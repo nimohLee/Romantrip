@@ -1,0 +1,80 @@
+<%-include('../header.ejs') %>
+<link rel="stylesheet" href="/css/boardListStyle.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<main>
+    <div id="board-wrap">
+        <section id="board-title" class="nanum">
+            <h2>자유게시판</h2>
+        </section>
+
+        <section id="board-table-section">
+            <article id="board-table-article">
+                <table border="1" id="board-table">
+                    <thead>
+                        <th>No</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                        <th>조회수</th>
+                    </thead>
+                    
+                    <% const date = new Date().toISOString().substring(0,10); %>
+                    <tbody>
+                    <% if(result[0]==null){
+                        for(let i = 0 ; i < 10 ; i++){%>
+                    <tr class="nbsp-tr">
+                        <td >&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td >&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                        <%} }else {%>
+                    <% for( let i = (page * page_num) - page_num ; i < (page *
+                    page_num); i++ ) { if(i > length){ i++; }else{ 
+                        let data = result[i]; %>
+                        <tr class="data-tr">
+                            <td><%=data.idx %></td>
+                            <td><a href="../detail/<%= data.idx%>" id="title-td"><%=data.title %></a></td>
+                            <td><%=data.writer%></td>
+                            <td><%=data.writeDate %></td>
+                            <td><%=data.views%></td>
+                        </tr>
+                        <% }}}%>     
+                    </tbody>
+                </table>
+                <div id="paging-btn-wrap">
+                <% for(let j = 0; j < result.length / page_num; j++){ %>
+                    <button class="paging-btn"><a href="/board/page/<%= j + 1 %>"><%= j + 1 %></a></button>
+                <% } %>
+                </div>
+            </article>
+            <article id="board-footer">
+                <div class="board-search">
+                    <form action="" method="">
+                        <select name="select" id="search-select">
+                            <option value="title">제목</option>
+                            <option value="writer">작성자</option>
+                            <option value="content">내용</option>
+                            <option value="writeDate">작성기간</option>
+                        </select>
+                        <input type="text" placeholder="검색어를 입력하세요" name="text" id="search-text" />
+                        <input type="submit" value="검색"></input>
+                    </form>
+                </div>
+                <div class="board-write">
+                        <a href="../write"><button style="cursor: pointer; font-size:1.2em;margin-right:10px"><i class="fa-solid fa-pen-to-square"></i>글쓰기</button></a>
+                    </div>
+            </article>
+        </section>
+    </div>
+  
+</main>
+
+
+
+<script>
+    document.title = "BitTravel > Board > List";
+</script>
+<script src="/js/board.js"></script>
+<%-include('../footer.ejs') %>

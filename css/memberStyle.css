@@ -1,0 +1,193 @@
+@charset "utf-8";
+@import "./reset.css";
+:root {
+    --sea-blue-color: #7fbcd2;
+    --sea-teal-color: #a5f1e9;
+    --sea-green-color: #e1ffee;
+    --sea-yellow-color: #ffeeaf;
+    --sea-yellow-color-trans: #f4e7bb;
+    --summer-black-color: #222831;
+    --summer-blue-color: #00adb5;
+    --summer-black2-color: #393e46;
+    --summer-gray-color: #eeeeee;
+}
+
+/* 멤버 메인 */
+
+#member-main {
+    width: 100vw;
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+#btn-wrap {
+    display: flex;
+}
+#member-main h2 {
+    font-size: 5em;
+    color: var(--summer-blue-color);
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+.main-btn {
+    background-color: var(--sea-yellow-color);
+    border-radius: 20px;
+    font-size: 1.15em;
+    width: 100px;
+    height: 50px;
+    margin: 0 20px;
+    cursor: pointer;
+}
+.main-btn:hover {
+    background-color: var(--sea-yellow-color-trans);
+    transition: 0.3s;
+}
+
+/* 회원가입 */
+
+#register-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70vw;
+    height: 70vh;
+    background-color: rgba(255, 255, 255, 0.418);
+    border: 1px solid var(--summer-black2-color);
+    border-radius: 30px;
+}
+
+#register-title {
+    margin-top: 30px;
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+#register-title h2 {
+    font-size: 1.1em;
+    color: black;
+}
+
+#register-main {
+    background-color: transparent;
+    width: 80%;
+}
+
+#register-main form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.wrap-input {
+    display: flex;
+    width: 30vw;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+#input-wrap-forFlex {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.wrap-input input {
+    padding: 10px;
+    width: 20vw;
+}
+.wrap-input input[type="text" i] {
+    padding: 10px;
+}
+
+.wrap-input input[type="password" i] {
+    padding: 10px;
+}
+
+small {
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+    color: tomato;
+}
+.error input {
+    border: 2px solid tomato;
+    outline: 0;
+}
+
+.success small {
+    display: none;
+}
+
+#reg-btn {
+    background-color: var(--summer-blue-color);
+    width: 300px;
+    height: 50px;
+    border: 0;
+    border-radius: 20px;
+    color: white;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+/* 회원 관리 */
+.paging-btn {
+    cursor: pointer;
+    width: 40px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: var(--sea-blue-color);
+}
+.paging-btn a {
+    width: 100%;
+}
+
+/* 테이블 */
+#member-table-section {
+    width: 80vw;
+    height: 70vh;
+    background-color: white;
+}
+#member-table-article {
+    width: 100%;
+    height: 90%;
+}
+#member-table {
+    width: 100%;
+    height: 90%;
+    text-align: center;
+    color: var(--summer-black2-color);
+}
+
+#member-table th {
+    background-color: var(--sea-blue-color);
+    color: white;
+    border-bottom: 1px solid #222831;
+    text-align: center;
+    padding: 10px 0;
+    height: 30px;
+}
+
+#member-table tr {
+}
+.nbsp-tr{
+    height: 6vh;
+}
+#paging-btn-wrap{
+    margin-left: 10px;
+}
+
+.icon{
+    cursor:pointer;
+}
+
+/* 회원 수정 */
+#update-form{
+    
+}

@@ -1,0 +1,47 @@
+<%-include('../header.ejs') %> 
+<link rel="stylesheet" href="/css/boardListStyle.css">
+<main>
+    <section id="read-section">
+        <table border="1" id="board-table" class="nanum">
+            <thead>
+                <tr>
+                    <th colspan="2" scope="col" ><%= result[0].title%></th>
+                </tr>
+                <tr>
+                    <th scope="row">작성자</th>
+                    <td><%= result[0].writer%></td>
+                </tr>
+                <tr>
+                    <th scope="row">작성일</th>
+                    <td><%= result[0].writeDate%></td>
+                </tr>
+                <tr>
+                    <th scope="row">조회수</th>
+                    <td><%= result[0].views%></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2"><%=result[0].content%></td>
+                </tr>
+            </tbody>
+             
+ 
+              
+        </table>
+        <article id="write-footer">
+            <button onclick="updateBoard('<%=result[0].idx%>');" class="write-btn">수정</button>
+            <button onclick="deleteBoard('<%=result[0].idx %>');" class="write-btn">삭제</button>
+            <a href="/board/page/1" ><button class="write-btn">목록</button></a>
+        </article>
+
+    </section>
+</main>
+
+
+<script>
+    document.title = "BitTravel > Board > Detail"
+</script>
+<script src="/js/board.js"></script>
+<%-include('../footer.ejs') %> 
+    

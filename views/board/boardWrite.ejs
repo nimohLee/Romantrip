@@ -1,0 +1,46 @@
+<%-include('../header.ejs') %> 
+<link rel="stylesheet" href="/css/boardListStyle.css">
+<main id="write-main">
+    <section id="write-section">
+        <article id="write-title">
+            글쓰기
+        </article>
+        <form action="./writeProc" method="post" name="writeForm">
+            <table id="write-table">
+                <tr>
+                    <td>제목</td>
+                    <td>
+                        <div class="write-input-wrap">
+                            
+                            <input type="text" name="title">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>작성자</td>
+                    <td>
+                        <div class="write-input-wrap">
+                            <input type="text" name="writer">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>글쓰기</td>
+                    <td>
+                        <textarea name="content" id="content-area" ></textarea>
+                    </td>
+                </tr>
+            </table>    
+                <div id="write-page-btns">
+                    <input type="button" value="등록" onclick="toSubmit()">
+                    <a href="/board/page/1"><input type="button" value="취소"></a>
+                </div>
+            </form>
+    </section>
+</main>
+<script>
+    document.title = "BitTravel > Board > Write"
+</script>
+<script src="/js/board.js"></script>
+<%-include('../footer.ejs') %> 
+    
