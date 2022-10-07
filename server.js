@@ -6,7 +6,7 @@ const memberRoute = require('./routes/memberRoute');
 
 const app = express();
 
-const PORT  = 5001;
+const PORT  = 5000;
 
 const date = new Date().toISOString().substring(0,10);
 
