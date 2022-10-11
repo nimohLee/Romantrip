@@ -11,9 +11,9 @@ router.get("/page/:page",(req, res) =>{
     const searchTf = req.query.text;
     let sql;
     if(selected === undefined){
-        sql = "SELECT * FROM board ORDER BY idx DESC";     
+        sql = "SELECT * FROM board ORDER BY b_id DESC";     
     }else{
-        sql = "SELECT * FROM board WHERE "+selected+" like '%"+searchTf+"%' ORDER BY idx DESC;";
+        sql = "SELECT * FROM board WHERE "+selected+" like '%"+searchTf+"%' ORDER BY b_id DESC;";
     }
 
     db.query(sql,(err,result)=>{
