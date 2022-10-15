@@ -3,39 +3,25 @@
 2. 서비스에서 작업을 마친 데이터를 받아 클라이언트에게 응답한다.*/
 
 const db = require('../config/db');
-const sql = require('../models/boardSQL');
+const model = require('../models/boardService');
+const { user, Board } = require('../database/models/index');
+
 module.exports = {
-    getMain: (req, res) => {
+    getMain:  async (req, res) => {
         const params = {
             page : req.params.page,
             selected : req.query.select,
             searchTf : req.query.text
         }
-        model.getBoardList(params);
-        
-        let sql;
-        if (selected === undefined) {
-            
-            sql = "SELECT * FROM board ORDER BY b_id DESC";
-        } else {
-            sql =
-                "SELECT * FROM board WHERE " +
-                selected +
-                " like '%" +
-                searchTf +
-                "%' ORDER BY b_id DESC;";
-        }
-
-        db.query(sql, (err, result) => {
-            if (err) throw err;
-            res.render("../views/board/list.ejs", {
-                result: result,
-                page: page,
-                length: result.length - 1,
-                page_num: 10,
-                pass: true,
-            });
-        });
+        model.getBoardList(params).then(function(data){
+            res.render("../views/board/list.ejs",{
+                result : data,
+                page : params.page,
+                length : data.length -1,
+                page_num : 10,
+                pass: true
+            })}
+        );
     },
 
     getWrite: (req, res) => {

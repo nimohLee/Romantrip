@@ -1,38 +1,31 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define(
-        "User", // 테이블 명
+        "TourList", // 테이블 명
         {
-            m_id: {
+            tl_id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
                 allowNull: false,
-                comment: "idx",
+                comment: "board idx",
             },
             name: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                comment: "사용자 이름",
+                comment: "tour 이름"
             },
-            id: {
+            description: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                comment: "사용자 아이디"
+                comment: "tour 설명",
             },
-            pw : {
+            image: {
                 type: DataTypes.STRING,
-                allowNull: false,
-                comment: "사용자 비밀번호"
+                comment: "사진 주소"
             },
-            email: {
-                type: DataTypes.STRING,
-                allowNull: false,
-                comment: "사용자 이메일",
-            },
-            regDate : {
+            price : {
                 type : DataTypes.STRING,
-                allowNull: false,
-                comment: "가입일"
+                comment: "가격"
             }
         },
         {
