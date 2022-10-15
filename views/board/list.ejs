@@ -34,10 +34,10 @@
                     page_num); i++ ) { if(i > length){ i++; }else{ 
                         let data = result[i]; %>
                         <tr class="data-tr">
-                            <td><%=data.idx %></td>
-                            <td><a href="../detail/<%= data.idx%>" id="title-td"><%=data.title %></a></td>
+                            <td><%=data.b_id %></td>
+                            <td><a href="../detail/<%= data.b_id%>" id="title-td"><%=data.title %></a></td>
                             <td><%=data.writer%></td>
-                            <td><%=data.writeDate %></td>
+                            <td><%=data.regDate %></td>
                             <td><%=data.views%></td>
                         </tr>
                         <% }}}%>     

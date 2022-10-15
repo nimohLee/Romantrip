@@ -1,3 +1,4 @@
+const db = require('../config/db');
 module.exports = {
     getMain: (req, res) => {
         const page = req.params.page;
@@ -17,7 +18,7 @@ module.exports = {
 
         db.query(sql, (err, result) => {
             if (err) throw err;
-            res.render("../views/board/boardList.ejs", {
+            res.render("../views/board/list.ejs", {
                 result: result,
                 page: page,
                 length: result.length - 1,
@@ -28,7 +29,7 @@ module.exports = {
     },
 
     getWrite: (req, res) => {
-        res.render("../views/board/boardWrite.ejs");
+        res.render("../views/board/write.ejs");
     },
     getDetail: (req, res) => {
         const id = req.params.id;
@@ -38,7 +39,7 @@ module.exports = {
         db.query(selectSql, (err, result) => {
             if (err) throw err;
             else {
-                res.render("../views/board/boardDetail.ejs", { result });
+                res.render("../views/board/detail.ejs", { result });
             }
         });
         db.query(updateViewSql, (err) => {
@@ -51,7 +52,7 @@ module.exports = {
         db.query(sql, (err, result) => {
             if (err) throw err;
             else {
-                res.render("../views/board/boardUpdate", { result });
+                res.render("../views/board/update", { result });
             }
         });
     },
@@ -79,7 +80,7 @@ module.exports = {
 
                 db.query(
                     addBoardSql,
-                    [board.title, board.writer, board.content, new Date(), 0],
+                    [1, board.title, board.content, new Date(), 0],
                     (err) => {
                         if (err) throw err;
                     }

@@ -1,6 +1,7 @@
+const db = require('../config/db');
 module.exports = {
     getMain: (req, res) => {
-        res.render("../views/member/memberMain.ejs");
+        res.render("../views/users/main.ejs");
     },
     postRegister: (req, res) => {
         const user = {
@@ -35,10 +36,10 @@ module.exports = {
             }
         });
 
-        res.redirect("/member");
+        res.redirect("/users");
     },
     getRegister: (req, res) => {
-        res.render("../views/member/memberRegister");
+        res.render("../views/users/register");
     },
     validation: (req, res) => {
         const user = {
@@ -74,7 +75,7 @@ module.exports = {
 
         db.query(sql, (err, result) => {
             if (err) throw err;
-            res.render("../views/member/memberList.ejs", {
+            res.render("../views/users/list.ejs", {
                 result: result,
                 page: page,
                 length: result.length - 1,
@@ -90,7 +91,7 @@ module.exports = {
         db.query(sql, (err, result) => {
             if (err) throw err;
             else {
-                res.render("../views/member/updatePopup", { result });
+                res.render("../views/users/update", { result });
             }
         });
     },

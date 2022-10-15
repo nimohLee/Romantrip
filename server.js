@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const boardRoute = require('./routes/board');
-const memberRoute = require('./routes/users');
+const userRoute = require('./routes/users');
 
 const app = express();
 
@@ -20,7 +20,7 @@ app.get("/",(req,res)=>{
 });
 
 app.use('/board',boardRoute);
-app.use('/member',memberRoute); 
+app.use('/users',userRoute); 
 
 
 app.listen(PORT,()=>{console.log(`localhost:${PORT} is connected`)});

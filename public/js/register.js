@@ -205,7 +205,7 @@ document.getElementById("frm").addEventListener("submit", (e) => {
     if (nameOK && idOK && pwOK && emailOK) {
         if(submitForm()){
             alert('회원가입이 완료되었습니다');
-            location.href = "/member";
+            location.href = "/users";
             return true;
         }else{
             e.preventDefault();
