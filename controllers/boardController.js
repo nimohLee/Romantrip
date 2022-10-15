@@ -1,11 +1,21 @@
+/* controller에서는  데이터 가공등 서비스 로직 X 
+1. 컨트롤러는 들어오는 클라이언트 요청을 받고 서비스에 전달한다.
+2. 서비스에서 작업을 마친 데이터를 받아 클라이언트에게 응답한다.*/
+
 const db = require('../config/db');
+const sql = require('../models/boardSQL');
 module.exports = {
     getMain: (req, res) => {
-        const page = req.params.page;
-        const selected = req.query.select;
-        const searchTf = req.query.text;
+        const params = {
+            page : req.params.page,
+            selected : req.query.select,
+            searchTf : req.query.text
+        }
+        model.getBoardList(params);
+        
         let sql;
         if (selected === undefined) {
+            
             sql = "SELECT * FROM board ORDER BY b_id DESC";
         } else {
             sql =

@@ -2,10 +2,20 @@ const express = require('express');
 const path = require('path');
 const boardRoute = require('./routes/board');
 const userRoute = require('./routes/users');
+const cors = require("cors");
+const { sequelize } = require('./database/models/index')
+
+
 
 const app = express();
 
 const PORT  = 5001;
+
+sequelize
+  .sync()
+  .then(() => console.log('connected database'))
+  .catch(err => console.error('occurred error in database connecting', err))
+
 
 app.set("view engine","ejs");
 
@@ -14,6 +24,7 @@ app.use(express.static(path.join(__dirname,'views')));
 app.use('/',express.static(path.join(__dirname,'public')));
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
+app.use(cors());
 
 app.get("/",(req,res)=>{
     res.render('index');
