@@ -53,36 +53,37 @@ module.exports = {
         });
     },
     postWrite: (req, res) => {
+        console.log("여기옴");
         const board = {
             title: req.body.title,
-            writer: req.body.writer,
             content: req.body.content,
         };
+        model.writeBoard(board);
         const addBoardSql = "INSERT INTO board VALUES(NULL,?,?,?,?,?);";
         const selectCount = "SELECT * FROM board;";
 
         /* member 테이블의 AUTO_INCREMENT 값을 현재 row의 개수+1로 초기화 
                    초기화 하지않으면 삭제 후 새로 삽입되는 row는 idx값이 계속 올라감 */
 
-        db.query(selectCount, (err, result) => {
-            if (err) throw err;
-            else {
-                const rowsCount = result.length;
-                const alterIdx =
-                    "ALTER TABLE board AUTO_INCREMENT = " + (rowsCount + 1);
-                db.query(alterIdx, (err) => {
-                    if (err) throw err;
-                });
+        // db.query(selectCount, (err, result) => {
+        //     if (err) throw err;
+        //     else {
+        //         const rowsCount = result.length;
+        //         const alterIdx =
+        //             "ALTER TABLE board AUTO_INCREMENT = " + (rowsCount + 1);
+        //         db.query(alterIdx, (err) => {
+        //             if (err) throw err;
+        //         });
 
-                db.query(
-                    addBoardSql,
-                    [1, board.title, board.content, new Date(), 0],
-                    (err) => {
-                        if (err) throw err;
-                    }
-                );
-            }
-        });
+        //         db.query(
+        //             addBoardSql,
+        //             [1, board.title, board.content, new Date(), 0],
+        //             (err) => {
+        //                 if (err) throw err;
+        //             }
+        //         );
+        //     }
+        // });
 
         res.redirect("/board/page/1");
     },

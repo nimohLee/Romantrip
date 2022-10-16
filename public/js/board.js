@@ -36,12 +36,12 @@ function closeForm() {
 
 /* boardWrite js */
 function toSubmit(){
+    console.log("여기옴 ㅋㅋ")
     const frm = document.writeForm;
     const title = writeForm.title.value;
-    const writer = writeForm.writer.value;
     const content = writeForm.content.value;
     console.log(title);
-    if(title==""||writer==""||content==""){
+    if(title==""||content==""){
         alert("모두 작성해야합니다. 작성을 완료해주세요");
     }
     else{
