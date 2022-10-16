@@ -1,0 +1,46 @@
+#login-main {
+    background-color: white;
+}
+#login-section{
+    display: flex;
+    width: 80%;
+    justify-content: space-around;
+}
+#login-section article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35vw;
+    height: 50vh;
+    border: 2px solid #ccc;
+}
+#login-frm{
+    text-align: center;
+    width: 70%;
+}
+#login-frm h4{
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+#login-frm>form{
+    display: flex;
+    flex-direction: column;
+}
+.login-text{
+    margin-top: 10px;
+    padding: 15px;
+    border : 1px solid #ccc;
+    outline-color: #5cfccc;
+}
+.login-text:active{
+    border-color: #A7FFE4;
+}
+#login-btn{
+    margin: 30px 0 20px 0;
+    padding:15px;
+    background-color: #A7FFE4;
+    border:0;
+    font-size: 1.15em;
+}

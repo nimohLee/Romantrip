@@ -4,6 +4,9 @@ module.exports = {
     getMain: (req, res) => {
         res.render("../views/users/main.ejs");
     },
+    getLogin: (req,res) =>{
+        res.render("../views/users/login.ejs")  
+    },
     postRegister: (req, res) => {
         const userDto = {
             id: req.body.id,
@@ -12,7 +15,6 @@ module.exports = {
             email: req.body.email,
         };
         model.register(userDto);
-
         res.redirect("/");
     },
     getRegister: (req, res) => {
@@ -27,40 +29,6 @@ module.exports = {
         };
         model.validator(userDto).then(function (data){
             res.send(data);
-        });
-        // const selectUserSql = `SELECT count(m_id) AS idCount FROM member WHERE id = "${user.id}";`;
-        // db.query(selectUserSql, (err, result) => {
-        //     if (err) throw err;
-        //     else if (result[0].idCount > 0) {
-        //         res.send("No");
-        //     } else res.send("Yes");
-        // });
-    },
-    getList: (req, res) => {
-        const page = req.params.page;
-        const selected = req.query.select;
-        const searchTf = req.query.text;
-        let sql;
-        if (selected === undefined) {
-            sql = "SELECT * FROM member ORDER BY m_id DESC";
-        } else {
-            sql =
-                "SELECT * FROM member WHERE " +
-                selected +
-                "= '" +
-                searchTf +
-                "' ORDER BY m_id DESC;";
-        }
-
-        db.query(sql, (err, result) => {
-            if (err) throw err;
-            res.render("../views/users/list.ejs", {
-                result: result,
-                page: page,
-                length: result.length - 1,
-                page_num: 10,
-                pass: true,
-            });
         });
     },
     getUpdate: (req, res) => {

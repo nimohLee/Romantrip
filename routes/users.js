@@ -6,6 +6,8 @@ router.get("/", controller.getMain);
 
 router.post("/", controller.postRegister);
 
+router.get("/login",controller.getLogin);
+
 router.get("/register", controller.getRegister);
 
 router.post("/idVaild",controller.validation);
