@@ -1,5 +1,6 @@
 const db = require("../config/db");
 const { Board } = require("../database/models/index");
+const sequelize = require('sequelize');
 
 module.exports = {
     getBoardList: (params) => {
@@ -62,6 +63,33 @@ module.exports = {
                 views : 0
             });
             console.log(boards.m_id);
+        })
+    },
+    showBoardDetail : (id) => {
+        return new Promise(async (resolve, reject) =>{
+            const boards = await Board.findAll({
+                where: {
+                    b_id : id
+                },
+                raw: true, // dataValues만 출력됨
+                attributes: ['title','content','views', [sequelize.fn('date_format', sequelize.col('regDate'), '%Y-%m-%d'), 'regDate']]
+            });
+            
+            // Detail get 시 view에 1추가
+            await Board.update(
+                {
+                    views : boards[0].views+1
+                },
+                { 
+                    where : {
+                    b_id : id
+                }
+            }
+            );
+
+            setTimeout(() => {
+                resolve(boards);
+            }, 0);
         })
     }
 };

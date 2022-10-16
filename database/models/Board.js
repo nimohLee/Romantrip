@@ -25,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
             },
             regDate : {
                 type : DataTypes.DATE,
+               
                 comment: "가입일"
             },
             views : {
