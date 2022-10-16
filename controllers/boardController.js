@@ -46,47 +46,20 @@ module.exports = {
             content: req.body.content,
         };
         model.writeBoard(board);
-        
         res.redirect("/board/page/1");
     },
 
     postDelete: (req, res) => {
         const idx = req.body.idx;
-        
-        const deleteSql = "DELETE FROM board WHERE b_id = " + req.body.idx;
-        const updateSql =
-            "UPDATE Boards SET b_id = b_id-1 WHERE b_id > " + req.body.idx;
-        const resetB_id = "ALTER TABLE Boards AUTO_INCREMENT= (SELECT count(*) FROM Boards)+1 " ;
-
-
-        model.deleteBoard(idx).then(()=>{
-            db.query(updateSql, (err) => {
-                if (err) throw err;
-                else {
-                }
-            });
-            db.query(resetB_id,(err)=>{
-                if(err) throw err;
-            })
-        });
-
-        // db.query(deleteSql, (err) => {
-        //     if (err) throw err;
-        // });
-        
-       
+        model.deleteBoard(idx);
     },
 
     postUpdate: (req, res) => {
-        const sql =
-            "UPDATE board SET title = ?, writer = ?, content = ? WHERE b_id = " +
-            req.params.id;
-        db.query(
-            sql,
-            [req.body.title, req.body.writer, req.body.content],
-            (err) => {
-                if (err) throw err;
-            }
-        );
+        const updateDto = {
+            id: req.params.id,
+            title: req.body.title,
+            content: req.body.content,
+        };
+        model.updateBoard(updateDto);
     },
 };

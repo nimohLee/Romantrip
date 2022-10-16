@@ -118,15 +118,29 @@ module.exports = {
             }, 0);
         });
     },
-    deleteBoard: (params) => {
-        const updateParams = params - 1;
+    deleteBoard: async (id) => {
+        const updateSql =
+        "UPDATE Boards SET b_id = b_id-1 WHERE b_id > " + id;
         // delete recode
-        Board.destroy({
+        await Board.destroy({
             where: {
                 b_id: params,
             },
         });
-
-        // b_id 하나씩 땡기기
+        db.query(updateSql, (err) => {
+            if (err) throw err;
+            else {
+            }
+        });
     },
+    updateBoard : async (params)=>{
+        await Board.update({
+            title : params.title,
+            content : params.content
+        },{
+            where : {
+                b_id : params.id
+            }
+        })
+    }
 };

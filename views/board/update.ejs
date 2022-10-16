@@ -7,17 +7,17 @@
     <title>Board Update</title>
 </head>
 <body>
-    <form action="./<%=result[0].idx%>" method="post" name="updateFrm">
+    <form action="./<%=result[0].b_id%>" method="post" name="updateFrm">
         <table>
             <tr>
                 <td>제목</td>
                 <td><input type="text" value="<%=result[0].title%>" name="title">
                 </td>
             </tr>
-            <tr>
+             <tr>
                 <td>작성자</td>
                 <td>
-                    <input type="text" value="<%=result[0].writer%>" name="writer">
+                   로그인한 사람 이름
                 </td>
             </tr>
             <tr>
