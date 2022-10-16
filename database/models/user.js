@@ -30,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
                 comment: "사용자 이메일",
             },
             regDate : {
-                type : DataTypes.STRING,
-                allowNull: false,
+                type : DataTypes.DATE,
+                
                 comment: "가입일"
             }
         },

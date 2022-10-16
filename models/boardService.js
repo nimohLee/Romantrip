@@ -98,13 +98,14 @@ module.exports = {
                     ],
                 ],
             }); // Detail get 시 view에 1추가
-
-            await Board.increment({ views: 1 }, { where: { b_id: id } }); // Will increase age to 15
-
+            
+            /* 에러 남. 추후에 수정하기 */
+            // await Board.increment({ views: 1 }, { where: { b_id: id } }); // Will increase age to 15
             setTimeout(() => {
                 resolve(boards);
             }, 0);
         });
+        
     },
     popupUpdate: (id) => {
         return new Promise(async (resolve, reject) => {

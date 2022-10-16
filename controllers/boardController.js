@@ -28,9 +28,9 @@ module.exports = {
     getWrite: (req, res) => {
         res.render("../views/board/write.ejs");
     },
-    getDetail: (req, res) => {
+    getDetail: async (req, res) => {
         const id = req.params.id;
-        model.showBoardDetail(id).then(function (data) {
+        await model.showBoardDetail(id).then(function (data) {
             res.render("../views/board/detail.ejs", { result: data });
         });
     },
