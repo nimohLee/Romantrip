@@ -12,8 +12,8 @@ router.get("/detail/:id",controller.getDetail);
 
 router.post("/detail/deleteProc", controller.postDelete);
 
-router.get("/detail/update/:id",controller.getUpdate);
+router.get("/update/:id",controller.getUpdate);
 
-router.post("/detail/update/:id",controller.postUpdate);
+router.post("/update/:id",controller.postUpdate);
 
 module.exports = router;

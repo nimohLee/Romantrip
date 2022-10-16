@@ -30,19 +30,14 @@ module.exports = {
     },
     getDetail: (req, res) => {
         const id = req.params.id;
-        const selectSql = "SELECT * FROM board WHERE b_id =" + id;
         model.showBoardDetail(id).then(function (data) {
             res.render("../views/board/detail.ejs", { result: data });
         });
     },
     getUpdate: (req, res) => {
         const id = req.params.id;
-        const sql = "SELECT * FROM board WHERE b_id = " + id;
-        db.query(sql, (err, result) => {
-            if (err) throw err;
-            else {
-                res.render("../views/board/update", { result });
-            }
+        model.popupUpdate(id).then(function (data) {
+            res.render("../views/board/update", { result: data });
         });
     },
     postWrite: (req, res) => {
@@ -51,23 +46,35 @@ module.exports = {
             content: req.body.content,
         };
         model.writeBoard(board);
-
+        
         res.redirect("/board/page/1");
     },
 
     postDelete: (req, res) => {
+        const idx = req.body.idx;
+        
         const deleteSql = "DELETE FROM board WHERE b_id = " + req.body.idx;
         const updateSql =
-            "UPDATE board SET b_id = b_id-1 WHERE b_id > " + req.body.idx;
+            "UPDATE Boards SET b_id = b_id-1 WHERE b_id > " + req.body.idx;
+        const resetB_id = "ALTER TABLE Boards AUTO_INCREMENT= (SELECT count(*) FROM Boards)+1 " ;
 
-        db.query(deleteSql, (err) => {
-            if (err) throw err;
+
+        model.deleteBoard(idx).then(()=>{
+            db.query(updateSql, (err) => {
+                if (err) throw err;
+                else {
+                }
+            });
+            db.query(resetB_id,(err)=>{
+                if(err) throw err;
+            })
         });
-        db.query(updateSql, (err) => {
-            if (err) throw err;
-            else {
-            }
-        });
+
+        // db.query(deleteSql, (err) => {
+        //     if (err) throw err;
+        // });
+        
+       
     },
 
     postUpdate: (req, res) => {

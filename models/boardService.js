@@ -1,6 +1,8 @@
 const db = require("../config/db");
 const { Board } = require("../database/models/index");
-const sequelize = require('sequelize');
+const sequelize = require("sequelize");
+const { Op } = require("sequelize");
+const board = require("../database/models/board");
 
 module.exports = {
     getBoardList: (params) => {
@@ -53,43 +55,78 @@ module.exports = {
             }, 0);
         });
     },
-    writeBoard : (params) => {
-        return new Promise(async (resolve, reject) =>{
-            const boards = await Board.create({
-                m_id : 123,
-                title : params.title,
-                content : params.content,
-                regDate : new Date(),
-                views : 0
+    writeBoard: (params) => {
+        return new Promise(async (resolve, reject) => {
+            const boardCount = await Board.findAll({
+                raw: true,
             });
-            console.log(boards.m_id);
-        })
+            const alterIdx =
+                "ALTER TABLE Boards AUTO_INCREMENT = " +
+                (boardCount.length + 1);
+            db.query(alterIdx, (err) => {
+                if (err) throw err;
+            });
+            await Board.create({
+                m_id: 123,
+                title: params.title,
+                content: params.content,
+                regDate: new Date(),
+                views: 0,
+            });
+        });
     },
-    showBoardDetail : (id) => {
-        return new Promise(async (resolve, reject) =>{
+    /* update params 수정해야함  */
+    showBoardDetail: (id) => {
+        return new Promise(async (resolve, reject) => {
             const boards = await Board.findAll({
                 where: {
-                    b_id : id
+                    b_id: id,
                 },
                 raw: true, // dataValues만 출력됨
-                attributes: ['title','content','views', [sequelize.fn('date_format', sequelize.col('regDate'), '%Y-%m-%d'), 'regDate']]
-            });
-            
-            // Detail get 시 view에 1추가
-            await Board.update(
-                {
-                    views : boards[0].views+1
-                },
-                { 
-                    where : {
-                    b_id : id
-                }
-            }
-            );
+                attributes: [
+                    "b_id",
+                    "title",
+                    "content",
+                    "views",
+                    [
+                        sequelize.fn(
+                            "date_format",
+                            sequelize.col("regDate"),
+                            "%Y-%m-%d"
+                        ),
+                        "regDate",
+                    ],
+                ],
+            }); // Detail get 시 view에 1추가
+
+            await Board.increment({ views: 1 }, { where: { b_id: id } }); // Will increase age to 15
 
             setTimeout(() => {
                 resolve(boards);
             }, 0);
-        })
-    }
+        });
+    },
+    popupUpdate: (id) => {
+        return new Promise(async (resolve, reject) => {
+            const boards = await Board.findAll({
+                where: {
+                    b_id: id,
+                },
+            });
+            setTimeout(() => {
+                resolve(boards);
+            }, 0);
+        });
+    },
+    deleteBoard: (params) => {
+        const updateParams = params - 1;
+        // delete recode
+        Board.destroy({
+            where: {
+                b_id: params,
+            },
+        });
+
+        // b_id 하나씩 땡기기
+    },
 };

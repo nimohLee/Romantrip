@@ -1,7 +1,7 @@
 /* boardDetail js */
 function updateBoard(idx) {
     const frmPop = document.frmPopup;
-    const url = "./update/" + idx;
+    const url = "../update/" + idx;
     const name = "update board";
     const option = "width = 300, height = 300, top = 100, left = 200";
     const popup = window.open(url, "_blank", option);
@@ -36,7 +36,6 @@ function closeForm() {
 
 /* boardWrite js */
 function toSubmit(){
-    console.log("여기옴 ㅋㅋ")
     const frm = document.writeForm;
     const title = writeForm.title.value;
     const content = writeForm.content.value;
