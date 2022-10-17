@@ -6,9 +6,10 @@ const snsRoute = require('./routes/snsLogin');
 const cors = require("cors");
 const { sequelize } = require('./database/models/index')
 const session = require('express-session');
+const FileStore = require('session-file-store')(session);
+
 
 const app = express();
-
 const PORT  = 5001;
 
 sequelize
@@ -26,6 +27,14 @@ app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use(cors());
 
+app.use(session({
+  store: new FileStore(),
+  secret: 'keyboard dogcatdog',
+  resave: false,
+  saveUninitialized: true
+}))
+
+
 app.get("/",(req,res)=>{
     res.render('index');
 });
@@ -33,12 +42,7 @@ app.get("/",(req,res)=>{
 app.use('/board',boardRoute);
 app.use('/users',userRoute); 
 app.use("/snsLogin",snsRoute);
-app.use(session({
-  secret: 'your session secret',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
-}));
+
 
 
 app.listen(PORT,()=>{console.log(`localhost:${PORT} is connected`)});

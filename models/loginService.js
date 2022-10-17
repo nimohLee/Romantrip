@@ -11,7 +11,6 @@ module.exports = {
                 function(error, res, body){
                     if(!error && res.statusCode == 200){
                         response = JSON.parse(body);
-                        console.log(response.access_token);
                         resolve(response.access_token);
                     }else{
                         console.log(error);
@@ -19,5 +18,19 @@ module.exports = {
                 }
             );
         })
+    },
+    getUserInfo : async (access_token) => {
+        
+        request.get({
+            uri: 'http://kapi.kakao.com',
+            headers : {
+                Authorization: `Bearer ${access_token}`
+            }
+        },function(err,res,body){
+            console.log(body);
+        }
+        )
+        
     }
+    
 }

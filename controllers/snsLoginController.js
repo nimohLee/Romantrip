@@ -1,7 +1,17 @@
+const session = require('express-session');
 const service = require('../models/loginService');
 
 module.exports = {
-    kakaoLogin : async (req,res)=>{
-        await service.auth(req.query.code).then((data)=>{res.redirect("/?"+data)});      
+    kakaoLogin : (req,res)=>{
+        const code = req.query.code;
+        /* data : token value  */
+        
+        service.auth(code).then(async (data)=>{
+           const userInfo = await service.getUserInfo(data).then((res)=>{console.log(res)});
+           
+           
+           
+            // res.redirect("/?"+data)
+        });
     }
 }
