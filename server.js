@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const boardRoute = require('./routes/board');
 const userRoute = require('./routes/users');
-const snsRoute = require('./routes/snsLogin');
+const loginRoute = require('./routes/login');
 const cors = require("cors");
 const { sequelize } = require('./database/models/index')
 const session = require('express-session');
@@ -41,7 +41,7 @@ app.get("/",(req,res)=>{
 
 app.use('/board',boardRoute);
 app.use('/users',userRoute); 
-app.use("/snsLogin",snsRoute);
+app.use("/login",loginRoute);
 
 
 

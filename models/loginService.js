@@ -1,6 +1,6 @@
 const request = require('request');
 const REST_API_KEY = "457bc0baab39156996248d5b7386f600";
-const REDIRECT_URI = "http://localhost:5001/snsLogin/kakao";
+const REDIRECT_URI = "http://localhost:5001/login/kakao";
 
 module.exports = {
     auth : (code)=>{
