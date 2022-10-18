@@ -8,23 +8,37 @@ module.exports = {
         res.render("../views/users/main.ejs",{session : req.session._id});
     },
     getLogin: (req,res) =>{
-        res.render("../views/users/login.ejs",{session : req.session._id})  
+        if(req.session._id==undefined)
+        res.render("../views/users/login.ejs",{session : req.session._id})      
+        else{
+        
+        console.log("이미 로그인 중");}
     },
     postLogout:(req,res)=>{
         
         const logoutURL = `https://kauth.kakao.com/oauth/logout?client_id=457bc0baab39156996248d5b7386f600&logout_redirect_uri=http://localhost:5001`;
-        // const logURL = `https://kapi.kakao.com/v1/user/logout?target_id_type=user_id&target_id=${req.session._id}`;
-        // const token = req.session._token;
-        
-        request.get({
-            url : logoutURL},
-                function (err,result,body){
-                    req.session.destroy((err)=>{
-                        if(err) throw(err);
-                    });
-                res.send("success");
+        if(req.session._kakao){
+            request.get({
+                url : logoutURL},
+                    function (err,result,body){
+                        req.session.destroy((err)=>{
+                            if(err) throw(err);
+                            else {
+                                res.send("success");
+                            }
+                        });
+                    
+                    }
+                );
+        }else{
+            req.session.destroy((err)=>{
+                if(err) throw(err);
+                else{
+                    res.send("success");
                 }
-            );
+            })
+        }
+        
 
             
         
@@ -57,7 +71,6 @@ module.exports = {
     getUpdate: (req, res) => {
         console.log(req.query.idx);
         const sql = "SELECT * FROM member WHERE m_id = " + req.query.idx + ";";
-        console.log(sql);
         db.query(sql, (err, result) => {
             if (err) throw err;
             else {

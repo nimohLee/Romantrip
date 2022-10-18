@@ -23,10 +23,13 @@ function naverAuthorization(){
    
 /* 로그아웃 */
 function logout(){
+
+    /* express 서버에서 처리하기 위해 post 요청 */
     if(confirm("로그아웃 하시겠습니까?")){
         $.ajax({
             method : "post",
             url : "/users/logout",
+            data : "",
             success : (result)=>{
                 if(result === "success"){
                     location.href = "/";
@@ -34,6 +37,4 @@ function logout(){
             }
           });
     }
-
-
 }
