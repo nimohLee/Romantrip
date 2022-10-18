@@ -83,7 +83,7 @@
 
     /* body css part */
     .bg {
-        background-image: url("../assets/mainBg.jpg");
+        background-image: url("/assets/mainBg.jpg");
         background-color: black;
         background-size: cover;
         background-position: center;

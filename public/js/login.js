@@ -23,9 +23,17 @@ function naverAuthorization(){
    
 /* 로그아웃 */
 function logout(){
-    Kakao.Auth.get
-$.ajax({
-        method : "post",
-        url : "/users/logout"
-      });
+    if(confirm("로그아웃 하시겠습니까?")){
+        $.ajax({
+            method : "post",
+            url : "/users/logout",
+            success : (result)=>{
+                if(result === "success"){
+                    location.href = "/";
+                }
+            }
+          });
+    }
+
+
 }

@@ -21,11 +21,13 @@ sequelize
 app.set("view engine","ejs");
 
 /* use express middleware */
-app.use(express.static(path.join(__dirname,'views')));
+
 app.use('/',express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'views')));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
-app.use(cors());
+
 
 app.use(session({
   store: new FileStore(),

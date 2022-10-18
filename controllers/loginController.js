@@ -33,6 +33,7 @@ module.exports = {
                 console.log(req.session._name)}
         });
             res.redirect("/");
+
         });
     },
     naverLogin : (req,res)=>{
@@ -54,10 +55,7 @@ module.exports = {
         });
         
     },
-    logout : async (req, res)=>{
-    
-        res.render("../views/users/login.ejs",{session:undefined});
-        
+    logout : async (req, res, next)=>{
     }
 
 }

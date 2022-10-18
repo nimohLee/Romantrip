@@ -11,17 +11,18 @@ module.exports = {
         res.render("../views/users/login.ejs",{session : req.session._id})  
     },
     postLogout:(req,res)=>{
-        const logoutURL = `https://kauth.kakao.com/oauth/logout?client_id=457bc0baab39156996248d5b7386f600&logout_redirect_uri=http://localhost:5001/login/logout`;
-        const logURL = `https://kapi.kakao.com/v1/user/logout?target_id_type=user_id&target_id=${req.session._id}`;
-        const token = req.session._token;
+        
+        const logoutURL = `https://kauth.kakao.com/oauth/logout?client_id=457bc0baab39156996248d5b7386f600&logout_redirect_uri=http://localhost:5001`;
+        // const logURL = `https://kapi.kakao.com/v1/user/logout?target_id_type=user_id&target_id=${req.session._id}`;
+        // const token = req.session._token;
+        
         request.get({
             url : logoutURL},
-                function (err,res,body){
+                function (err,result,body){
                     req.session.destroy((err)=>{
-                        if(err) throw(err)
-                        else{
-                        }
+                        if(err) throw(err);
                     });
+                res.send("success");
                 }
             );
 
