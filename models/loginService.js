@@ -1,3 +1,4 @@
+const { application } = require('express');
 const request = require('request');
 const REST_API_KEY = "457bc0baab39156996248d5b7386f600";
 const REDIRECT_URI = "http://localhost:5001/login/kakao";
@@ -20,12 +21,14 @@ module.exports = {
         })
     },
     getUserInfo : async (access_token) => {
-        
-        request.get({
-            uri: 'http://kapi.kakao.com',
-            headers : {
-                Authorization: `Bearer ${access_token}`
-            }
+        const header = {
+            'Authorization' : `Bearer ${access_token}`,
+            'Content-type' : 'application/x-www-form-urlencoded;charset=utf-8'
+        }
+
+        request.post({
+            url: 'https://kapi.kakao.com/v2/user/me',
+            headers : header
         },function(err,res,body){
             console.log(body);
         }
