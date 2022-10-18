@@ -1,4 +1,5 @@
 const { application } = require('express');
+const axios = require('axios');
 const request = require('request');
 const REST_API_KEY = "457bc0baab39156996248d5b7386f600";
 const REDIRECT_URI = "http://localhost:5001/login/kakao";
@@ -19,6 +20,14 @@ module.exports = {
                 }
             );
         })
+    },
+    naverAuth: async ()=>{
+        const reqParams = {
+            client_id : "_MITzC_aLNm1ne3NkL3o",
+            redirect_uri : "http://localhost:5001/login/naver",
+            state : "test"
+        };
+        await axios.get(`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${reqParams.client_id}&redirect_uri=${reqParams.redirect_uri}&state=${reqParams.state}`);
     },
     getUserInfo : async (access_token) => {
         const header = {

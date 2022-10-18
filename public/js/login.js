@@ -5,8 +5,20 @@ const REDIRECT_URI = "http://localhost:5001/login/kakao";
 Kakao.init(REST_API_KEY);
 console.log(Kakao.isInitialized());
 function kakaoAuthorization() {
-    
     Kakao.Auth.authorize({
         redirectUri: REDIRECT_URI,
     });
 }
+
+/* 네이버 */
+function naverAuthorization(){
+    const reqParams = {
+        client_id : "_MITzC_aLNm1ne3NkL3o",
+        redirect_uri : "http://localhost:5001/login/naver",
+        state : "test"
+    };
+    location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${reqParams.client_id}&redirect_uri=${reqParams.redirect_uri}&state=test`
+}
+    
+   
+

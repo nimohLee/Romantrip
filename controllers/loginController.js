@@ -1,5 +1,7 @@
+const request  = require('request');
 const session = require('express-session');
 const service = require('../models/loginService');
+const url = require('url');
 
 module.exports = {
     basicLogin : (req,res)=>{
@@ -31,5 +33,9 @@ module.exports = {
         });
             res.redirect("/");
         });
+    },
+    naverLogin : (req,res)=>{
+        console.log(req.query.code);
+        
     }
 }
