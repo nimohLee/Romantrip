@@ -31,7 +31,8 @@ app.use(session({
   store: new FileStore(),
   secret: 'keyboard dogcatdog',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false,
+  cookie: { maxAge: 3600000,secure: false, httpOnly: true }
 }))
 
 

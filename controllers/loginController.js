@@ -20,7 +20,7 @@ module.exports = {
         const code = req.query.code;
         /* data : token value  */
         
-        service.auth(code).then(async (data)=>{
+        service.getKakaoToken(code).then(async (data)=>{
            await service.getUserInfo(data).then((returnData)=>
            {const userInfo = JSON.parse(returnData);
             if(req.session._id === undefined){
@@ -35,7 +35,23 @@ module.exports = {
         });
     },
     naverLogin : (req,res)=>{
-        console.log(req.query.code);
+        const code = req.query.code;
+        service.getNaverToken(code).then(async (data)=>{
+            await service.naverGetUserInfo(data).then((returnData)=>{
+                const userInfo = JSON.parse(returnData);
+                console.log(userInfo.response);
+            if(req.session._id === undefined){
+            console.log(req.session._id);
+            req.session._id = userInfo.response.id;
+            req.session._name = userInfo.response.name;
+            
+            }
+            else
+                {console.log("이미 세션이 존재합니다");
+                console.log(req.session._name)}
+            })
+            res.redirect("/");
+        });
         
     }
 }
