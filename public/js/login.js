@@ -11,30 +11,28 @@ function kakaoAuthorization() {
 }
 
 /* 네이버 */
-function naverAuthorization(){
+function naverAuthorization() {
     const reqParams = {
-        client_id : "_MITzC_aLNm1ne3NkL3o",
-        redirect_uri : "http://localhost:5001/login/naver",
+        client_id: "_MITzC_aLNm1ne3NkL3o",
+        redirect_uri: "http://localhost:5001/login/naver",
     };
-    location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${reqParams.client_id}&redirect_uri=${reqParams.redirect_uri}&state=test`
+    location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${reqParams.client_id}&redirect_uri=${reqParams.redirect_uri}&state=test`;
 }
- 
 
-   
 /* 로그아웃 */
-function logout(){
-
+function logout() {
     /* express 서버에서 처리하기 위해 post 요청 */
-    if(confirm("로그아웃 하시겠습니까?")){
+    if (confirm("로그아웃 하시겠습니까?")) {
         $.ajax({
-            method : "post",
-            url : "/users/logout",
-            data : "",
-            success : (result)=>{
-                if(result === "success"){
+            method: "post",
+            async: true,
+            url: "/users/logout",
+            data: "",
+            success: (result) => {
+                if (result === "success") {
                     location.href = "/";
                 }
-            }
-          });
+            },
+        });
     }
 }

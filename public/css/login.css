@@ -42,8 +42,11 @@
     padding:15px;
     background-color: #A7FFE4;
     border:0;
+    border-radius: 5px;
     font-size: 1.15em;
+    cursor: pointer;
 }
+
 #kakao-login-btn{
     background-image: url('../assets/kakao_login.png');
     background-size: contain;

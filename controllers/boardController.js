@@ -32,7 +32,7 @@ module.exports = {
     getDetail: async (req, res) => {
         const id = req.params.id;
         await model.showBoardDetail(id).then(function (data) {
-            res.render("../views/board/detail.ejs", { result: data, id : req.session._id });
+            res.render("../views/board/detail.ejs", { result: data, session : req.session._id });
         });
     },
     getUpdate: (req, res) => {

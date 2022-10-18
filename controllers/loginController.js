@@ -5,11 +5,15 @@ const url = require("url");
 
 module.exports = {
     basicLogin: (req, res) => {
+/* DB랑 연결해서 로그인 유효성검사하기 */
         const loginInfo = {
             id: req.body.id,
             pw: req.body.pw,
         };
-        if (req.session._id === undefined) req.session._id = loginInfo.id;
+        if (req.session._id === undefined) {
+            req.session._id = loginInfo.id;
+            res.redirect("/");
+        }
         else {
             console.log("이미 세션이 존재합니다");
         }
