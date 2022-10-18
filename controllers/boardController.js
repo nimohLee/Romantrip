@@ -21,23 +21,24 @@ module.exports = {
                 length: data.length - 1,
                 page_num: 10,
                 pass: true,
+                session : req.session._id
             });
         });
     },
 
     getWrite: (req, res) => {
-        res.render("../views/board/write.ejs");
+        res.render("../views/board/write.ejs",{session : req.session._id});
     },
     getDetail: async (req, res) => {
         const id = req.params.id;
         await model.showBoardDetail(id).then(function (data) {
-            res.render("../views/board/detail.ejs", { result: data });
+            res.render("../views/board/detail.ejs", { result: data, id : req.session._id });
         });
     },
     getUpdate: (req, res) => {
         const id = req.params.id;
         model.popupUpdate(id).then(function (data) {
-            res.render("../views/board/update", { result: data });
+            res.render("../views/board/update", { result: data , session : req.session._id});
         });
     },
     postWrite: (req, res) => {

@@ -18,6 +18,14 @@ function naverAuthorization(){
     };
     location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${reqParams.client_id}&redirect_uri=${reqParams.redirect_uri}&state=test`
 }
-    
-   
+ 
 
+   
+/* 로그아웃 */
+function logout(){
+    Kakao.Auth.get
+$.ajax({
+        method : "post",
+        url : "/users/logout"
+      });
+}
