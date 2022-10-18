@@ -26,14 +26,15 @@ module.exports = {
             'Content-type' : 'application/x-www-form-urlencoded;charset=utf-8'
         }
 
-        request.post({
-            url: 'https://kapi.kakao.com/v2/user/me',
-            headers : header
-        },function(err,res,body){
-            console.log(body);
-        }
-        )
-        
+        return new Promise((resolve, reject)=>{
+            request.post({
+                url: 'https://kapi.kakao.com/v2/user/me',
+                headers : header
+            },function(err,res,body){
+                resolve(body);
+            }
+            )
+        })
     }
     
 }
