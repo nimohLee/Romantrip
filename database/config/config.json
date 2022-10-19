@@ -3,7 +3,7 @@
     "username": "roman",
     "password": "roman",
     "database": "romantrip",
-    "host": "127.0.0.1",
+    "host": "portfolio-rds.cr4pel3y5xf1.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql",
     "timezone":"+09:00",
     "logging": false
@@ -12,7 +12,7 @@
     "username": "roman",
     "password": "roman",
     "database": "romantrip",
-    "host": "127.0.0.1",
+    "host": "portfolio-rds.cr4pel3y5xf1.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql",
     "timezone":"+09:00",
     "logging": false
@@ -21,7 +21,7 @@
     "username": "root",
     "password": null,
     "database": "database_production",
-    "host": "127.0.0.1",
+    "host": "portfolio-rds.cr4pel3y5xf1.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql",
     "timezone":"+09:00"
   }

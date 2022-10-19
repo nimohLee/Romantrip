@@ -1,6 +1,6 @@
 -- user : root
-CREATE USER 'romantrip'@'localhost' IDENTIFIED WITH mysql_native_password BY 'roman';
-GRANT all privileges on romantrip.* to romantrip@'localhost' with grant option;
+CREATE USER 'roman'@'localhost' IDENTIFIED WITH mysql_native_password BY 'roman';
+GRANT all privileges on roman.* to roman@'%' with grant option;
 -- user : romantrip
 CREATE database romantrip;
 

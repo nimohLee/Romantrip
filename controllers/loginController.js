@@ -35,7 +35,10 @@ module.exports = {
                 }
             });
             res.redirect("/");
-        });
+        }
+        );
+     
+
     },
     naverLogin: (req, res) => {
         const code = req.query.code;

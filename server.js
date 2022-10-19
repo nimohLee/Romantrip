@@ -8,7 +8,6 @@ const { sequelize } = require('./database/models/index')
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
-
 const app = express();
 const PORT  = 5001;
 
@@ -39,7 +38,9 @@ app.use(session({
 
 
 app.get("/",(req,res)=>{
+
     res.render('index',{session : req.session._id});
+ 
 });
 
 app.use('/board',boardRoute);
