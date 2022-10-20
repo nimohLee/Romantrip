@@ -45,6 +45,8 @@ module.exports = {
         const board = {
             title: req.body.title,
             content: req.body.content,
+            m_id: req.session._id,
+            writer: req.session._name
         };
         model.writeBoard(board);
         res.redirect("/board/page/1");

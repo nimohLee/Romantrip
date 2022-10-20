@@ -1,5 +1,5 @@
 const db = require("../config/db");
-const { Board } = require("../database/models/index");
+const { Board, User } = require("../database/models/index");
 const sequelize = require("sequelize");
 const { Op } = require("sequelize");
 const board = require("../database/models/board");
@@ -9,14 +9,25 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             let result = [];
             if (params.selected === undefined) {
+               
                 const boards = await Board.findAll({
                     /* ORDER BY b_id DESC */
                     order: [["b_id", "DESC"]],
                 });
-                boards.forEach((board) => {
+                boards.forEach(  (board) => {
+                    const findedName =  User.findAll({
+                        where:{
+                            id : board.m_id
+                        },
+                        attributes: ['name'],
+                        raw : true
+                    });
+                    const userName = findedName[0];
+                    
                     result.push({
                         b_id: board.b_id,
                         m_id: board.m_id,
+                        ...userName,
                         title: board.title,
                         content: board.content,
                         regDate: board.createdAt.toISOString().substring(0, 10),
@@ -51,28 +62,50 @@ module.exports = {
                 });
             }
             setTimeout(() => {
+                
                 resolve(result);
             }, 0);
         });
     },
     writeBoard: (params) => {
         return new Promise(async (resolve, reject) => {
-            const boardCount = await Board.findAll({
-                raw: true,
-            });
-            const alterIdx =
-                "ALTER TABLE Boards AUTO_INCREMENT = " +
-                (boardCount.length + 1);
-            db.query(alterIdx, (err) => {
-                if (err) throw err;
-            });
-            await Board.create({
-                m_id: 123,
-                title: params.title,
-                content: params.content,
-                regDate: new Date(),
-                views: 0,
-            });
+            
+            new Promise(async (resolve,reject)=>{
+                const boardCount = await Board.findAll({
+                    raw: true,
+                });
+                const alterIdx =
+                    "ALTER TABLE Boards AUTO_INCREMENT = " +
+                    (boardCount.length + 1);
+                    resolve(alterIdx);
+            }).then((alterIdx)=>{
+                db.query(alterIdx, (err) => {
+                    if (err) throw err;
+                    else{
+                        console.log(alterIdx);
+                        console.log("alter");
+                    }
+                });
+            
+            }).then(()=>{
+                setTimeout(async () => {
+                    await Board.create({
+                        m_id: params.m_id,
+                        title: params.title,
+                        content: params.content,
+                        regDate: new Date(),
+                        views: 0,
+                    });
+                    console.log("create");
+                }, 10);
+               
+               
+            })
+                
+              
+               
+            
+           
         });
     },
     /* update params 수정해야함  */
@@ -125,7 +158,7 @@ module.exports = {
         // delete recode
         await Board.destroy({
             where: {
-                b_id: params,
+                b_id: id,
             },
         });
         db.query(updateSql, (err) => {

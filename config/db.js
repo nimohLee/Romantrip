@@ -3,7 +3,7 @@
 const mysql = require('mysql');
 
 const db = mysql.createConnection({
-  host     : 'localhost',
+  host     : 'portfolio-rds.cr4pel3y5xf1.ap-northeast-2.rds.amazonaws.com',
   user     : 'roman',
   password : 'roman',
   database : 'romantrip',
