@@ -15,10 +15,9 @@ module.exports = {
         console.log("이미 로그인 중");}
     },
     postLogout:(req,res)=>{
-        
-        const logoutURL = `https://kauth.kakao.com/oauth/logout?client_id=457bc0baab39156996248d5b7386f600&logout_redirect_uri=http://localhost:5001`;
         /* 카카오 세션 존재 시 카카오 서버~ 없을 시 세션만 삭제 */
         if(req.session._kakao){
+            const logoutURL = `https://kauth.kakao.com/oauth/logout?client_id=457bc0baab39156996248d5b7386f600&logout_redirect_uri=http://localhost:5001`;
             request.get({
                 url : logoutURL},
                     function (err,result,body){
