@@ -65,6 +65,7 @@ module.exports = {
                 url: 'https://kapi.kakao.com/v2/user/me',
                 headers : header
             },function(err,res,body){
+                
                 resolve(body);
             }
             )

@@ -10,9 +10,14 @@ module.exports = (sequelize, DataTypes) => {
                 comment: "board idx"
             },
             m_id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.STRING,
                 allowNull: false,
-                comment: "member idx"
+                comment: "member id"
+            },
+            m_name:{
+                type: DataTypes.STRING,
+                allowNull: false,
+                comment: "member name"
             },
             title: {
                 type: DataTypes.STRING,

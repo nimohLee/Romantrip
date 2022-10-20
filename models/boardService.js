@@ -8,38 +8,15 @@ module.exports = {
     getBoardList: (params) => {
         return new Promise(async (resolve, reject) => {
             let result = [];
+            let userName;
             if (params.selected === undefined) {
                 const boards = await Board.findAll({
                     /* ORDER BY b_id DESC */
                     order: [["b_id", "DESC"]],
                 });     
+                
                 boards.forEach(async (board) => {
-                    const findedName = await User.findAll({
-                        where:{
-                            id : board.m_id
-                        },
-                        attributes: ['name'],
-                        raw : true
-                    });
-                    console.log(board.m_id);
-                    console.log(findedName);
-                    const userName = findedName;
-                    setTimeout(() => {
-                        result.push({
-                            b_id: board.b_id,
-                            m_id: board.m_id,
-                            title: board.title,
-                            ...userName,
-                            content: board.content,
-                            regDate: board.createdAt.toISOString().substring(0, 10),
-                            updateDate: board.updatedAt
-                                .toISOString()
-                                .substring(0, 10),
-                            views: board.views,
-                        });    
-                    }, 60);
-                    
-                   
+                          pushQueryResult(board); 
                 }); 
               
             } else {
@@ -51,31 +28,28 @@ module.exports = {
                     "%' ORDER BY b_id DESC;";
                 db.query(sql, (err, results) => {
                     if (err) throw err;
-                    else {
-                        results.forEach((board) => {
-                            result.push({
-                                b_id: board.b_id,
-                                m_id: board.m_id,
-                                ...userName,
-                                title: board.title,
-                                content: board.content,
-                                // regDate : board.createdAt.toISOString().substring(0,10),
-                                updateDate: board.updatedAt.substring(0, 10),
-                                views: board.views,
-                            });
+                    else pushQueryResult(board);
                         });
+                       
+                    }
+                    resolve(result);
+                
+                    function pushQueryResult(board){
+                        result.push({
+                            b_id: board.b_id,
+                            m_id: board.m_id,
+                            m_name : board.m_name,
+                            title: board.title,
+                            content: board.content,
+                            regDate: board.regDate,
+                            views: board.views,
+                        });  
                     }
                 });
-            }
-            setTimeout(() => {
-                
-                resolve(result);
-            }, 0);
-        });
-    },
+               
+            },
     writeBoard: (params) => {
         return new Promise(async (resolve, reject) => {
-            
             new Promise(async (resolve,reject)=>{
                 const boardCount = await Board.findAll({
                     raw: true,
@@ -97,12 +71,12 @@ module.exports = {
                 setTimeout(async () => {
                     await Board.create({
                         m_id: params.m_id,
+                        m_name : params.m_name,
                         title: params.title,
                         content: params.content,
                         regDate: new Date(),
                         views: 0,
                     });
-                    console.log("create");
                 }, 10);
                
                

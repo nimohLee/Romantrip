@@ -33,7 +33,6 @@ module.exports = {
         service.getKakaoToken(code).then(async (data) => {
             await service.getUserInfo(data).then((returnData) => {
                 const userInfo = JSON.parse(returnData);
-
                 /* 카카오와 네이버로그인 -> DB INSERT 함수인 createSnsUser()를 카카오와 네이버에서 재사용할 수있도록 새로운 객체 userObj 정의 */
                 const userObj = {
                     id: userInfo.id,

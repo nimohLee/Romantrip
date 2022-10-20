@@ -39,8 +39,8 @@
                         <tr class="data-tr">
                             <td><%=data.b_id%></td>
                             <td><a href="../detail/<%= data.b_id%>" id="title-td"><%=data.title %></a></td>
-                            <td><%=data.name%></td>
-                            <td><%=data.updateDate%></td>
+                            <td><%=data.m_name%></td>
+                            <td><%=data.regDate.toISOString().substring(0,10)%></td>
                             <td><%=data.views%></td>
                             
                         </tr>
