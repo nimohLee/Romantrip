@@ -36,3 +36,25 @@ function logout() {
         });
     }
 }
+
+function submitLoginForm(){
+    const loginForm = document.forms.loginFrm;
+    const formData = {
+        id : loginForm.id.value,
+        pw : loginForm.pw.value
+    }
+    $.ajax({
+        method: "post",
+        url: "/login/basic",
+        data: formData,
+        success : (result)=>{
+            if(result === "fail"){
+                alert("아이디 또는 비밀번호를 확인하세요");
+            }else{
+                console.log("성공")
+                location.href = "/users";
+            }
+        }
+    })
+};
+

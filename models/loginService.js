@@ -1,6 +1,8 @@
 const { application } = require('express');
 const axios = require('axios');
 const request = require('request');
+const { User } = require("../database/models/index");
+
 const kakaoKey = {
     client_id : "457bc0baab39156996248d5b7386f600",
     redirect_uri : "http://localhost:5001/login/kakao"
@@ -82,6 +84,24 @@ module.exports = {
             }
             )
         })
+    },
+    validation : (info) =>{
+
+        return new Promise(async (resolve,reject)=>{
+            const selectUser = await User.findAll({
+                where : {
+                    id : info.id,
+                    pw : info.pw
+                },
+                raw: true
+            });
+            if(selectUser.length>0){
+                resolve(selectUser);
+            }else{resolve("fail");}
+            
+        })
+        
+        
     }
     
 }

@@ -6,13 +6,26 @@ const url = require("url");
 module.exports = {
     basicLogin: (req, res) => {
 /* DB랑 연결해서 로그인 유효성검사하기 */
-        const loginInfo = {
+const loginInfo = {
             id: req.body.id,
             pw: req.body.pw,
         };
+        service.validation(loginInfo).then((selectedUser)=>{
+            if(selectedUser === "fail"){
+                res.send(
+                    `<script>
+                      alert('이메일 인증 시간을 초과했습니다.');
+                      location.href='/';
+                    </script>`
+                  );
+            }else{
+                req.session._id = loginInfo.id;
+            }
+
+        });
         if (req.session._id === undefined) {
             req.session._id = loginInfo.id;
-            res.redirect("/");
+            
         }
         else {
             console.log("이미 세션이 존재합니다");
