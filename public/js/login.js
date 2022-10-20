@@ -1,10 +1,13 @@
+/* DOM */
+document.title = "RomanTrip>login";
+
+
 /* SNS 로그인 */
 /* 카카오 */
-const REST_API_KEY = "457bc0baab39156996248d5b7386f600";
-const REDIRECT_URI = "http://localhost:5001/login/kakao";
-Kakao.init(REST_API_KEY);
-console.log(Kakao.isInitialized());
 function kakaoAuthorization() {
+    const REST_API_KEY = "457bc0baab39156996248d5b7386f600";
+    const REDIRECT_URI = "http://localhost:5001/login/kakao";
+    Kakao.init(REST_API_KEY);
     Kakao.Auth.authorize({
         redirectUri: REDIRECT_URI,
     });
@@ -37,24 +40,27 @@ function logout() {
     }
 }
 
-function submitLoginForm(){
+function submitLoginForm() {
     const loginForm = document.forms.loginFrm;
     const formData = {
-        id : loginForm.id.value,
-        pw : loginForm.pw.value
-    }
+        id: loginForm.id.value,
+        pw: loginForm.pw.value,
+    };
     $.ajax({
         method: "post",
         url: "/login/basic",
         data: formData,
-        success : (result)=>{
-            if(result === "fail"){
+        dataType: "json",
+        success: (data) => {
+            if (data.result === "fail") {
                 alert("아이디 또는 비밀번호를 확인하세요");
-            }else{
-                console.log("성공")
-                location.href = "/users";
+                /* 로그인 폼 초기화 및 포커싱 */
+                loginForm.id.value = "";
+                loginForm.pw.value = "";
+                loginForm.id.focus();
+            } else {
+                location.href = "/";
             }
-        }
-    })
-};
-
+        },
+    });
+}

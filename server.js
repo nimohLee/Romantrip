@@ -29,7 +29,7 @@ app.use(express.urlencoded({extended : true}));
 
 
 app.use(session({
-  store: new FileStore(),
+  store: new FileStore({logFn: function(){}}),
   secret: 'keyboard dogcatdog',
   resave: false,
   saveUninitialized: false,

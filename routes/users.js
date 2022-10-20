@@ -4,13 +4,13 @@ const controller = require("../controllers/userController");
 
 router.get("/", controller.getMain);
 
-router.post("/", controller.postRegister);
-
 router.get("/login",controller.getLogin);
 
 router.post("/logout",controller.postLogout);
 
 router.get("/register", controller.getRegister);
+
+router.post("/register", controller.postRegister);
 
 router.post("/idVaild",controller.validation);
 

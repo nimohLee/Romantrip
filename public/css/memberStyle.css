@@ -54,7 +54,7 @@
     align-items: center;
     width: 70vw;
     height: 70vh;
-    background-color: rgba(255, 255, 255, 0.418);
+    background-color: rgba(255, 255, 255, 0.85);
     border: 1px solid var(--summer-black2-color);
     border-radius: 30px;
 }

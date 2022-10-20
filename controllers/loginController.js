@@ -5,31 +5,27 @@ const url = require("url");
 
 module.exports = {
     basicLogin: (req, res) => {
-/* DB랑 연결해서 로그인 유효성검사하기 */
-const loginInfo = {
+        /* DB랑 연결해서 로그인 유효성검사하기 */
+        const loginInfo = {
             id: req.body.id,
             pw: req.body.pw,
         };
-        service.validation(loginInfo).then((selectedUser)=>{
-            if(selectedUser === "fail"){
-                res.send(
-                    `<script>
-                      alert('이메일 인증 시간을 초과했습니다.');
-                      location.href='/';
-                    </script>`
-                  );
-            }else{
+        service.validation(loginInfo).then((selectedUser) => {
+            let result;
+            if (selectedUser === "fail") {
+                result = "fail";
+            } else {
                 req.session._id = loginInfo.id;
+                result = "success";
             }
-
+        
+            res.send({result});
         });
-        if (req.session._id === undefined) {
-            req.session._id = loginInfo.id;
-            
-        }
-        else {
-            console.log("이미 세션이 존재합니다");
-        }
+        // if (req.session._id === undefined) {
+        //     req.session._id = loginInfo.id;
+        // } else {
+        //     console.log("이미 세션이 존재합니다");
+        // }
     },
     kakaoLogin: (req, res) => {
         const code = req.query.code;
@@ -48,14 +44,11 @@ const loginInfo = {
                 }
             });
             res.redirect("/");
-        }
-        );
-     
-
+        });
     },
     naverLogin: (req, res) => {
         const code = req.query.code;
-        
+
         service.getNaverToken(code).then(async (data) => {
             await service.naverGetUserInfo(data).then((returnData) => {
                 const userInfo = JSON.parse(returnData);

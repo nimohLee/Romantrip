@@ -189,8 +189,7 @@ function submitForm(){
         async: false,
         data: JSON.stringify(jsObj),
         success: function(result){
-            console.log(result);
-            if( result == "No"){
+            if( result === "No"){
                 alert("사용할 수 없는 아이디입니다");
                 isSuccessed = false;
             }else{
@@ -205,7 +204,6 @@ document.getElementById("frm").addEventListener("submit", (e) => {
     if (nameOK && idOK && pwOK && emailOK) {
         if(submitForm()){
             alert('회원가입이 완료되었습니다');
-            location.href = "/";
             return true;
         }else{
             e.preventDefault();

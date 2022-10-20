@@ -9,9 +9,8 @@ module.exports = {
     },
     getLogin: (req,res) =>{
         if(req.session._id==undefined)
-        res.render("../views/users/login.ejs",{session : req.session._id})      
+            res.render("../views/users/login.ejs",{session : req.session._id})      
         else{
-        
         console.log("이미 로그인 중");}
     },
     postLogout:(req,res)=>{
@@ -52,7 +51,7 @@ module.exports = {
             email: req.body.email,
         };
         model.register(userDto);
-        res.redirect("/",{session : req.session._id});
+        res.redirect("/users/login");
     },
     getRegister: (req, res) => {
         res.render("../views/users/register",{session : req.session._id});
