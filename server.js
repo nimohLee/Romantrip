@@ -3,6 +3,8 @@ const path = require('path');
 const boardRoute = require('./routes/board');
 const userRoute = require('./routes/users');
 const loginRoute = require('./routes/login');
+const playRoute = require('./routes/play');
+const eatRoute = require('./routes/eat');
 const cors = require("cors");
 const { sequelize } = require('./database/models/index')
 const session = require('express-session');
@@ -43,9 +45,15 @@ app.get("/",(req,res)=>{
  
 });
 
+app.get("/busan",(req,res)=>{
+  res.render("busan",{session : req.session._id});
+});
+
 app.use('/board',boardRoute);
 app.use('/users',userRoute); 
 app.use("/login",loginRoute);
+app.use("/play",playRoute);
+app.use("/eat",eatRoute);
 
 
 
