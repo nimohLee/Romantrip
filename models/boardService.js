@@ -9,34 +9,39 @@ module.exports = {
         return new Promise(async (resolve, reject) => {
             let result = [];
             if (params.selected === undefined) {
-               
                 const boards = await Board.findAll({
                     /* ORDER BY b_id DESC */
                     order: [["b_id", "DESC"]],
-                });
-                boards.forEach(  (board) => {
-                    const findedName =  User.findAll({
+                });     
+                boards.forEach(async (board) => {
+                    const findedName = await User.findAll({
                         where:{
                             id : board.m_id
                         },
                         attributes: ['name'],
                         raw : true
                     });
-                    const userName = findedName[0];
+                    console.log(board.m_id);
+                    console.log(findedName);
+                    const userName = findedName;
+                    setTimeout(() => {
+                        result.push({
+                            b_id: board.b_id,
+                            m_id: board.m_id,
+                            title: board.title,
+                            ...userName,
+                            content: board.content,
+                            regDate: board.createdAt.toISOString().substring(0, 10),
+                            updateDate: board.updatedAt
+                                .toISOString()
+                                .substring(0, 10),
+                            views: board.views,
+                        });    
+                    }, 60);
                     
-                    result.push({
-                        b_id: board.b_id,
-                        m_id: board.m_id,
-                        ...userName,
-                        title: board.title,
-                        content: board.content,
-                        regDate: board.createdAt.toISOString().substring(0, 10),
-                        updateDate: board.updatedAt
-                            .toISOString()
-                            .substring(0, 10),
-                        views: board.views,
-                    });
-                });
+                   
+                }); 
+              
             } else {
                 const sql =
                     "SELECT * FROM Boards WHERE " +
@@ -51,6 +56,7 @@ module.exports = {
                             result.push({
                                 b_id: board.b_id,
                                 m_id: board.m_id,
+                                ...userName,
                                 title: board.title,
                                 content: board.content,
                                 // regDate : board.createdAt.toISOString().substring(0,10),

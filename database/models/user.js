@@ -21,18 +21,20 @@ module.exports = (sequelize, DataTypes) => {
             },
             pw : {
                 type: DataTypes.STRING,
-                allowNull: false,
                 comment: "사용자 비밀번호"
             },
             email: {
                 type: DataTypes.STRING,
-                allowNull: false,
                 comment: "사용자 이메일",
             },
             regDate : {
                 type : DataTypes.DATE,
                 
                 comment: "가입일"
+            },
+            loginBy :{
+                type : DataTypes.STRING,
+                comment : "가입 수단"
             }
         },
         {

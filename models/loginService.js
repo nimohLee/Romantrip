@@ -100,6 +100,21 @@ module.exports = {
             }else{resolve("fail");}
             
         })
+    },
+    createSnsUser : async(params,userObj)=>{
+        const countUser = await User.findAll({
+            where : {
+                id : userObj.id
+            },
+            raw : true
+        });
+        if(countUser.length===0){
+            await User.create({
+                name : userObj.name,
+                id : userObj.id,
+                loginBy : params
+            })
+        }
         
         
     }
