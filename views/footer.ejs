@@ -7,7 +7,7 @@
     const subMenu = document.querySelector(".sub-menu");
     const playMenu = document.querySelector(".play-sub-menu");
     const eatMenu = document.querySelector(".eat-sub-menu");
-    const mains = document.querySelectorAll("main");
+    const main = document.querySelector("main");
     menus.forEach((menu)=>{
          menu.addEventListener('mouseenter',(e)=>{
              const menuName = e.target.innerText;
@@ -17,47 +17,62 @@
              if(menuName === "즐길거리"){
                  eatMenu.classList.remove("selected-sub-menu");
                  playMenu.classList.add("selected-sub-menu");
-                 mains.forEach((main)=>{
+                //  mains.forEach((main)=>{
                  main.classList.add("menu-opened");
-             })
+            //  })
 
                 
              }
              else if(menuName === "먹거리"){
                  playMenu.classList.remove("selected-sub-menu");
                  eatMenu.classList.add("selected-sub-menu");
-                 mains.forEach((main)=>{
+                //  mains.forEach((main)=>{
                  main.classList.add("menu-opened");
-             })
+            //  })
 
-             }else{
+             }else if(menuName === "게시판"){
                  subMenu.classList.remove("menu-block");
-                 mains.forEach((main)=>{
+                //  mains.forEach((main)=>{
                  main.classList.remove("menu-opened");
-             })
+            //  })
              }
          });
         
     })
 
-    subMenu.addEventListener('mouseleave',(e)=>{
-         subMenu.classList.remove("menu-block");
-         mains.forEach((main)=>{
-            main.classList.remove("menu-opened");
-             })
+    document.addEventListener('mousemove', (event) => {
+      if(convertPXToVH(event.clientY) > 45){
+        subMenu.classList.remove("menu-block");
+        // mains.forEach((main)=>{
+          main.classList.remove("menu-opened");
+        // })
+      }
+      
+});
+
+/* pixel to vh function */
+function convertPXToVH(px) {
+	return px * (100 / document.documentElement.clientHeight);
+}
+    
+    // subMenu.addEventListener('mouseleave',(e)=>{
+    //      subMenu.classList.remove("menu-block");
+    //      mains.forEach((main)=>{
+    //         main.classList.remove("menu-opened");
+    //          })
          
-        })
+    //     })
 
 
           $(function() {
-  var body = $('#starshine'),
+  let body = $('#starshine'),
       template = $('.template.shine'),
       stars =  500,
       sparkle = 20;
   
     
-  var size = 'small';
-  var createStar = function() {
+  let size = 'small';
+  const createStar = function() {
     template.clone().removeAttr('id').css({
       top: (Math.random() * 100) + '%',
       left: (Math.random() * 100) + '%',
@@ -66,7 +81,7 @@
     }).addClass(size).appendTo(body);
   };
  
-  for(var i = 0; i < stars; i++) {
+  for(let i = 0; i < stars; i++) {
     if(i % 2 === 0) {
       size = 'small';
     } else if(i % 3 === 0) {
