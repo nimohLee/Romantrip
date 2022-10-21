@@ -2,6 +2,51 @@
    
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+<script>
+    const menus = document.querySelectorAll(".main-menu li");
+    const subMenu = document.querySelector(".sub-menu");
+    const playMenu = document.querySelector(".play-sub-menu");
+    const eatMenu = document.querySelector(".eat-sub-menu");
+    const mains = document.querySelectorAll("main");
+    menus.forEach((menu)=>{
+         menu.addEventListener('mouseenter',(e)=>{
+             const menuName = e.target.innerText;
+             subMenu.classList.add("menu-block");
+           
 
+             if(menuName === "즐길거리"){
+                 eatMenu.classList.remove("selected-sub-menu");
+                 playMenu.classList.add("selected-sub-menu");
+                 mains.forEach((main)=>{
+                 main.classList.add("menu-opened");
+             })
+
+                
+             }
+             else if(menuName === "먹거리"){
+                 playMenu.classList.remove("selected-sub-menu");
+                 eatMenu.classList.add("selected-sub-menu");
+                 mains.forEach((main)=>{
+                 main.classList.add("menu-opened");
+             })
+
+             }else{
+                 subMenu.classList.remove("menu-block");
+                 mains.forEach((main)=>{
+                 main.classList.remove("menu-opened");
+             })
+             }
+         });
+        
+    })
+
+    subMenu.addEventListener('mouseleave',(e)=>{
+         subMenu.classList.remove("menu-block");
+         mains.forEach((main)=>{
+            main.classList.remove("menu-opened");
+             })
+         
+        })
+ </script>
 </body>
 </html>

@@ -47,6 +47,7 @@
     
     .header-center ul li{
         margin-right: 30px;
+        padding : 0 3em;
     }
 
     .header-center ul li> a {
@@ -62,9 +63,11 @@
     }
     .header-right ul li{
         margin-left: 10px;
+       
     }
     .header-right ul li a {
         font-size:0.9em;
+ 
         transition-duration: 0.5s;
     }
     .header-right ul li a:hover {
@@ -185,6 +188,11 @@
         z-index: -1;
         
     }
+
+    .menu-opened{
+        background-color: rgba(0, 0, 0, 0.377);
+    }
+
     body{
         position: absolute;
         top:80px;

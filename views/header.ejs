@@ -111,33 +111,7 @@
             </div>
         </div>
 
-        <script>
-           const menus = document.querySelectorAll(".main-menu li");
-           const subMenu = document.querySelector(".sub-menu");
-           const playMenu = document.querySelector(".play-sub-menu");
-           const eatMenu = document.querySelector(".eat-sub-menu");
-           menus.forEach((menu)=>{
-                menu.addEventListener('mouseenter',(e)=>{
-                    const menuName = e.target.innerText;
-                    subMenu.classList.add("menu-block");
-                    if(menuName === "즐길거리"){
-                        eatMenu.classList.remove("selected-sub-menu");
-                        playMenu.classList.add("selected-sub-menu");
-                    }
-                    else if(menuName === "먹거리"){
-                        playMenu.classList.remove("selected-sub-menu");
-                        eatMenu.classList.add("selected-sub-menu");
-                    }else{
-                        subMenu.classList.remove("menu-block")
-                    }
-                });
-               
-           })
-
-           subMenu.addEventListener('mouseleave',(e)=>{
-                subMenu.classList.remove("menu-block");
-               })
-        </script>
+        
         <script src="/js/login.js"></script>
     </body>
 </html>
