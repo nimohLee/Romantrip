@@ -7,9 +7,11 @@
         <link rel="stylesheet" href="/css/reset.css" as="style" crossorigin="crossorigin"/>
         <link rel="stylesheet" href="/css/indexStyle.css" as="style" crossorigin="crossorigin"/>
         <link
-            href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Gothic:wght@400;700&family=Roboto:wght@400;700&family=Titillium+Web:wght@400;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Gothic:wght@400;700&family=Roboto:wght@400;700&family=Titillium+Web:wght@400;700&family=Do+Hyeon&family=Jua&family=Nanum+Brush+Script&display=swap"
             rel="stylesheet"
         />
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=Nanum+Brush+Script&display=swap" rel="stylesheet"> -->
+
         <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
         <link
             rel="stylesheet"
@@ -44,10 +46,10 @@
                 </a>
             </div>
             <div class="header-center">
-                <ul>
-                    <li><a href="/busan">부산은?</a></li>
-                    <li><a href="/play">즐길거리</a></li>
-                    <li><a href="/eat">먹거리</a></li>
+                <ul class="main-menu gmarket">
+                    <li><a href="#">즐길거리</a></li>
+                    <li><a href="#">먹거리</a>
+                    </li>
                     <li><a href="/board/page/1">게시판</a></li>
                 </ul>
             </div>
@@ -67,13 +69,74 @@
                 </ul>
             </div>
         </header>
-        <div class="bg"></div>
+        <div class="sub-menu menu-hidden">
+            <div class="play-sub-menu">
+                <div class="sub-menu-title-wrap">
+                    <h4 class="hans">즐길거리</h4>
+                    
+                    <h5 class="brush">부산에서 신나게 놀아보자 !</h5>
+                </div>
+                <div class="sub-menu-button-wrap dohyeon">
+                    <a href="/play/sightseeing">관광명소
+                        <i class="fa-regular fa-circle-check check-icon"></i>
+                    </a>
+                    <a href="/play/relax">휴양지
+                        <i class="fa-regular fa-circle-check check-icon"></i>
+                    </a>
+                    <a href="/play/amusement">놀이시설
+                        <i class="fa-regular fa-circle-check check-icon"></i>
+                    </a>
+                    <a href="/play/leisure">레저
+                        <i class="fa-regular fa-circle-check check-icon"></i>
+                    </a>
+                </div>
+            </div>
+            <div class= "eat-sub-menu dohyeon">
+                <div class="sub-menu-title-wrap">
+                    <h4 class="hans">먹거리</h4>
+                    <h5 class="brush">부산에서 맛있게 먹어보자 !</h5>
+                </div>
+                <div class="sub-menu-button-wrap">
+                    <a href="/eat/restaurant">식당
+                        <i class="fa-regular fa-circle-check check-icon"></i>
+                    </a>
+                    <a href="/eat/cafe">카페
+                        <i class="fa-regular fa-circle-check check-icon"></i>
+                    </a>
+                    <a href="/eat/market">시장
+                        <i class="fa-regular fa-circle-check check-icon"></i>
+                    </a>
+                </div>
+            
+            </div>
+        </div>
 
         <script>
-            // const loginA = document.querySelector(".header-right ul li:nth-child(2)");
-            // console.log(sessionStorage.getItem(_id));
-            // if(sessionStorage.getItem(_id))
-            //     loginA.innerHTML = "<a href='/users/logout'>로그아웃<a>";
+           const menus = document.querySelectorAll(".main-menu li");
+           const subMenu = document.querySelector(".sub-menu");
+           const playMenu = document.querySelector(".play-sub-menu");
+           const eatMenu = document.querySelector(".eat-sub-menu");
+           menus.forEach((menu)=>{
+                menu.addEventListener('mouseenter',(e)=>{
+                    const menuName = e.target.innerText;
+                    subMenu.classList.add("menu-block");
+                    if(menuName === "즐길거리"){
+                        eatMenu.classList.remove("selected-sub-menu");
+                        playMenu.classList.add("selected-sub-menu");
+                    }
+                    else if(menuName === "먹거리"){
+                        playMenu.classList.remove("selected-sub-menu");
+                        eatMenu.classList.add("selected-sub-menu");
+                    }else{
+                        subMenu.classList.remove("menu-block")
+                    }
+                });
+               
+           })
+
+           subMenu.addEventListener('mouseleave',(e)=>{
+                subMenu.classList.remove("menu-block");
+               })
         </script>
         <script src="/js/login.js"></script>
     </body>

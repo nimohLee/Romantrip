@@ -53,6 +53,24 @@ table {
 .hans{
     font-family: 'Black Han Sans', sans-serif;
 }
+.dohyeon{
+	font-family: 'Do Hyeon', sans-serif;
+}
+.jua{
+	font-family: 'Jua', sans-serif;
+}
+.brush{
+	font-family: 'Nanum Brush Script', cursive;
+}
+
+@font-face {
+	font-family: 'gmarket';
+	src: url('../assets/fonts//GmarketSansTTFMedium.ttf');
+}
+
+.gmarket{
+	font-family: 'gmarket';
+}
 
 .titil{
     font-family: 'Titillium Web', sans-serif;

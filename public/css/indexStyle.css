@@ -49,21 +49,21 @@
         margin-right: 30px;
     }
 
-    .header-center ul li a {
+    .header-center ul li> a {
         color: black;
         text-decoration: none;
         font-size: 1.2em;
         text-align: center;
         transition-duration: 0.2s;
     }
-    .header-center ul li a:hover {
+    .header-center ul li>a:hover {
         font-size: 1.4em;
         transition-duration: 0.5s;
     }
     .header-right ul li{
         margin-left: 10px;
     }
-    .header-right ul li aㅎ {
+    .header-right ul li a {
         font-size:0.9em;
         transition-duration: 0.5s;
     }
@@ -79,7 +79,96 @@
         height: 100%;
     }
 
+    /* menu css part  */
 
+    @keyframes showMenu{
+        0%{
+            height: 0vh;
+            opacity: 0;
+        }
+         100%{
+            height: 30vh;
+            opacity: 1;
+         }
+    }
+
+    .sub-menu{
+        /* height: 30vh; */
+        background-color: white;
+        border-bottom: 1px solid #eee;
+        /* animation-name: showMenu; */
+        
+    }
+    .sub-menu-title-wrap{
+        background-color: #eee;
+    }
+    
+    .menu-hidden{
+        display: none;
+    }
+
+    /* 서브메뉴 보이기 */
+    .menu-block{
+        display:grid;
+        /* transition: 1s; */
+        animation: showMenu 1.2s ease-in-out 1 forwards;
+    }
+
+    .play-sub-menu{
+        display: none;
+    }
+
+    .eat-sub-menu{
+        display: none;
+    }
+
+    .selected-sub-menu{
+        display : grid;
+        grid-template-columns: 30% 70%;
+    }
+    .sub-menu-title-wrap{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center;
+    }
+    .sub-menu-title-wrap h4{
+        margin-bottom: 1.5em;
+       font-size: 2.5em;
+    }
+    .sub-menu-title-wrap h5{
+        font-size: 1.5em;
+     }
+    .sub-menu-button-wrap{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: start;
+        font-size: 1.2em
+    }
+    .sub-menu-button-wrap a{
+        width: 15em;
+        padding : 1em 0;
+        margin: 0 0.5em;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+        position: relative;
+    }
+
+    .sub-menu-button-wrap a:hover{
+        transition : .4s;
+        background-color: #FF74B1;
+        color: white;
+    }
+
+    .check-icon{
+        position: absolute;
+        top: 0.68em;
+        left: 9em;
+        font-size: 1.3em;
+        color: white;
+    }
 
     /* body css part */
     .bg {
