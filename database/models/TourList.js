@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 comment: "board idx",
             },
+            category : {
+                type: DataTypes.STRING,
+                allowNull: false,
+                comment : "tour category"
+            }
+            ,
             name: {
                 type: DataTypes.STRING,
                 allowNull: false,
@@ -20,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
                 comment: "tour 설명",
             },
             image: {
-                type: DataTypes.STRING,
+                type: DataTypes.BLOB,
                 comment: "사진 주소"
             },
             price : {
