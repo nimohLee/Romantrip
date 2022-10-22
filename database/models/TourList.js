@@ -25,14 +25,16 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
                 comment: "tour 설명",
             },
-            image: {
-                type: DataTypes.BLOB,
-                comment: "사진 주소"
+            location :{
+                type: DataTypes.STRING,
+                allowNull : false,
+                comment : "tour location"
             },
-            price : {
-                type : DataTypes.STRING,
-                comment: "가격"
+            image: {
+                type: DataTypes.STRING,
+                comment: "사진 주소"
             }
+         
         },
         {
             timestamps: false,
