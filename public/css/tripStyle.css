@@ -10,18 +10,21 @@ body{
 
 .subject-content{
      display: flex;
-    flex-wrap : wrap;
+    flex-wrap :wrap;
     margin : 20px 20px 0 20px;
-    justify-content: space-around;
+    justify-content: center;
+    
     }
 .tour-card{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
     width: 20vw;
     /* height: 40vh; */
+    margin: 0 20px;
+    margin-bottom: 5vh;
     border : 2px solid #eee;
-    
 }
 .trip-img{
     width: 100%;
@@ -38,14 +41,16 @@ body{
     margin-bottom: 10px;
     font-size: 1.2em;
 }
+.tour-description{
+    line-height: 1.6;
+    margin-bottom: 3px;
+}
 .detail-closed{
     display : -webkit-box;
     -webkit-box-orient: vertical;
-    line-height: 1.6;
     -webkit-line-clamp: 3;
     overflow:hidden;
     text-overflow: ellipsis;
-    margin-bottom: 3px;
 }
 .read-more-btn{
     width: 4em;
@@ -56,6 +61,13 @@ body{
  
 }
 .shopping-btn{
+    font-size: 1.2em;
+    font-weight: 700;
+    color:  rgb(40, 40, 40);
     height: 5vh;
     background-color: #FFD6EC;
+    outline: auto;
+    outline-color: #FFD6EC;
+    outline-style: solid;
+    cursor: pointer;
 }

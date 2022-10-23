@@ -10,14 +10,15 @@
             <div class="img-box"><img src=<%=result[i].image%> alt=<%=result[i].name%> class="trip-img"></div>
             <div class="content-box">
                 <div class="tour-name jua"><%=result[i].name%></div>
-                <div class="tour-description detail-closed"><%=result[i].description%></div>
-                <button class="read-more-btn">더보기</button>
+                <div class="tour-description detail-closed" id="content-desc[<%=i%>]"><%=result[i].description%></div>
+                <button class="read-more-btn" id="content-btn[<%=i%>]">더보기</button>
+                
                 <br>
                 
                 <div class="tour-location">주소 <br><br><%=result[i].location%></div>
                 
             </div>
-            <button class="shopping-btn">낭만 담기</button>
+            <button class="shopping-btn jua">낭만 담기</button>
         </article>
     <% } %>
     </section>
