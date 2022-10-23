@@ -1,6 +1,25 @@
 <%-include('../header.ejs') %>
 <main id="amusement-main" class="play-main">
-    
+    <section class="subject-title">
+        <h3>놀이시설</h3>
+    </section>
+    <section class="subject-content">
+        
+        <% for(let i = 0 ; i < result.length ; i ++) { %>
+        <article class="tour-card">
+            <div><img src=<%=result[i].image%> alt=<%=result[i].name%> ></div>
+            <div>
+                <div class="tour-name"><%=result[i].name%></div>
+                <div class="tour-description detail-closed"><%=result[i].description%></div>
+                <div class="tour-location"><%=result[i].location%></div>
+                <button class="shopping-btn">낭만 담기</button>
+            </div>
+        </article>
+    <% } %>
+    </section>
+    <section class="subject-paging">
+
+    </section>
 </main>
 
 <%-include('../footer.ejs') %>

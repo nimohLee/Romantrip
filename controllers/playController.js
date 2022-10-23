@@ -1,17 +1,19 @@
+const service = require('../models/playService');
+
 module.exports = {
-    getMain : (req,res) =>{
+    getMainPage : (req,res) =>{
         res.render("../views/play/index",{session : req.session._id});
     },
-    getSightseeing : (req,res) =>{
-        res.render("../views/play/sightseeing",{session : req.session._id});
+    getSightseeingPage : async (req,res) =>{
+        const sightseeingResult = await service.selectAllTourList("sightseeing");
+        res.render("../views/play/sightseeing",{session : req.session._id, result : sightseeingResult});
     },
-    getRelax : (req,res) =>{
-        res.render("../views/play/relax",{session : req.session._id});
+    getAmusementPage : async (req,res) =>{
+        const amusementResult = await service.selectAllTourList("amusement"); 
+        res.render("../views/play/amusement",{session : req.session._id, result : amusementResult});
     },
-    getAmusement : (req,res) =>{
-        res.render("../views/play/amusement",{session : req.session._id});
-    },
-    getLeisure : (req,res) =>{
-        res.render("../views/play/leisure",{session : req.session._id});
+    getLeisurePage : async (req,res) =>{
+        const leisureResult = await service.selectAllTourList("leisure");
+        res.render("../views/play/leisure",{session : req.session._id, result : leisureResult});
     }
 }

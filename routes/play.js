@@ -2,10 +2,9 @@ const express = require("express");
 const router = express.Router();
 const controller = require('../controllers/playController');
 
-router.get('/',controller.getMain);
-router.get('/sightseeing',controller.getSightseeing);
-router.get('/relax',controller.getRelax);
-router.get('/amusement',controller.getAmusement);
-router.get('/leisure',controller.getLeisure);
+router.get('/',controller.getMainPage);
+router.get('/sightseeing',controller.getSightseeingPage);
+router.get('/amusement',controller.getAmusementPage);
+router.get('/leisure',controller.getLeisurePage);
 
 module.exports = router;
