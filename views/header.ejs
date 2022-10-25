@@ -45,72 +45,78 @@
     </head>
     <body>
         <header>
-            <div class="header-left logo roboto">
-                <a href="/">
-                    <img src="/assets/logo.jpg" alt="logo" />
-                    <span>낭만부산</span>
-                </a>
+            <div id="main-header">
+                <div class="header-left logo roboto">
+                    <a href="/">
+                        <img src="/assets/logo.jpg" alt="logo" />
+                        <span>낭만부산</span>
+                    </a>
+                </div>
+                <div class="header-center">
+                    <ul class="main-menu gmarket">
+                        <li><a href="#">즐길거리</a></li>
+                        <li><a href="#">먹거리</a>
+                        </li>
+                        <li><a href="/board/page/1">게시판</a></li>
+                    </ul>
+                </div>
+                <div class="header-right">
+                    <ul>
+                        <li><a href="">여행바구니</a></li>
+                        <li>
+                            <% if(session=== undefined){ %>
+                            <a href="/users/login">로그인</a>
+                            <%}else{%>
+                            <a onclick="logout()" style="cursor: pointer" id="logoutBtn">
+                                로그아웃
+                            </a>
+                            <%}%>
+                        </li>
+                        <li><a href="/users/register">회원가입</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="header-center">
-                <ul class="main-menu gmarket">
-                    <li><a href="#">즐길거리</a></li>
-                    <li><a href="#">먹거리</a>
-                    </li>
-                    <li><a href="/board/page/1">게시판</a></li>
-                </ul>
-            </div>
-            <div class="header-right">
-                <ul>
-                    <li><a href="">여행바구니</a></li>
-                    <li>
-                        <% if(session=== undefined){ %>
-                        <a href="/users/login">로그인</a>
-                        <%}else{%>
-                        <a onclick="logout()" style="cursor: pointer" id="logoutBtn">
-                            로그아웃
-                        </a>
-                        <%}%>
-                    </li>
-                    <li><a href="/users/register">회원가입</a></li>
-                </ul>
+
+
+            <div id="sub-header">
+                <div class="sub-menu menu-hidden">
+                    <div class="play-sub-menu">
+                        <div class="sub-menu-title-wrap">
+                            <h4 class="hans">즐길거리</h4>
+                
+                            <h5 class="brush">부산에서 신나게 놀아보자 !</h5>
+                        </div>
+                        <div class="sub-menu-button-wrap dohyeon">
+                            <a href="/play/sightseeing">관광명소
+                                <i class="fa-regular fa-circle-check check-icon"></i>
+                            </a>
+                            <a href="/play/amusement">놀이시설
+                                <i class="fa-regular fa-circle-check check-icon"></i>
+                            </a>
+                            <a href="/play/leisure">레저
+                                <i class="fa-regular fa-circle-check check-icon"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class= "eat-sub-menu dohyeon">
+                        <div class="sub-menu-title-wrap">
+                            <h4 class="hans">먹거리</h4>
+                            <h5 class="brush">부산에서 맛있게 먹어보자 !</h5>
+                        </div>
+                        <div class="sub-menu-button-wrap">
+                            <a href="/eat/restaurant">식당
+                                <i class="fa-regular fa-circle-check check-icon"></i>
+                            </a>
+                            <a href="/eat/cafe">카페
+                                <i class="fa-regular fa-circle-check check-icon"></i>
+                            </a>
+                            <a href="/eat/market">시장
+                                <i class="fa-regular fa-circle-check check-icon"></i>
+                            </a>
+                        </div>
+                
+                    </div>
+                </div>
             </div>
         </header>
-        <div class="sub-menu menu-hidden">
-            <div class="play-sub-menu">
-                <div class="sub-menu-title-wrap">
-                    <h4 class="hans">즐길거리</h4>
-                    
-                    <h5 class="brush">부산에서 신나게 놀아보자 !</h5>
-                </div>
-                <div class="sub-menu-button-wrap dohyeon">
-                    <a href="/play/sightseeing">관광명소
-                        <i class="fa-regular fa-circle-check check-icon"></i>
-                    </a>
-                    <a href="/play/amusement">놀이시설
-                        <i class="fa-regular fa-circle-check check-icon"></i>
-                    </a>
-                    <a href="/play/leisure">레저
-                        <i class="fa-regular fa-circle-check check-icon"></i>
-                    </a>
-                </div>
-            </div>
-            <div class= "eat-sub-menu dohyeon">
-                <div class="sub-menu-title-wrap">
-                    <h4 class="hans">먹거리</h4>
-                    <h5 class="brush">부산에서 맛있게 먹어보자 !</h5>
-                </div>
-                <div class="sub-menu-button-wrap">
-                    <a href="/eat/restaurant">식당
-                        <i class="fa-regular fa-circle-check check-icon"></i>
-                    </a>
-                    <a href="/eat/cafe">카페
-                        <i class="fa-regular fa-circle-check check-icon"></i>
-                    </a>
-                    <a href="/eat/market">시장
-                        <i class="fa-regular fa-circle-check check-icon"></i>
-                    </a>
-                </div>
-            
-            </div>
-        </div>
-
+       
