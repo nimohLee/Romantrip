@@ -24,7 +24,15 @@ module.exports = {
 
 
     },
-    locateLoginPage : (params) =>{
+    /* 세션 TourList에 선택한 idx값이 있을 경우 중복해서 담지 못하게 하기 위한 function */
+    checkExistTourList : (tourLists, tourIdx) =>{
+        let isExist = false;
+        tourLists.forEach((tourList)=>{
+            if(tourList === tourIdx){
+                isExist = true;
+            }   
+        });
+        return isExist;
         
     }
 }

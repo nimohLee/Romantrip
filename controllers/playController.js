@@ -18,16 +18,26 @@ module.exports = {
     },
     postShopping : async (req,res)=>{
         const shoppedIdx = req.params.idx;
+        const tourListSession = req.session._tourList;
+        const isExist = service.checkExistTourList(tourListSession,shoppedIdx);
+        console.log(service.checkExistTourList(tourListSession,shoppedIdx));
         if(req.session._id){
-            if(tourListSession)
-                tourListSession.push(shoppedIdx);
-            else{
-                req.session._tourList = [];
-                req.session._tourList.push(shoppedIdx);
+            if(isExist){
+                res.send("exist");
+            }else{
+                if(tourListSession)
+                    tourListSession.push(shoppedIdx);
+                else{
+                    req.session._tourList = [];
+                    req.session._tourList.push(shoppedIdx);
+                }
+                res.send("success");
             }
-            res.send("success");
+            
+            
         }else{
             res.send("fail");
         }
+        console.log(req.session._tourList);
     }
 }

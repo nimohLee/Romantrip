@@ -32,7 +32,10 @@ shoppingBtns.forEach((shoppingBtn)=>{
                         if(result === "fail"){
                             alert("로그인이 필요합니다");
                             window.location.href= "/users/login";
-                        }else{
+                        }else if(result === "exist"){
+                            alert("이미 담은 낭만입니다");
+                        }
+                        else{
                             alert("낭만을 담았습니다!");
                         }
                     }

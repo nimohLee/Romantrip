@@ -71,10 +71,10 @@ function validateCheck() {
     }
 
     //PW
-    if (uPW.value.trim().length > 11) {
+    if (uPW.value.trim().length > 8) {
         pwOK = successCheck(uPW);
     } else {
-        pwOK = errorCheck(uPW, "비밀번호는 12자 이상 입력해주세요");
+        pwOK = errorCheck(uPW, "비밀번호는 8자 이상 입력해주세요");
     }
 
     /* 회원가입 폼 첫 제출 후 keyup에 따른 error or success 변화 */
@@ -106,10 +106,10 @@ function validateCheck() {
 
     // PW
     uPW.addEventListener("keyup", (e) => {
-        if (e.currentTarget.value.length > 11) {
+        if (e.currentTarget.value.length > 8) {
             pwOK = successCheck(uPW);
         } else {
-            pwOK = errorCheck(uPW, "비밀번호는 12자리 이상 입력해주세요");
+            pwOK = errorCheck(uPW, "비밀번호는 8자리 이상 입력해주세요");
         }
     });
 
