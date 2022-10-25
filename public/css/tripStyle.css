@@ -8,12 +8,19 @@ body{
 
 }
 
+.subject-title h3{ 
+    padding : 1.5em 0 1.5em 1.5em;
+    border-bottom: 1px dotted #ccc;
+    margin-bottom: 1em;
+    font-size: 2em;
+}
+
 .subject-content{
-     display: flex;
-    flex-wrap :wrap;
-    margin : 20px 20px 0 20px;
-    justify-content: center;
-    
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 10px;
+    column-gap: 10px;
+    justify-items: center;
     }
 .tour-card{
     display: flex;

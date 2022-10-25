@@ -7,4 +7,6 @@ router.get('/sightseeing',controller.getSightseeingPage);
 router.get('/amusement',controller.getAmusementPage);
 router.get('/leisure',controller.getLeisurePage);
 
+router.post('/shopping/:idx',controller.postShopping);
+
 module.exports = router;

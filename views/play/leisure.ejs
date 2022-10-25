@@ -1,19 +1,25 @@
 <%-include('../header.ejs') %>
 <main id="leisure-main" class="play-main">
-    <section class="subject-title">
+    <section class="subject-title dohyeon">
         <h3>레저</h3>
     </section>
     <section class="subject-content">
         
         <% for(let i = 0 ; i < result.length ; i ++) { %>
         <article class="tour-card">
-            <div><img src=<%=result[i].image%> alt=<%=result[i].name%> ></div>
-            <div>
-                <div class="tour-name"><%=result[i].name%></div>
-                <div class="tour-description detail-closed"><%=result[i].description%></div>
+            <div class="img-box"><img src=<%=result[i].image%> alt=<%=result[i].name%> class="trip-img"></div>
+            <div class="content-box">
+                <div class="tour-name jua"><%=result[i].name%></div>
+                <div class="tour-description detail-closed" id="content-desc[<%=i%>]"><%=result[i].description%></div>
                 <div class="tour-location"><%=result[i].location%></div>
-                <button class="shopping-btn">낭만 담기</button>
+                <button class="read-more-btn" id="content-btn[<%=i%>]">더보기</button>
+                
+                <br>
+                
+                <div class="tour-location">주소 <br><br><%=result[i].location%></div>
+                
             </div>
+            <button class="shopping-btn jua">낭만 담기</button>
         </article>
     <% } %>
     </section>

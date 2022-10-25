@@ -59,7 +59,12 @@ function submitLoginForm() {
                 loginForm.pw.value = "";
                 loginForm.id.focus();
             } else {
-                location.href = "/";
+                /* 이전 주소가 회원가입 주소이면 홈화면으로, 아니면 이전 화면으로 */
+                if(document.referrer === "http://localhost:5001/users/register"){ // 배포 시 로컬호스트 손봐주기
+                    location.href = "/";
+                }
+                else
+                    history.back();
             }
         },
     });

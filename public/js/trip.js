@@ -1,5 +1,6 @@
-const readMoreBtns = document.querySelectorAll(".read-more-btn");
 
+/* DOM */
+const readMoreBtns = document.querySelectorAll(".read-more-btn");
 readMoreBtns.forEach((btn)=>{
     btn.addEventListener("click",(e)=>{
         for(let i = 0; i < readMoreBtns.length; i++){
@@ -19,3 +20,37 @@ readMoreBtns.forEach((btn)=>{
     })
     
 })
+
+const shoppingBtns = document.querySelectorAll(".shopping-btn");
+shoppingBtns.forEach((shoppingBtn)=>{
+    shoppingBtn.addEventListener("click",(e)=>{
+        const tourIdx = e.target.value;
+        $.ajax({
+                    method : "post",
+                    url : `/play/shopping/${tourIdx}`,
+                    success : (result)=>{
+                        if(result === "fail"){
+                            alert("로그인이 필요합니다");
+                            window.location.href= "/users/login";
+                        }else{
+                            alert("낭만을 담았습니다!");
+                        }
+                    }
+                })
+    });
+})
+
+
+// shoppingBtn.addEventListener("click",(e)=>{
+    
+//     const data = {
+
+//     }
+//     $.ajax({
+//         method : "post",
+//         url : "play/shopping/1",
+//         success : ()=>{
+
+//         }
+//     })
+// })

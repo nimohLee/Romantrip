@@ -23,5 +23,8 @@ module.exports = {
         
 
 
+    },
+    locateLoginPage : (params) =>{
+        
     }
 }

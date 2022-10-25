@@ -15,5 +15,19 @@ module.exports = {
     getLeisurePage : async (req,res) =>{
         const leisureResult = await service.selectAllTourList("leisure");
         res.render("../views/play/leisure",{session : req.session._id, result : leisureResult});
+    },
+    postShopping : async (req,res)=>{
+        const shoppedIdx = req.params.idx;
+        if(req.session._id){
+            if(tourListSession)
+                tourListSession.push(shoppedIdx);
+            else{
+                req.session._tourList = [];
+                req.session._tourList.push(shoppedIdx);
+            }
+            res.send("success");
+        }else{
+            res.send("fail");
+        }
     }
 }

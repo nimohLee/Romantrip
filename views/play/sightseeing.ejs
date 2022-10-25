@@ -1,6 +1,6 @@
 <%-include('../header.ejs') %>
 <main id="sightseeing-main" class="play-main">
-    <section class="subject-title">
+    <section class="subject-title dohyeon">
         <h3>관광명소</h3>
     </section>
     <section class="subject-content">
@@ -11,6 +11,7 @@
             <div class="content-box">
                 <div class="tour-name jua"><%=result[i].name%></div>
                 <div class="tour-description detail-closed" id="content-desc[<%=i%>]"><%=result[i].description%></div>
+                <div class="tour-location"><%=result[i].location%></div>
                 <button class="read-more-btn" id="content-btn[<%=i%>]">더보기</button>
                 
                 <br>
@@ -18,7 +19,7 @@
                 <div class="tour-location">주소 <br><br><%=result[i].location%></div>
                 
             </div>
-            <button class="shopping-btn jua">낭만 담기</button>
+            <button class="shopping-btn jua" id="shopping-btn[<%=i%>]" value=<%=result[i].tl_id%>>낭만 담기</button>
         </article>
     <% } %>
     </section>
