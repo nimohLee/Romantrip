@@ -40,13 +40,7 @@ app.use(session({
 
 
 app.get("/",(req,res)=>{
-
     res.render('index',{session : req.session._id});
- 
-});
-
-app.get("/busan",(req,res)=>{
-  res.render("busan",{session : req.session._id});
 });
 
 app.use('/board',boardRoute);
@@ -55,6 +49,17 @@ app.use("/login",loginRoute);
 app.use("/play",playRoute);
 app.use("/eat",eatRoute);
 
+
+/* 404 error  */
+app.use(function(req, res, next) {
+  res.status(404).render("errors/404");
+});
+
+/* 500 error */
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).render("errors/500");
+});
 
 
 app.listen(PORT,()=>{console.log(`localhost:${PORT} is connected`)});

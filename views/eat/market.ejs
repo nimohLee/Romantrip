@@ -1,6 +1,31 @@
 <%-include('../header.ejs') %>
-<main id="market-main">
-    
+<main id="market-main" class="eat-main">
+    <section class="subject-title dohyeon">
+        <h3>시장</h3>
+    </section>
+    <section class="subject-content">
+        
+        <% for(let i = 0 ; i < result.length ; i ++) { %>
+        <article class="tour-card">
+            <div class="img-box"><img src=<%=result[i].image%> alt=<%=result[i].name%> class="trip-img"></div>
+            <div class="content-box">
+                <div class="tour-name jua"><%=result[i].name%></div>
+                <div class="tour-description detail-closed" id="content-desc[<%=i%>]"><%=result[i].description%></div>
+                
+                <button class="read-more-btn" id="content-btn[<%=i%>]">더보기</button>
+                
+                <br>
+                
+                <div class="tour-location">주소 <br><br><%=result[i].location%></div>
+                
+            </div>
+            <button class="shopping-btn jua" id="shopping-btn[<%=i%>]" value=<%=result[i].tl_id%>>낭만 담기</button>
+        </article>
+    <% } %>
+    </section>
+    <section class="subject-paging">
+
+    </section>
 </main>
 
 <%-include('../footer.ejs') %>

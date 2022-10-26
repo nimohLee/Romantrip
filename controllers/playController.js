@@ -1,4 +1,4 @@
-const service = require('../models/playService');
+const service = require('../models/tourService');
 
 module.exports = {
     getMainPage : (req,res) =>{

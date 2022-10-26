@@ -1,14 +1,19 @@
+const service = require('../models/tourService');
+
 module.exports = {
-    getMain : (req,res) =>{
+    getMainPage : (req,res) =>{
         res.render("../views/eat/index",{session : req.session._id});
     },
-    getRestaurant : (req,res) =>{
-        res.render("../views/eat/restaurant",{session : req.session._id});
+    getRestaurantPage : async (req,res) =>{
+        const restaurantResult = await service.selectAllTourList("restaurant");
+        res.render("../views/eat/restaurant",{session : req.session._id, result : restaurantResult});
     },
-    getCafe : (req,res) =>{
-        res.render("../views/eat/cafe",{session : req.session._id});
+    getCafePage : async (req,res) =>{
+        const cafeResult = await service.selectAllTourList("cafe");
+        res.render("../views/eat/cafe",{session : req.session._id,result: cafeResult});
     },
-    getMarket : (req,res) =>{
-        res.render("../views/eat/market",{session : req.session._id});
+    getMarketPage : async (req,res) =>{
+        const marketResult = await service.selectAllTourList("market");
+        res.render("../views/eat/market",{session : req.session._id, result:marketResult});
     }
 }
