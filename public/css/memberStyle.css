@@ -48,6 +48,15 @@
 
 /* 회원가입 */
 
+#register-main{
+ height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #register-wrap {
     display: flex;
     flex-direction: column;

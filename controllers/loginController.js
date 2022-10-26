@@ -21,11 +21,6 @@ module.exports = {
 
             res.send({ result });
         });
-        // if (req.session._id === undefined) {
-        //     req.session._id = loginInfo.id;
-        // } else {
-        //     console.log("이미 세션이 존재합니다");
-        // }
     },
     kakaoLogin: (req, res) => {
         const code = req.query.code;

@@ -17,24 +17,23 @@ module.exports = {
         res.render("../views/play/leisure",{session : req.session._id, result : leisureResult});
     },
     postShopping : async (req,res)=>{
-        const shoppedIdx = req.params.idx;
+        
         const tourListSession = req.session._tourList;
         
         if(req.session._id){
-           
-                if(tourListSession){
-                    if(service.checkExistTourList(tourListSession,shoppedIdx))
-                        res.send("exist");
-                    else{
-                        tourListSession.push(shoppedIdx);
-                        res.send("success");
-                    }
-                }
-                else{
-                    req.session._tourList = [];
-                    req.session._tourList.push(shoppedIdx);
-                    res.send("success");
-                }
+            const params = {
+                shoppedIdx : parseInt(req.params.idx),
+                sessionID : req.session._id
+            }
+            service.checkTourCart(params).then((isAlreadyShopped)=>{
+                console.log(isAlreadyShopped);
+            if(isAlreadyShopped){
+                res.send("exist");
+            }else{
+                service.insertTourCart(params);
+                res.send("success");
+            }
+            });
         }else{
             res.send("fail");
         }

@@ -64,7 +64,7 @@ function submitLoginForm() {
                     location.href = "/";
                 }
                 else
-                    history.back();
+                    location.href = document.referrer; // 새로고침되면서 이전페이지로 이동
             }
         },
     });

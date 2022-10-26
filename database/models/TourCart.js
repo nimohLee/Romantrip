@@ -10,17 +10,13 @@ module.exports = (sequelize, DataTypes) => {
                 comment: "tourCart idx",
             },
             m_id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.STRING,
                 allowNull: false,
                 comment: "member idx"
             },
             tl_id: {
                 type: DataTypes.INTEGER,
                 comment: "tourList idx",
-            },
-            price: {
-                type: DataTypes.STRING,
-                comment: "가격"
             }
         },
         {
