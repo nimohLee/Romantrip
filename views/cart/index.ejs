@@ -1,0 +1,48 @@
+<%-include('../header.ejs') %>
+<main id="cart-main">
+    <section id="cart-section-title" class="dohyeon">
+        <h2>낭만목록</h2>
+    </section>
+    <section id="cart-list-wrap">    
+       <% if(result.length > 0){%>
+        <% for( let i = 0; i < result.length; i++ ) { %>
+            <article class="cart-list">
+                <div class="img-wrap">
+                    <img src= <%=result[i].image%> alt = <%=result[i].name%> >
+                </div>
+                <div class="content-wrap">
+                    <h4><%=result[i].name%></h4>
+                    <p><%=result[i].location%></p>
+                </div>
+                <div class="btn-wrap">
+                    <i class="fa-solid fa-trash" id="remove-btn"></i>
+    
+                </div>
+            </article>
+        <% }} else { %>
+            <article class="empty-cart">
+                <h4>담겨있는 낭만이 없습니다!</h4>
+                <p>낭만 담으러 가기</p>
+            </article>
+            <% } %>
+    </section>
+    <secrion id="cart-detail">
+        <!-- 낭만 클릭 시 출력되는 모달 화면 -->
+    </secrion>
+</main>
+<script>
+    document.title = "RomantTrip > cart";
+    const btnWrap = document.querySelector(".btn-wrap");
+    const removeBtn = document.querySelector(".remove-btn");
+    const deleteSpan = document.querySelector(".delete-span");
+    btnWrap.addEventListener("mouseenter",()=>{
+        btnWrap.classList.add("btn-hover");
+        btnWrap.classList.remove("btn-hover-out");
+       removeBtn.classList.add("show-span");
+    });
+    btnWrap.addEventListener("mouseleave",()=>{
+        btnWrap.classList.remove("btn-hover");
+        btnWrap.classList.add("btn-hover-out");
+    });
+</script>
+<%-include('../footer.ejs') %>

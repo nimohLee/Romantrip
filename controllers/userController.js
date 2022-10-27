@@ -11,7 +11,8 @@ module.exports = {
         if(req.session._id==undefined)
             res.render("../views/users/login.ejs",{session : req.session._id})      
         else{
-        console.log("이미 로그인 중");}
+            res.send("<script>alert('이미 로그인 중입니다');history.go(-1);</script>")
+        }
     },
     postLogout:(req,res)=>{
         /* 카카오 세션 존재 시 카카오 서버~ 없을 시 세션만 삭제 */

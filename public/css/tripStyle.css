@@ -36,12 +36,13 @@ body{
 .trip-img{
     width: 100%;
     height: 25vh;
+    
 }
 .content-box{
     
     display: flex;
     flex-direction: column;
-    margin : 0 10px 10px 10px;
+    margin : 10px 10px 10px 10px;
 }
 .tour-name{
     text-align: center;

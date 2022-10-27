@@ -1,0 +1,137 @@
+@keyframes btnBefore{
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+        color: white;
+        background-color: #FF74B1;
+    }
+}
+
+@keyframes btnAfter {
+    from {
+      background-color: #FF74B1; 
+      color: white;
+      width: 100%;
+    }
+    to {
+      background-color: white; 
+      color: black;
+      width: 0;
+    }
+  }
+
+@keyframes showSpan {
+    from{
+        opacity: 0;
+        display: none;
+    }
+
+    to{
+        opacity: 1;
+        display: block;
+    }
+}
+@keyframes hiddenSpan{
+    from{
+        opacity: 1;
+    }
+
+    to{
+        opacity: 0;
+    }
+}
+
+
+#cart-section-title{
+    width: 100%;
+    height: 30vh;
+    font-size: 3em;
+    text-align: center;
+    padding: 10vh 0;
+}
+.cart-list{
+    display: flex;
+    position: relative;
+    margin : 0 auto 50px auto;
+    width: 70vw;
+    height: 30vh;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+.cart-list .img-wrap{
+    width: 25vw;
+    height: 100%;
+    overflow: hidden;
+}
+.cart-list .img-wrap img{
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.cart-list .content-wrap{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.cart-list .btn-wrap{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    padding-right: 30px;
+    width: 7vw;
+    top: 0;
+    right: 0;
+    height: 100%;
+    margin: auto 0;
+    z-index: 100;
+}
+
+.cart-list .btn-wrap:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 100%;
+    z-index: -100;
+  }
+
+.cart-list .btn-wrap #remove-btn{
+    font-size: 2em;
+    text-align: end;
+    width: 100px;
+    z-index: 100;
+}
+
+.cart-list .btn-wrap #remove-btn:after{
+    content: "낭만 제거";
+    display: none;
+}
+
+.show-span:after{
+    animation: showSpan .5s ease-in-out forwards;
+}
+
+
+.btn-hover:after{
+    animation: btnBefore .5s ease-out forwards;
+}
+
+.btn-hover-out:after{
+    animation: btmAfter .5s ease-out forwards;
+}
+
+.show{
+    animation: showSpan .5s ease-out forwards;
+}
+
+.hidden{
+    animation: hiddenSpan .5s ease-out forwards;
+}

@@ -1,10 +1,14 @@
 const express = require('express');
 const path = require('path');
+
+/* import Routes */
 const boardRoute = require('./routes/board');
 const userRoute = require('./routes/users');
 const loginRoute = require('./routes/login');
 const playRoute = require('./routes/play');
 const eatRoute = require('./routes/eat');
+const cartRoute = require('./routes/cart');
+
 const cors = require("cors");
 const { sequelize } = require('./database/models/index')
 const session = require('express-session');
@@ -48,6 +52,7 @@ app.use('/users',userRoute);
 app.use("/login",loginRoute);
 app.use("/play",playRoute);
 app.use("/eat",eatRoute);
+app.use("/cart",cartRoute);
 
 
 /* 404 error  */
