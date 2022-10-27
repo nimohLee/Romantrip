@@ -74,9 +74,18 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    padding-left: 5vw;
 }
+
+.cart-list .content-wrap h4{
+    font-size: 2em;
+}
+.cart-list .content-wrap p{
+    margin-top: 20px;
+    font-size: 1em;
+}
+
 .cart-list .btn-wrap{
     position: absolute;
     display: flex;
@@ -88,7 +97,7 @@
     height: 100%;
     margin: auto 0;
     cursor: pointer;
-    z-index: 100;
+    z-index: 50;
 }
 
 .cart-list .btn-wrap:after {
@@ -109,17 +118,6 @@
     width: 100px;
     z-index: 100;
 }
-/* 
-.cart-list .btn-wrap .remove-btn::after{
-    position: absolute;
-    width: 100px;
-    text-align: center;
-    right: 0px;
-    content: "낭만제거";
-    color: white;
-    font-size: 0.7em;
-    opacity: 0;
-} */
 
 .cart-list .btn-wrap .delete-span{
     position: absolute;

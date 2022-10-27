@@ -3,28 +3,31 @@
     <section id="cart-section-title" class="dohyeon">
         <h2>낭만목록</h2>
     </section>
-    <section id="cart-list-wrap">    
-       <% if(result.length > 0){%>
-        <% for( let i = 0; i < result.length; i++ ) { %>
-            <article class="cart-list">
-                <div class="img-wrap">
-                    <img src= <%=result[i].image%> alt = <%=result[i].name%> >
-                </div>
-                <div class="content-wrap">
-                    <h4><%=result[i].name%></h4>
-                    <p><%=result[i].location%></p>
-                </div>
-                <div class="btn-wrap">
-                    <i class="fa-solid fa-trash remove-btn" id="remove-btn"></i>
-                    <p class="delete-span jua">낭만 <br/> 제거</p>
-                </div>
-            </article>
+    <section id="cart-list-wrap">
+        <% if(result.length > 0){%>
+         <% for( let i = 0; i < result.length; i++ )  { %>
+        <article class="cart-list">
+            <div class="img-wrap">
+                <img src=<%=result[i].image%>  alt = <%=result[i].name%> />
+            </div>
+            <div class="content-wrap">
+                <h4 class="gmarket"><%=result[i].name%></h4>
+                <p class="nanum"><%=result[i].location%></p>
+            </div>
+            <div class="btn-wrap">
+                <i class="fa-solid fa-trash remove-btn" id="remove-btn"></i>
+                <p class="delete-span jua">
+                    낭만 <br />
+                    제거
+                </p>
+            </div>
+        </article>
         <% }} else { %>
-            <article class="empty-cart">
-                <h4>담겨있는 낭만이 없습니다!</h4>
-                <p>낭만 담으러 가기</p>
-            </article>
-            <% } %>
+        <article class="empty-cart">
+            <h4>담겨있는 낭만이 없습니다!</h4>
+            <p>낭만 담으러 가기</p>
+        </article>
+        <% } %>
     </section>
     <secrion id="cart-detail">
         <!-- 낭만 클릭 시 출력되는 모달 화면 -->
@@ -35,27 +38,27 @@
     const btnWrap = document.querySelectorAll(".btn-wrap");
     const removeBtn = document.querySelectorAll(".remove-btn");
     const deleteSpan = document.querySelectorAll(".delete-span");
-    
-    for(let i = 0; i < btnWrap.length; i++){
 
-        btnWrap[i].addEventListener("mouseenter",()=>{
-        btnWrap[i].classList.add("btn-hover");
-        btnWrap[i].classList.remove("btn-hover-out");
-        deleteSpan[i].classList.add("show");
-        deleteSpan[i].classList.remove("hidden");
-        removeBtn[i].classList.add("hidden");
-        removeBtn[i].classList.remove("show");
-    });
-    btnWrap[i].addEventListener("mouseleave",()=>{
-        btnWrap[i].classList.remove("btn-hover");
-        btnWrap[i].classList.add("btn-hover-out");
-        deleteSpan[i].classList.add("hidden");
-        deleteSpan[i].classList.remove("show");
-        removeBtn[i].classList.add("show");
-        removeBtn[i].classList.remove("hidden");
-    });
+
+    function changeBtnWrap(i,param1,param2){
+        deleteSpan[i].classList.add(param1);
+        deleteSpan[i].classList.remove(param2);
+        removeBtn[i].classList.add(param2);
+        removeBtn[i].classList.remove(param1);
     }
-    
-    
+
+    for(let i = 0; i < btnWrap.length; i++){
+        btnWrap[i].addEventListener("mouseenter",()=>{
+            btnWrap[i].classList.add("btn-hover");
+            btnWrap[i].classList.remove("btn-hover-out");
+            changeBtnWrap(i,"show","hidden");
+        });
+
+        btnWrap[i].addEventListener("mouseleave",()=>{
+            btnWrap[i].classList.remove("btn-hover");
+            btnWrap[i].classList.add("btn-hover-out");
+            changeBtnWrap(i,"hidden","show");
+        });
+    }
 </script>
 <%-include('../footer.ejs') %>
