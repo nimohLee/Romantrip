@@ -15,8 +15,8 @@
                     <p><%=result[i].location%></p>
                 </div>
                 <div class="btn-wrap">
-                    <i class="fa-solid fa-trash" id="remove-btn"></i>
-    
+                    <i class="fa-solid fa-trash remove-btn" id="remove-btn"></i>
+                    <p class="delete-span jua">낭만 <br/> 제거</p>
                 </div>
             </article>
         <% }} else { %>
@@ -32,17 +32,30 @@
 </main>
 <script>
     document.title = "RomantTrip > cart";
-    const btnWrap = document.querySelector(".btn-wrap");
-    const removeBtn = document.querySelector(".remove-btn");
-    const deleteSpan = document.querySelector(".delete-span");
-    btnWrap.addEventListener("mouseenter",()=>{
-        btnWrap.classList.add("btn-hover");
-        btnWrap.classList.remove("btn-hover-out");
-       removeBtn.classList.add("show-span");
+    const btnWrap = document.querySelectorAll(".btn-wrap");
+    const removeBtn = document.querySelectorAll(".remove-btn");
+    const deleteSpan = document.querySelectorAll(".delete-span");
+    
+    for(let i = 0; i < btnWrap.length; i++){
+
+        btnWrap[i].addEventListener("mouseenter",()=>{
+        btnWrap[i].classList.add("btn-hover");
+        btnWrap[i].classList.remove("btn-hover-out");
+        deleteSpan[i].classList.add("show");
+        deleteSpan[i].classList.remove("hidden");
+        removeBtn[i].classList.add("hidden");
+        removeBtn[i].classList.remove("show");
     });
-    btnWrap.addEventListener("mouseleave",()=>{
-        btnWrap.classList.remove("btn-hover");
-        btnWrap.classList.add("btn-hover-out");
+    btnWrap[i].addEventListener("mouseleave",()=>{
+        btnWrap[i].classList.remove("btn-hover");
+        btnWrap[i].classList.add("btn-hover-out");
+        deleteSpan[i].classList.add("hidden");
+        deleteSpan[i].classList.remove("show");
+        removeBtn[i].classList.add("show");
+        removeBtn[i].classList.remove("hidden");
     });
+    }
+    
+    
 </script>
 <%-include('../footer.ejs') %>

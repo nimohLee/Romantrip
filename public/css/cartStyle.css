@@ -3,8 +3,8 @@
         width: 0;
     }
     to {
-        width: 100%;
-        color: white;
+        width: 100px;
+        
         background-color: #FF74B1;
     }
 }
@@ -12,12 +12,11 @@
 @keyframes btnAfter {
     from {
       background-color: #FF74B1; 
-      color: white;
-      width: 100%;
+      width: 100px;
     }
     to {
       background-color: white; 
-      color: black;
+      
       width: 0;
     }
   }
@@ -25,12 +24,12 @@
 @keyframes showSpan {
     from{
         opacity: 0;
-        display: none;
+        
     }
 
     to{
         opacity: 1;
-        display: block;
+        
     }
 }
 @keyframes hiddenSpan{
@@ -88,6 +87,7 @@
     right: 0;
     height: 100%;
     margin: auto 0;
+    cursor: pointer;
     z-index: 100;
 }
 
@@ -109,14 +109,25 @@
     width: 100px;
     z-index: 100;
 }
+/* 
+.cart-list .btn-wrap .remove-btn::after{
+    position: absolute;
+    width: 100px;
+    text-align: center;
+    right: 0px;
+    content: "낭만제거";
+    color: white;
+    font-size: 0.7em;
+    opacity: 0;
+} */
 
-.cart-list .btn-wrap #remove-btn:after{
-    content: "낭만 제거";
-    display: none;
-}
-
-.show-span:after{
-    animation: showSpan .5s ease-in-out forwards;
+.cart-list .btn-wrap .delete-span{
+    position: absolute;
+    right: 2.2vw;
+    opacity: 0;
+    color: white;
+    font-size: 1.4em;
+    line-height: 1.5em;
 }
 
 
@@ -125,7 +136,7 @@
 }
 
 .btn-hover-out:after{
-    animation: btmAfter .5s ease-out forwards;
+    animation: btnAfter .5s ease-in-out forwards;
 }
 
 .show{
@@ -133,5 +144,5 @@
 }
 
 .hidden{
-    animation: hiddenSpan .5s ease-out forwards;
+    animation : hiddenSpan .5s ease-out forwards;
 }
