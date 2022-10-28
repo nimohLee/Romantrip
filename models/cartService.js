@@ -28,5 +28,17 @@ module.exports = {
             },500)
             
         })
+    },
+    deleteList : (params) => {
+        return new Promise(async (resolve, reject)=>{
+            await TourCart.destroy({
+                where:{
+                    tc_id : params.tcID,
+                    m_id : params.sessionID
+                }
+            });
+            resolve("success");
+            reject("fail");
+        })
     }
 }

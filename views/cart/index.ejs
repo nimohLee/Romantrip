@@ -22,6 +22,9 @@
                 </p>
             </div>
         </article>
+        <div class="pop-up">
+            
+        </div>
         <% }} else { %>
         <article class="empty-cart">
             <h4>담겨있는 낭만이 없습니다!</h4>
@@ -29,9 +32,7 @@
         </article>
         <% } %>
     </section>
-    <secrion id="cart-detail">
-        <!-- 낭만 클릭 시 출력되는 모달 화면 -->
-    </secrion>
+    
 </main>
 <script>
     document.title = "RomantTrip > cart";
@@ -59,6 +60,26 @@
             btnWrap[i].classList.add("btn-hover-out");
             changeBtnWrap(i,"hidden","show");
         });
+
+        /* delete CartList */
+        btnWrap[i].addEventListener("click",(e)=>{
+            if(confirm("정말 삭제하시겠습니까?")){
+                $.ajax({
+            method : "delete",
+            url : "/cart/list",
+            data : {idx : (i+1)} // DB에서 tc_id 값은 1부터 시작하므로 +1
+        }).then((result)=>{
+            if(result === "success"){
+                alert("성공적으로 삭제되었습니다.");
+                location.href = "/cart"
+            }
+        })
+            }
+            
+     
+    })
     }
+
+  
 </script>
 <%-include('../footer.ejs') %>
