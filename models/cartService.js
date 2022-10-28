@@ -10,6 +10,9 @@ module.exports = {
                 where : {
                     m_id : params
                 },
+                order:[
+                    ['tl_id','ASC']
+                ],
                 raw : true
             });
            
@@ -31,13 +34,13 @@ module.exports = {
     },
     deleteList : (params) => {
         return new Promise(async (resolve, reject)=>{
-            const destroyList = await TourCart.destroy({
+            destroyList = await TourCart.destroy({
                 where:{
                     tl_id : params.tlID,
                     m_id : params.sessionID
                 }
             });
-            console.log(params.tlID);
+            
             resolve("success");
             reject("fail");
         })

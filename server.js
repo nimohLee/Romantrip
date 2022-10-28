@@ -27,7 +27,10 @@ app.set("view engine","ejs");
 
 /* use express middleware */
 
-app.use('/',express.static(path.join(__dirname,'public')));
+/* 라우팅 경로 지정 해주지 않을 경우 브라우저에서 간헐적으로 get 요청 실패함 */
+app.use('/assets',express.static(path.join(__dirname,'public/assets')));
+app.use('/css',express.static(path.join(__dirname,'public/css')));
+app.use('/js',express.static(path.join(__dirname,'public/js')));
 app.use(express.static(path.join(__dirname,'views')));
 app.use(cors());
 app.use(express.json());

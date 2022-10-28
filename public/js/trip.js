@@ -33,12 +33,20 @@ shoppingBtns.forEach((shoppingBtn)=>{
                             alert("로그인이 필요합니다");
                             window.location.href= "/users/login";
                         }else if(result === "exist"){
-                            alert("이미 담은 낭만입니다");
+                            $(".pop-up #modal-text").text("이미 담긴 낭만입니다");
                         }
                         else{
-                            alert("낭만을 담았습니다!");
+                            $(".pop-up #modal-text").text("낭만이 담겼습니다");
                         }
+                          
                     }
+                }).then(()=>{
+                    $(".pop-up").fadeIn();
+                    $(".pop-up").addClass("black");
+                    setTimeout(()=>{
+                        $(".pop-up").removeClass("black");
+                        $(".pop-up").fadeOut({duration:300});
+                    },1500)
                 })
     });
 })

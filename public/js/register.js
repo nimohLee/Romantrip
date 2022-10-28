@@ -204,7 +204,13 @@ document.getElementById("frm").addEventListener("submit", (e) => {
     validateCheck();
     if (nameOK && idOK && pwOK && emailOK) {
         if(submitForm()){
-            alert('회원가입이 완료되었습니다');
+            $(".pop-up #modal-text").text("회원가입이 완료되었습니다");
+            $(".pop-up").fadeIn();
+                    $(".pop-up").addClass("black");
+                    setTimeout(()=>{
+                        $(".pop-up").removeClass("black");
+                        $(".pop-up").fadeOut({duration:300});
+                         },1500);
             return true;
         }else{
             e.preventDefault();

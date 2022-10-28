@@ -65,16 +65,30 @@ table {
 
 @font-face {
 	font-family: 'gmarket';
-	src: url('../assets/fonts//GmarketSansTTFMedium.ttf');
+	src: url('/assets/fonts/GmarketSansTTFMedium.woff');
+}
+
+@font-face {
+	font-family: 'jalnan';
+	src: url('/fonts/Jalnan.ttf');
 }
 
 .gmarket{
 	font-family: 'gmarket';
 }
 
+.jalnan{
+	font-family: 'jalnan';
+}
+
 .titil{
     font-family: 'Titillium Web', sans-serif;
 }
+
+.gowun{
+	font-family: 'Gowun Dodum', sans-serif;
+}
+
 
 a{
     text-decoration: none;

@@ -1,20 +1,20 @@
 <%-include('../header.ejs') %>
+<link rel="stylesheet" href="/css/cartStyle.css">
 <main id="cart-main">
     <section id="cart-section-title" class="dohyeon">
         <h2>낭만목록</h2>
     </section>
     <section id="cart-list-wrap">
-        <% if(result.length > 0){%>
-         <% for( let i = 0; i < result.length; i++ )  { %>
+        <% if(result.length > 0){%> <% for( let i = 0; i < result.length; i++ )  { %>
         <article class="cart-list">
             <div class="img-wrap">
-                <img src=<%=result[i].image%>  alt = <%=result[i].name%> />
+                <img src= <%=result[i].image%> alt = <%=result[i].name%>/>
             </div>
             <div class="content-wrap">
                 <h4 class="gmarket"><%=result[i].name%></h4>
                 <p class="nanum"><%=result[i].location%></p>
             </div>
-            <div class="btn-wrap" id = <%=result[i].tl_id%>>
+            <div class="btn-wrap" id=<%=result[i].tl_id%>>
                 <i class="fa-solid fa-trash remove-btn"></i>
                 <p class="delete-span jua">
                     낭만 <br />
@@ -22,94 +22,23 @@
                 </p>
             </div>
         </article>
-       
+
         <% }} else { %>
-        <article class="empty-cart">
+        <article id="empty-cart" class="gmarket">
+            <img src="/assets/empty-cart.png" alt="empty-cart">
             <h4>담겨있는 낭만이 없습니다!</h4>
-            <p>낭만 담으러 가기</p>
         </article>
         <% } %>
-        <div class="pop-up">
-            <article>
-                <h1>팝업</h1>
+        <div id="pop-up-cart" class="pop-up">
+            <article class="jalnan">
+                <h3>삭제하시겠습니까?</h3>
+                <div id="btn-wrap">
+                    <button id="cancel-btn">취소</button>
+                    <button id="ok-btn">확인</button>
+                </div>
             </article>
         </div>
     </section>
-    
 </main>
-
-<style>
-    .pop-up{
-        position : absolute;
-        z-index: 1;
-        top:0;
-        width: 100%;
-        height: 10%;
-        display: none;
-    }
-
-    .pop-up article{
-        width: 700px;
-        height: 400px;
-        position: relative;
-        z-index: 2;
-        background-color: tomato;
-        box-shadow: 3px 3px 5px black;
-        margin: auto;
-        cursor: pointer;
-        text-align: center;
-    }
-
-    .black { background-color: rgba(0, 0, 0, 0.6);}
-</style>
-
-<script>
-    document.title = "RomantTrip > cart";
-    const btnWrap = document.querySelectorAll(".btn-wrap");
-    const removeBtn = document.querySelectorAll(".remove-btn");
-    const deleteSpan = document.querySelectorAll(".delete-span");
-    const popUp = document.querySelector(".pop-up");
-
-    function changeBtnWrap(i,param1,param2){
-        deleteSpan[i].classList.add(param1);
-        deleteSpan[i].classList.remove(param2);
-        removeBtn[i].classList.add(param2);
-        removeBtn[i].classList.remove(param1);
-    }
-
-    for(let i = 0; i < btnWrap.length; i++){
-        btnWrap[i].addEventListener("mouseenter",()=>{
-            btnWrap[i].classList.add("btn-hover");
-            btnWrap[i].classList.remove("btn-hover-out");
-            changeBtnWrap(i,"show","hidden");
-        });
-
-        btnWrap[i].addEventListener("mouseleave",()=>{
-            btnWrap[i].classList.remove("btn-hover");
-            btnWrap[i].classList.add("btn-hover-out");
-            changeBtnWrap(i,"hidden","show");
-        });
-
-        /* delete CartList */
-        btnWrap[i].addEventListener("click",(e)=>{
-            /* ejs result값을 받아오기 위해 id값으로 임시 지정 */
-            const idx = btnWrap[i].id;
-
-            /* e.target.id 하면 못 불러오는 경우도 있기때문에 사용 X */
-            if(confirm("정말 삭제하시겠습니까?")){
-                $.ajax({
-            method : "delete",
-            url : "/cart/list",
-            data : {idx : idx} // DB에서 tc_id 값은 1부터 시작하므로 +1
-        }).then((result)=>{
-            if(result === "success"){
-                alert("성공적으로 삭제되었습니다.");
-                location.href = "/cart"
-            }
-        })
-            }     
-    })
-    }
-
-</script>
+<script src="/js/cart.js"></script>
 <%-include('../footer.ejs') %>

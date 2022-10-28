@@ -79,3 +79,13 @@ body{
     outline-style: solid;
     cursor: pointer;
 }
+
+/* modal */
+
+.pop-up article {
+    justify-content: center;
+}
+
+.pop-up article h3 {
+    padding-top: 0;
+}
