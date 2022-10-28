@@ -1,25 +1,37 @@
 
 /* DOM */
 const readMoreBtns = document.querySelectorAll(".read-more-btn");
-readMoreBtns.forEach((btn)=>{
-    btn.addEventListener("click",(e)=>{
-        for(let i = 0; i < readMoreBtns.length; i++){
-            if(btn.id == `content-btn[${i}]`){
-                document.getElementById(`content-desc[${i}]`).classList.toggle("detail-closed");
-                if(btn.innerText === "더보기"){
-    
-                    btn.innerText = "숨기기";
-                }else 
-                    btn.innerText = "더보기";
-            }
-        }
-        if(btn.id === 0){
+const readMoreCloseBtns = document.querySelectorAll(".close-detail-btn");
+const detailBox = document.querySelectorAll(".tour-card-detail");
 
+for(let i = 0; i < readMoreBtns.length; i++){
+    readMoreBtns[i].addEventListener("click",(e)=>{
+        if(readMoreBtns[i].id === `content-btn[${i}]`){
+            detailBox[i].classList.add("show-detail");
+            detailBox[i].classList.remove("close-detail");
         }
-        console.log(btn.id)
-    })
+    });
+    readMoreCloseBtns[i].addEventListener("click",(e)=>{
+        detailBox[i].classList.add("close-detail");
+        detailBox[i].classList.remove("show-detail");
+    });
+
+}
+
+// readMoreBtns.forEach((btn)=>{
+//     btn.addEventListener("click",(e)=>{
+//         for(let i = 0; i < readMoreBtns.length; i++){
+//             if(btn.id == `content-btn[${i}]`){
+//                     detailBox[i].classList.add("show-detail");
+//             }
+//         }
+//         if(btn.id === 0){
+
+//         }
+//         console.log(btn.id)
+//     })
     
-})
+// })
 
 const shoppingBtns = document.querySelectorAll(".shopping-btn");
 shoppingBtns.forEach((shoppingBtn)=>{

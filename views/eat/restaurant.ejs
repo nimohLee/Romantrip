@@ -21,6 +21,12 @@
                 
             </div>
             <button class="shopping-btn jua" id="shopping-btn[<%=i%>]" value=<%=result[i].tl_id%>>낭만 담기</button>
+            
+            <div class="tour-card-detail">
+                <h4 class="jua"><%=result[i].name%></h4>
+                <p><%=result[i].description%></p>
+                <button class="close-detail-btn nanum">닫기</button>
+            </div>
         </article>
     <% } %>
     </section>
