@@ -112,7 +112,7 @@
     z-index: -100;
   }
 
-.cart-list .btn-wrap #remove-btn{
+.cart-list .btn-wrap .remove-btn{
     font-size: 2em;
     text-align: end;
     width: 100px;

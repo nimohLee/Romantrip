@@ -31,12 +31,13 @@ module.exports = {
     },
     deleteList : (params) => {
         return new Promise(async (resolve, reject)=>{
-            await TourCart.destroy({
+            const destroyList = await TourCart.destroy({
                 where:{
-                    tc_id : params.tcID,
+                    tl_id : params.tlID,
                     m_id : params.sessionID
                 }
             });
+            console.log(params.tlID);
             resolve("success");
             reject("fail");
         })

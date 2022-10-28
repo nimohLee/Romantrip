@@ -8,7 +8,7 @@ module.exports = {
         }
         else {
             await service.getCartList(sessionID).then((selectResult)=>{
-            console.log(selectResult);
+            
             res.render("../views/cart/index",{session : req.session._id, result : selectResult});
         })
     }
@@ -17,7 +17,7 @@ module.exports = {
     deleteCartList : async (req, res)=>{
         const params = {
             sessionID : req.session._id,
-            tcID : req.body.idx
+            tlID : req.body.idx
         };
         await service.deleteList(params).then((result)=>{
             res.status(200).send(result);
