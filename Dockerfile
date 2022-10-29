@@ -7,6 +7,6 @@ COPY package.json package-lock.json ./
 # npm install은 버전 반올림 해버림
 RUN npm ci
 
-COPY index.js .
+COPY . .
 
-ENTRYPOINT [ "node","index.js"]
+ENTRYPOINT [ "node","server.js"]
