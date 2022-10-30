@@ -2,7 +2,7 @@
 
 /* 즐길거리 */
 body{
-    overflow-y: scroll;
+    overflow: scroll;
 }
 .play-main{
 
@@ -132,6 +132,12 @@ body{
     height: 10%;
     color: black;
     background-color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+.tour-card-detail .close-detail-btn:hover{    
+    background-color: #ccc;
+    transition: .3s;
 }
 
 @keyframes showDetail {

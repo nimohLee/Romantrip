@@ -2,7 +2,7 @@ const db = require("../config/db");
 const { Board, User } = require("../database/models/index");
 const sequelize = require("sequelize");
 const { Op } = require("sequelize");
-const board = require("../database/models/board");
+const board = require("../database/models/Board");
 
 module.exports = {
     getBoardList: (params) => {
