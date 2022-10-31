@@ -15,7 +15,8 @@ module.exports = {
             if (selectedUser === "fail") {
                 result = "fail";
             } else {
-                req.session._id = loginInfo.id;
+                req.session._id = selectedUser[0].id;
+                req.session._name = selectedUser[0].name;
                 result = "success";
             }
 

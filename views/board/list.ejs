@@ -2,11 +2,10 @@
 <link rel="stylesheet" href="/css/boardListStyle.css">
 
 <main id="board-main">
+    <section class="subject-title dohyeon">
+        <h3>게시판</h3>
+    </section>
     <div id="board-wrap">
-        <section id="board-title" class="nanum">
-            <h2>자유게시판</h2>
-        </section>
-
         <section id="board-table-section">
             <article id="board-table-article">
                 <table border="1" id="board-table">
@@ -40,7 +39,7 @@
                             <td><%=data.b_id%></td>
                             <td><a href="../detail/<%= data.b_id%>" id="title-td"><%=data.title %></a></td>
                             <td><%=data.m_name%></td>
-                            <td><%=data.regDate.toISOString().substring(0,10)%></td>
+                            <td><%=data.regDate%></td>
                             <td><%=data.views%></td>
                             
                         </tr>

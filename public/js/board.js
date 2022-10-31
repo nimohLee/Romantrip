@@ -36,14 +36,23 @@ function closeForm() {
 
 /* boardWrite js */
 function toSubmit(){
-    const frm = document.writeForm;
-    const title = writeForm.title.value;
-    const content = writeForm.content.value;
-    console.log(title);
-    if(title==""||content==""){
-        alert("모두 작성해야합니다. 작성을 완료해주세요");
+    const writeData = {
+        title : document.querySelector("#write-title").value,
+        content : document.querySelector("#write-content").value
     }
-    else{
-        frm.submit();
-    }
+
+    $.ajax({
+        method : "post",
+        contentType : "application/json",
+        url : "./writeProc",
+        data : JSON.stringify(writeData)
+    }).then((res)=>{
+        console.log(res);
+        if(res === "success"){
+        
+            location.href = document.referrer;
+        }
+    }).catch((res)=>{   
+        alert(res.responseText);
+    });
 }

@@ -10,11 +10,12 @@ const { user, Board } = require("../database/models/index");
 const axios = require("axios");
 const request = require("request");
 
+/*  */
 const sharedListData = async (params) => {
     let listData;
 
-    return new Promise((resolve, reject) => {
-        model.getBoardList(params).then(function (data) {
+    return new Promise(async (resolve, reject) => {
+        await model.getBoardList(params).then(function (data) {
             listData = {
                 result: data,
                 page: params.page,
@@ -31,6 +32,8 @@ const sharedListData = async (params) => {
         });
     });
 };
+
+
 module.exports = {
     getMain: async (req, res) => {
         const params = {
@@ -40,27 +43,27 @@ module.exports = {
             session: req.session._id,
         };
         
-        sharedListData(params).then((data) => {
+        setTimeout(()=>{
+            res.send("이거 왜");
+        },0)
+       
+    
+        await sharedListData(params).then((data) => {   
+         setTimeout(()=>{
+
+         },301)
             res.render("../views/board/list.ejs",data);
-        });
-        // model.getBoardList(params).then(function async (data) {
-        //      listData = {
-        //         result: data,
-        //         page: params.page,
-        //         length: data.length - 1,
-        //         page_num: 10,
-        //         pass: true,
-        //         session : req.session._id
-        //     }
-        //     res.render("../views/board/list.ejs", listData);
-        // });
-
-        // res.render("../views/board/list.ejs",listData);
-
+        })
     },
 
     getWrite: (req, res) => {
-        res.render("../views/board/write.ejs", { session: req.session._id });
+        if(req.session._id){
+            res.status(200).render("../views/board/write.ejs", { session: req.session._id });    
+        }else{
+            /* If client didn't login, print alert and locate to login page when client click write button*/
+            res.status(400).send("<script>alert('로그인이 필요합니다'); location.href = '/users/login';</script>");
+        }
+        
     },
     getDetail: async (req, res) => {
         const id = req.params.id;
@@ -80,7 +83,9 @@ module.exports = {
             });
         });
     },
-    postWrite: (req, res) => {
+
+    postWrite: async (req, res) => {
+        console.log(req.session._id);
         const board = {
             title: req.body.title,
             content: req.body.content,
@@ -88,16 +93,19 @@ module.exports = {
             m_name: req.session._name,
         };
 
-        const params = {
-            page: 1,
-            selected: req.query.select,
-            searchTf: req.query.text,
-        };
+        // const params = {
+        //     page: 1,
+        //     selected: req.query.select,
+        //     searchTf: req.query.text,
+        // };
 
-        model.writeBoard(board);
-
-      
-            res.redirect("/board/page/1");
+        await model.writeBoard(board).then((result)=>{
+            res.status(201).send("success");
+        }).catch((err)=>{
+            console.log(err);
+            res.status(400).send("잘못작성되었습니다.") 
+        });
+        
       
     },
 
