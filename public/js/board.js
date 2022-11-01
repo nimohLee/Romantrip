@@ -1,13 +1,18 @@
 /* boardDetail js */
-function updateBoard(idx) {
-    const frmPop = document.frmPopup;
-    const url = "../update/" + idx;
-    const name = "update board";
-    const option = "width = 300, height = 300, top = 100, left = 200";
-    const popup = window.open(url, "_blank", option);
-    popup.addEventListener("beforeunload", function () {
-        location.reload();
-    });
+function updateBoardPage(idx) {
+    $.ajax({
+        method : "get",
+        url : "/board/update/"+idx
+    })
+    
+    // const frmPop = document.frmPopup;
+    // const url = "../update/" + idx;
+    // const name = "update board";
+    // const option = "width = 700, height = 700, top = 100, left = 200";
+    // const popup = window.open(url, "_blank", option);
+    // popup.addEventListener("beforeunload", function () {
+    //     location.reload();
+    // });
 }
 function deleteBoard(idx) {
     if (confirm("삭제하시겠습니까?")) {
