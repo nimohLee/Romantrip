@@ -41,7 +41,7 @@ function toSubmit(){
         content : document.querySelector("#write-content").value
     }
     
-    /*  */
+    /* set display flex hidden progress bar */
     const progressBar = document.querySelector("#progress-bar");
     progressBar.className = "display-flex";
 

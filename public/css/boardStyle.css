@@ -26,9 +26,7 @@
     border-radius: 5px;
     background-color: #FFD6EC;
 }
-.paging-btn a {
-    width: 100%;
-}
+
 
 
 #board-main{
@@ -67,9 +65,8 @@
 }
 
 #board-table th {
-    background-color: #FFA1CF;
+    background-color: #FFD6EC;
     color: white;
-    border-bottom: 1px solid #222831;
     text-align: center;
     padding: 10px 0;
     height: 30px;
@@ -150,7 +147,7 @@
     cursor: pointer;
 }
 
-/* 글 읽기 */
+/* 글 읽기 ( detail.ejs ) */
 #read-section{
     width: 70vw;
     height: 70vh;
@@ -158,7 +155,7 @@
 }
 
 #read-section tr{
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px so   lid #ccc;
 }
 #read-section tr:first-child{
     height: 8vh;

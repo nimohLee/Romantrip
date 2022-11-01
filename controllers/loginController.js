@@ -1,6 +1,6 @@
 const request = require("request");
 const session = require("express-session");
-const service = require("../models/loginService");
+const service = require("../services/loginService");
 const url = require("url");
 
 module.exports = {

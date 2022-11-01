@@ -1,4 +1,4 @@
-const service = require('../models/tourService');
+const service = require('../services/tourService');
 
 module.exports = {
     getSightseeingPage : async (req,res) =>{

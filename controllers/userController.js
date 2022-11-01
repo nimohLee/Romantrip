@@ -1,7 +1,7 @@
 const request = require('request');
 const db = require('../config/db');
-const model = require('../models/userService');
-const service = require('../models/loginService');
+const model = require('../services/userService');
+const service = require('../services/loginService');
 const session = require('express-session');
 module.exports = {
     getMain: (req, res) => {
@@ -51,7 +51,7 @@ module.exports = {
             name: req.body.name,
             email: req.body.email,
         };
-        model.register(userDto);
+        service.register(userDto);
         res.redirect("/users/login");
     },
     getRegister: (req, res) => {
@@ -64,7 +64,7 @@ module.exports = {
             name: req.body.name,
             email: req.body.email,
         };
-        model.validator(userDto).then(function (data){
+        service.validator(userDto).then(function (data){
             res.send(data);
         });
     },

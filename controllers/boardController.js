@@ -5,7 +5,7 @@ import { axios } from 'axios';
 3. res, req는 controller에서만 control */
 
 const db = require("../config/db");
-const model = require("../models/boardService");
+const service = require("../services/boardService");
 const { user, Board } = require("../database/models/index");
 const axios = require("axios");
 const request = require("request");
@@ -15,7 +15,7 @@ const sharedListData = async (params) => {
     let listData;
 
     return new Promise(async (resolve, reject) => {
-        await model.getBoardList(params).then(function (data) {
+        await service.getBoardList(params).then(function (data) {
             listData = {
                 result: data,
                 page: params.page,
@@ -43,11 +43,8 @@ module.exports = {
 
 
         await sharedListData(params).then((data) => {
-            setTimeout(() => {}, 301);
             res.render("../views/board/list.ejs", data);
-        }).finally(()=>{
-            // res.send("이거 왜");
-        });
+        })
     },
 
     getWrite: (req, res) => {
@@ -64,7 +61,7 @@ module.exports = {
     },
     getDetail: async (req, res) => {
         const id = req.params.id;
-        await model.showBoardDetail(id).then(function (data) {
+        await service.showBoardDetail(id).then(function (data) {
             res.render("../views/board/detail.ejs", {
                 result: data,
                 session: req.session._id,
@@ -73,7 +70,7 @@ module.exports = {
     },
     getUpdate: (req, res) => {
         const id = req.params.id;
-        model.popupUpdate(id).then(function (data) {
+        service.popupUpdate(id).then(function (data) {
             res.render("../views/board/update", {
                 result: data,
                 session: req.session._id,
@@ -96,7 +93,7 @@ module.exports = {
         //     searchTf: req.query.text,
         // };
 
-        await model
+        await service
             .writeBoard(board)
             .then((result) => {
                 res.status(201).send("success");
@@ -109,7 +106,7 @@ module.exports = {
 
     postDelete: (req, res) => {
         const idx = req.body.idx;
-        model.deleteBoard(idx);
+        service.deleteBoard(idx);
     },
 
     postUpdate: (req, res) => {
@@ -118,6 +115,6 @@ module.exports = {
             title: req.body.title,
             content: req.body.content,
         };
-        model.updateBoard(updateDto);
+        service.updateBoard(updateDto);
     },
 };

@@ -1,4 +1,4 @@
-const service = require("../models/cartService");
+const service = require("../services/cartService");
 
 module.exports = {
     getCartMainPage : async (req,res)=>{

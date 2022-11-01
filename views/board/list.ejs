@@ -1,5 +1,5 @@
 <%-include('../header.ejs') %>
-<link rel="stylesheet" href="/css/boardListStyle.css">
+<link rel="stylesheet" href="/css/boardStyle.css">
 
 <main id="board-main">
     <section class="subject-title dohyeon">
@@ -32,8 +32,8 @@
                         <%} }else {%>
                     <% for( let i = (page * page_num) - page_num ; i < (page *
                     page_num); i++ ) { if(i > length){ i++;}else{ 
-                        let data = result[i];console.log(data);
-                        
+                        let data = result[i];
+                
                         %>
                         <tr class="data-tr">
                             <td><%=data.b_id%></td>
@@ -48,7 +48,7 @@
                 </table>
                 <div id="paging-btn-wrap">
                 <% for(let j = 0; j < result.length / page_num; j++){ %>
-                    <button class="paging-btn"><a href="/board/page/<%= j + 1 %>"><%= j + 1 %></a></button>
+                    <a href="/board/page/<%= j + 1 %>"><button class="paging-btn"><%= j + 1 %></button></a>
                 <% } %>
                 </div>
             </article>
