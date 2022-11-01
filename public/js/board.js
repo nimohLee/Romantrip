@@ -40,6 +40,10 @@ function toSubmit(){
         title : document.querySelector("#write-title").value,
         content : document.querySelector("#write-content").value
     }
+    
+    /*  */
+    const progressBar = document.querySelector("#progress-bar");
+    progressBar.className = "display-flex";
 
     $.ajax({
         method : "post",
@@ -48,9 +52,9 @@ function toSubmit(){
         data : JSON.stringify(writeData)
     }).then((res)=>{
         console.log(res);
+        progressBar.className = "display-none";
         if(res === "success"){
-        
-            location.href = document.referrer;
+            location.href = "/board/page/1";
         }
     }).catch((res)=>{   
         alert(res.responseText);

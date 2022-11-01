@@ -24,15 +24,13 @@ const sharedListData = async (params) => {
                 pass: true,
                 session: params.session,
             };
-            
-            setTimeout(()=>{
+
+            setTimeout(() => {
                 resolve(listData);
-            },100)
-            
+            }, 100);
         });
     });
 };
-
 
 module.exports = {
     getMain: async (req, res) => {
@@ -42,28 +40,27 @@ module.exports = {
             searchTf: req.query.text,
             session: req.session._id,
         };
-        
-        setTimeout(()=>{
-            res.send("이거 왜");
-        },0)
-       
-    
-        await sharedListData(params).then((data) => {   
-         setTimeout(()=>{
 
-         },301)
-            res.render("../views/board/list.ejs",data);
-        })
+
+        await sharedListData(params).then((data) => {
+            setTimeout(() => {}, 301);
+            res.render("../views/board/list.ejs", data);
+        }).finally(()=>{
+            // res.send("이거 왜");
+        });
     },
 
     getWrite: (req, res) => {
-        if(req.session._id){
-            res.status(200).render("../views/board/write.ejs", { session: req.session._id });    
-        }else{
+        if (req.session._id) {
+            res.status(200).render("../views/board/write.ejs", {
+                session: req.session._id,
+            });
+        } else {
             /* If client didn't login, print alert and locate to login page when client click write button*/
-            res.status(400).send("<script>alert('로그인이 필요합니다'); location.href = '/users/login';</script>");
+            res.status(400).send(
+                "<script>alert('로그인이 필요합니다'); location.href = '/users/login';</script>"
+            );
         }
-        
     },
     getDetail: async (req, res) => {
         const id = req.params.id;
@@ -99,14 +96,15 @@ module.exports = {
         //     searchTf: req.query.text,
         // };
 
-        await model.writeBoard(board).then((result)=>{
-            res.status(201).send("success");
-        }).catch((err)=>{
-            console.log(err);
-            res.status(400).send("잘못작성되었습니다.") 
-        });
-        
-      
+        await model
+            .writeBoard(board)
+            .then((result) => {
+                res.status(201).send("success");
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(400).send("잘못작성되었습니다.");
+            });
     },
 
     postDelete: (req, res) => {
