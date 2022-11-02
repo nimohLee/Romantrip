@@ -32,7 +32,7 @@
                         %>
                         <tr class="data-tr">
                             <td><%=data.b_id%></td>
-                            <td><a href="../detail/<%= data.b_id%>" id="title-td"><%=data.title %></a></td>
+                            <td><a href="/board/detail/<%= data.b_id%>" id="title-td"><%=data.title %></a></td>
                             <td><%=data.m_name%></td>
                             <td><%=data.regDate%></td>
                             <td><%=data.views%></td>
@@ -61,7 +61,7 @@
                     </form>
                 </div>
                 <div class="board-write">
-                        <a href="../write"><button style="cursor: pointer; font-size:1.2em;margin-right:10px"><i class="fa-solid fa-pen-to-square"></i>글쓰기</button></a>
+                        <a href="/board/write"><button style="cursor: pointer; font-size:1.2em;margin-right:10px"><i class="fa-solid fa-pen-to-square"></i>글쓰기</button></a>
                     </div>
             </article>
         </section>

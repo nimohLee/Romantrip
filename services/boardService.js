@@ -191,26 +191,38 @@ module.exports = {
         });
     },
     deleteBoard: async (params) => {
-        const updateSql = "UPDATE Boards SET b_id = b_id-1 WHERE b_id > " + params.boardIdx;
+        
         // delete recode
-        return await Board.destroy({
-            where: {
-                b_id: params.boardIdx,
-                m_id : params.loginedUser
-            },
-            raw: true
-        }).then(()=>{
-            db.query(updateSql, (err) => {
-                if (err) throw err;
-                else {
-                }
-            });
-            return(200);
-        }).catch(()=>{
-            return(403);    
-        });
+        let result;
+       
+        const deleteDto = {
+            b_id : params.boardIdx,
+            m_id : params.loginedUser
+        }
 
-        // return result;
+        const updateSql = "UPDATE Boards SET b_id = b_id-1 WHERE b_id > " + deleteDto.b_id;
+
+        return new Promise(async (resolve,reject)=>{
+            await Board.destroy({
+                where: {
+                    b_id : params.boardIdx,
+                    m_id : params.loginedUser
+                }
+            }).then((data)=>{
+                if(data === 0){
+                    resolve(403);  
+                }else{
+                        db.query(updateSql, (err) => {
+                            if (err) throw err;
+                            else {
+                               resolve(200);
+                            }
+                        });
+                }
+            })
+        })
+       
+
     },
     updateBoard: async (params) => {
         await Board.update(

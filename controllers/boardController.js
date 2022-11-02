@@ -47,10 +47,10 @@ module.exports = {
             if(data.page===1)
                 res.status(200).render("../views/board/list.ejs", data);
              else
-                res.status(200).render("../views/board/listNum.ejs",data);
-            
-            
-         
+            /* 페이지 버튼 클릭에 따른 동적인 렌더링을 위해 별도의 ejs파일 render */
+                res.status(200).render("../views/board/pagingList.ejs",data);
+        }).catch(()=>{
+                res.status(400);
         })
     },
 
@@ -133,8 +133,6 @@ module.exports = {
         }).catch(()=>{
             res.status(400).send("fail");
         });
-        
-        
     },
 
     postDelete: async (req, res) => {
@@ -146,8 +144,10 @@ module.exports = {
             /**
              * @result deleteBoard() 후 리턴된 상태코드
              **/
-            const result = await service.deleteBoard(params);
+            await service.deleteBoard(params).then((result)=>{
             res.sendStatus(result);
+            });
+        
         }else{
             res.sendStatus(401);
         }   

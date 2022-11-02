@@ -7,8 +7,9 @@ function paging(clickedPageNum){
         data : {clickedPageNum}
     }
     ).then((data)=>{
-        console.log(data);
         document.querySelector("#board-main").innerHTML = data;
+    }).catch(()=>{
+        alert("잘못된 접근입니다.");
     });
 
 }
@@ -22,15 +23,7 @@ function updateBoardPage(idx) {
         method : "get",
         url : "/board/update/"+idx
     })
-    
-    // const frmPop = document.frmPopup;
-    // const url = "../update/" + idx;
-    // const name = "update board";
-    // const option = "width = 700, height = 700, top = 100, left = 200";
-    // const popup = window.open(url, "_blank", option);
-    // popup.addEventListener("beforeunload", function () {
-    //     location.reload();
-    // });
+
 }
 function deleteBoard(idx) {
     if (confirm("삭제하시겠습니까?")) {
@@ -41,7 +34,7 @@ function deleteBoard(idx) {
             data: JSON.stringify({ idx }),
         }).then(()=>{
             alert("삭제되었습니다.");
-            location.href = "/board/page/1"
+            location.href = "/board/main"
         }).catch((res)=>{
             if(res.status === 401){
                 alert("로그인이 필요합니다");
@@ -50,7 +43,7 @@ function deleteBoard(idx) {
             }
             
         });
-        // location.href = "../page/1";
+        
     }
 }
 
@@ -87,7 +80,7 @@ function toWriteSubmit(){
         console.log(res);
         progressBar.className = "display-none";
         if(res === "success"){
-            location.href = "/board/page/1";
+            location.href = "/board/main";
         }
     }).catch((res)=>{   
         alert(res.responseText);
