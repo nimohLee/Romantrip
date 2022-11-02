@@ -132,7 +132,7 @@
     outline: 0;
     border: 1px solid #ebecef;   
     resize: none;
-    
+    line-height: 25px;
 }
 .write-page-btns{
     float: right;

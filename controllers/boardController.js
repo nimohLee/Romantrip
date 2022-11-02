@@ -40,8 +40,6 @@ module.exports = {
             searchTf: req.query.text,
             session: req.session._id,
         };
-
-
         await sharedListData(params).then((data) => {
             res.render("../views/board/list.ejs", data);
         })
@@ -136,7 +134,6 @@ module.exports = {
                 boardIdx : req.body.idx,
                 loginedUser : req.session._id
             };
-            
             /**
              * @result deleteBoard() 후 리턴된 상태코드
              **/

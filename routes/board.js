@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/boardController');
 
-router.get("/page/:page",controller.getMain);
+router.get("/main",controller.getMain);
 
 router.get("/write",controller.getWrite);
 

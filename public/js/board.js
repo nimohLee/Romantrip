@@ -1,4 +1,11 @@
-
+/* list.ejs */
+function paging(clickedPageNum){
+    $.ajax({
+        method : "get",
+        url : "/board/main",
+        data : { clickedPageNum }
+    })
+}
 
 
 

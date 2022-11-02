@@ -47,8 +47,8 @@
                     </tbody>
                 </table>
                 <div id="paging-btn-wrap">
-                <% for(let j = 0; j < result.length / page_num; j++){ %>
-                    <a href="/board/page/<%= j + 1 %>"><button class="paging-btn"><%= j + 1 %></button></a>
+                <% for(let j = 0; j < Math.ceil(result.length / page_num); j++){ %>
+                    <button class="paging-btn" onclick="paging('<%=j+1%>')"><%= j + 1 %></button>
                 <% } %>
                 </div>
             </article>
