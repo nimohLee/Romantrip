@@ -108,7 +108,7 @@
     margin: 0 auto;
 }
 
-#write-title{
+.write-title{
     height: 40px;
     width: 90%;
     padding : 11px 12px 10px;    
@@ -123,7 +123,7 @@
 }
 
 
-#write-content{
+.write-content{
     width: 90%;
     padding : 11px 12px 10px;    
     margin : 30px 0;
@@ -134,11 +134,11 @@
     resize: none;
     
 }
-#write-page-btns{
+.write-page-btns{
     float: right;
     margin-right: 20px;
 }
-#write-page-btns input{
+.write-page-btns input{
     margin-left: 15px;
     background-color: #FFD6EC;
     border: 1px solid #FFD6EC;

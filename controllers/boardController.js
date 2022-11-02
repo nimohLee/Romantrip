@@ -66,7 +66,30 @@ module.exports = {
                 result: data,
                 session: req.session._id,
             });
+        }).catch((result)=>{
+            res.status(result).send("<script>alert('잘못된 접근입니다'); history.back();</script>")
         });
+    },
+
+
+    postWrite: async (req, res) => {
+        console.log(req.session._id);
+        const board = {
+            title: req.body.title,
+            content: req.body.content,
+            m_id: req.session._id,
+            m_name: req.session._name,
+        };
+
+        await service
+            .writeBoard(board)
+            .then((result) => {
+                res.status(201).send("success");
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(400).send("잘못작성되었습니다.");
+            });
     },
 
     getUpdate: (req, res) => {
@@ -92,37 +115,35 @@ module.exports = {
         
     },
 
-    postWrite: async (req, res) => {
-        console.log(req.session._id);
-        const board = {
-            title: req.body.title,
-            content: req.body.content,
-            m_id: req.session._id,
-            m_name: req.session._name,
-        };
-
-        await service
-            .writeBoard(board)
-            .then((result) => {
-                res.status(201).send("success");
-            })
-            .catch((err) => {
-                console.log(err);
-                res.status(400).send("잘못작성되었습니다.");
-            });
-    },
-
-    postDelete: (req, res) => {
-        const idx = req.body.idx;
-        service.deleteBoard(idx);
-    },
-
     postUpdate: (req, res) => {
         const updateDto = {
             id: req.params.id,
             title: req.body.title,
             content: req.body.content,
         };
-        service.updateBoard(updateDto);
+        service.updateBoard(updateDto).then(()=>{
+            res.status(200).send("success");
+        }).catch(()=>{
+            res.status(400).send("fail");
+        });
+        
+        
     },
+
+    postDelete: async (req, res) => {
+        if(req.session._id){
+            const params = {
+                boardIdx : req.body.idx,
+                loginedUser : req.session._id
+            };
+            
+            /**
+             * @result deleteBoard() 후 리턴된 상태코드
+             **/
+            const result = await service.deleteBoard(params);
+            res.sendStatus(result);
+        }else{
+            res.sendStatus(401);
+        }   
+    }
 };

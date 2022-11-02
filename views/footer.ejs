@@ -10,6 +10,12 @@
 </footer>
 
 <script>
+
+/* HTML , CSS , JAVASCRIPT 모두 load 완료 시 progress-bar 숨기기 */
+window.onload = function() {
+    document.querySelector("#progress-bar").className = "display-none";
+}
+
     const menus = document.querySelectorAll(".main-menu li");
     const subMenu = document.querySelector(".sub-menu");
     const playMenu = document.querySelector(".play-sub-menu");

@@ -1,3 +1,8 @@
+
+
+
+
+
 /* boardDetail js */
 function updateBoardPage(idx) {
     $.ajax({
@@ -18,11 +23,21 @@ function deleteBoard(idx) {
     if (confirm("삭제하시겠습니까?")) {
         $.ajax({
             method: "post",
-            url: "./deleteProc",
+            url: "/board/detail/deleteProc",
             contentType: "application/json",
             data: JSON.stringify({ idx }),
+        }).then(()=>{
+            alert("삭제되었습니다.");
+            location.href = "/board/page/1"
+        }).catch((res)=>{
+            if(res.status === 401){
+                alert("로그인이 필요합니다");
+            }else if(res.status === 403){
+                alert("글쓴이만 삭제할 수 있습니다")
+            }
+            
         });
-        location.href = "../page/1";
+        // location.href = "../page/1";
     }
 }
 
@@ -40,7 +55,7 @@ function closeForm() {
 }
 
 /* boardWrite js */
-function toSubmit(){
+function toWriteSubmit(){
     const writeData = {
         title : document.querySelector("#write-title").value,
         content : document.querySelector("#write-content").value
@@ -64,4 +79,27 @@ function toSubmit(){
     }).catch((res)=>{   
         alert(res.responseText);
     });
+}
+
+/* update.ejs */
+function toUpdateSubmit(updateBoardIdx){
+    const updateDto = {
+        title : document.querySelector("#update-title").value,
+        content : document.querySelector("#update-content").value
+    };
+    $.ajax({
+        method : "post",
+        url : "/board/update/"+updateBoardIdx,
+        contentType : "application/json",
+        data : JSON.stringify(updateDto)
+    }).then((result)=>{
+        if(result === "success"){
+            /* 수정이 완료되었습니다 띄우고 */
+            location.href = document.referrer;
+        }else{
+            alert("잘못된 접근입니다.");
+        }
+           
+    });
+    
 }

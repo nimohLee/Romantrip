@@ -129,7 +129,11 @@ module.exports = {
     /* update params 수정해야함  */
     showBoardDetail: (id) => {
         return new Promise(async (resolve, reject) => {
-            const boards = await Board.findAll({
+            /**
+             * @type {number} HTTP status code
+             */
+            let result;
+            await Board.findAll({
                 where: {
                     b_id: id,
                 },
@@ -149,16 +153,18 @@ module.exports = {
                         "regDate",
                     ],
                 ],
-            })
-
+            }).then(async (boards)=>{
+                /* 해당 파라미터 (id)를 b_id로 하는 레코드가 DB에 없다면 */
+                if(boards.length ===0){
+                    reject(400);
+                }else{
+                    await Board.increment({ views: 1 }, { where: { b_id: id } }); // Will increase age to 15
+                    setTimeout(() => {
+                    resolve(boards);
+                }, 0);}
+            });
              // Detail get 시 view에 1추가
-            await Board.increment({ views: 1 }, { where: { b_id: id } }); // Will increase age to 15
-
-
             
-            setTimeout(() => {
-                resolve(boards);
-            }, 0);
         });
     },
     popupUpdate: (params) => {
@@ -176,19 +182,27 @@ module.exports = {
             }, 0);
         });
     },
-    deleteBoard: async (id) => {
-        const updateSql = "UPDATE Boards SET b_id = b_id-1 WHERE b_id > " + id;
+    deleteBoard: async (params) => {
+        const updateSql = "UPDATE Boards SET b_id = b_id-1 WHERE b_id > " + params.boardIdx;
         // delete recode
-        await Board.destroy({
+        return await Board.destroy({
             where: {
-                b_id: id,
+                b_id: params.boardIdx,
+                m_id : params.loginedUser
             },
+            raw: true
+        }).then(()=>{
+            db.query(updateSql, (err) => {
+                if (err) throw err;
+                else {
+                }
+            });
+            return(200);
+        }).catch(()=>{
+            return(403);    
         });
-        db.query(updateSql, (err) => {
-            if (err) throw err;
-            else {
-            }
-        });
+
+        // return result;
     },
     updateBoard: async (params) => {
         await Board.update(
