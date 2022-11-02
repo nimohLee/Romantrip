@@ -1,7 +1,7 @@
 const request = require('request');
 const db = require('../config/db');
-const model = require('../services/userService');
-const service = require('../services/loginService');
+const service = require('../services/userService');
+// const service = require('../services/loginService');
 const session = require('express-session');
 module.exports = {
     getMain: (req, res) => {

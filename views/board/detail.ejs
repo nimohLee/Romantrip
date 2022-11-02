@@ -1,48 +1,30 @@
-<%-include('../header.ejs') %> 
-<link rel="stylesheet" href="/css/boardStyle.css">
-<main>
+<%-include('../header.ejs') %>
+<link rel="stylesheet" href="/css/boardStyle.css" />
+<main id="board-detail-main">
     <section id="read-section">
-        <table border="1" id="board-table" class="nanum">
-            <thead>
-                <tr>
-                    <th colspan="2" scope="col" ><%= result[0].title%></th>
-                </tr>
-                <tr>
-                    <th scope="row">작성자</th>
-                    <td>이호민</td>
-                </tr>
-                <tr>
-                    <th scope="row">작성일</th>
-                    <td><%= result[0].regDate%></td>
-                </tr>
-                <tr>
-                    <th scope="row">조회수</th>
-                    <td><%= result[0].views%></td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="2"><%=result[0].content%></td>
-                </tr>
-            </tbody>
-             
- 
-              
-        </table>
-        <article id="write-footer">
-            
-            <a href=<%="/board/update/"+result[0].b_id%>> <button  class="write-btn">수정</button></a>
-            <button onclick="deleteBoard('<%=result[0].b_id %>');" class="write-btn">삭제</button>
-            <a href="/board/page/1" ><button class="write-btn">목록</button></a>
+        <article id="read-header" class="nanum">
+            <h4><%=result[0].title%></h4>
+            <strong><%=result[0].m_name%></strong> 
+            <span><%=result[0].regDate%> 조회 <%=result[0].views%></span>
         </article>
-
+        <article id="read-content">
+            <%=result[0].content%>
+        </article>
+        <article id="write-footer">
+            <a href=<%="/board/update/" +result[0].b_id%>>
+             <button class="write-btn">수정</button></a>
+            <button
+                onclick="deleteBoard('<%=result[0].b_id %>');"
+                class="write-btn" >
+                삭제
+            </button>
+            <a href="/board/page/1"><button class="write-btn">목록</button></a>
+        </article>
     </section>
 </main>
 
-
 <script>
-    document.title = "RomanTrip > Board > Detail"
+    document.title = "RomanTrip > Board > Detail";
 </script>
 <script src="/js/board.js"></script>
-<%-include('../footer.ejs') %> 
-    
+<%-include('../footer.ejs') %>

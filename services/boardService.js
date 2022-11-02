@@ -139,6 +139,7 @@ module.exports = {
                     "title",
                     "content",
                     "views",
+                    "m_name",
                     [
                         sequelize.fn(
                             "date_format",
@@ -160,15 +161,18 @@ module.exports = {
             }, 0);
         });
     },
-    popupUpdate: (id) => {
+    popupUpdate: (params) => {
         return new Promise(async (resolve, reject) => {
             const boards = await Board.findAll({
                 where: {
-                    b_id: id,
+                    b_id: params.boardIdx,
                 },
+                raw: true
             });
             setTimeout(() => {
-                resolve(boards);
+                if(boards[0].m_id === params.loginedUser)
+                    resolve(boards);
+                else reject(403);
             }, 0);
         });
     },

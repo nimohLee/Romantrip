@@ -68,14 +68,28 @@ module.exports = {
             });
         });
     },
+
     getUpdate: (req, res) => {
-        const id = req.params.id;
-        service.popupUpdate(id).then(function (data) {
-            res.render("../views/board/update", {
-                result: data,
-                session: req.session._id,
+        
+        /* 현재 세션에 로그인된 아이디가 있으면 popupdate() 호출 */
+        if(req.session._id){
+            const params = {
+                boardIdx : req.params.id,
+                loginedUser : req.session._id
+            }
+            service.popupUpdate(params).then(function (data) {
+                res.render("../views/board/update", {
+                    result: data,
+                    session: req.session._id,
+                });
+            }).catch((reason)=>{
+                res.status(reason).send("<script>alert('글쓴이만 수정할 수 있습니다'); location.href = document.referrer;</script>");
             });
-        });
+        }
+        else{
+            res.status(401).send("<script>alert('로그인이 필요합니다'); location.href = '/users/login'</script>");
+        }
+        
     },
 
     postWrite: async (req, res) => {
@@ -86,12 +100,6 @@ module.exports = {
             m_id: req.session._id,
             m_name: req.session._name,
         };
-
-        // const params = {
-        //     page: 1,
-        //     selected: req.query.select,
-        //     searchTf: req.query.text,
-        // };
 
         await service
             .writeBoard(board)
