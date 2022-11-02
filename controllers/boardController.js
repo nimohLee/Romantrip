@@ -13,13 +13,13 @@ const request = require("request");
 /*  */
 const sharedListData = async (params) => {
     let listData;
-
     return new Promise(async (resolve, reject) => {
-        await service.getBoardList(params).then(function (data) {
+        await service.getBoardList(params).then(function (result) {
             listData = {
-                result: data,
-                page: params.page,
-                length: data.length - 1,
+                result : result.boardsResult,
+                page: params.idx,
+                pageLength : result.pageLength,
+                // length: data.length,
                 page_num: 10,
                 pass: true,
                 session: params.session,
@@ -34,14 +34,23 @@ const sharedListData = async (params) => {
 
 module.exports = {
     getMain: async (req, res) => {
+        
+        const clickedPage = req.query.clickedPageNum === undefined ? 1 : req.query.clickedPageNum;
+        
         const params = {
-            page: req.params.page,
+            idx: clickedPage,
             selected: req.query.select,
             searchTf: req.query.text,
             session: req.session._id,
         };
         await sharedListData(params).then((data) => {
-            res.render("../views/board/list.ejs", data);
+            if(data.page===1)
+                res.status(200).render("../views/board/list.ejs", data);
+             else
+                res.status(200).render("../views/board/listNum.ejs",data);
+            
+            
+         
         })
     },
 

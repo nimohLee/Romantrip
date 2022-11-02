@@ -1,10 +1,16 @@
 /* list.ejs */
 function paging(clickedPageNum){
+
     $.ajax({
         method : "get",
         url : "/board/main",
-        data : { clickedPageNum }
-    })
+        data : {clickedPageNum}
+    }
+    ).then((data)=>{
+        console.log(data);
+        document.querySelector("#board-main").innerHTML = data;
+    });
+
 }
 
 

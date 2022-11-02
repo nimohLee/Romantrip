@@ -4,13 +4,30 @@ const sequelize = require("sequelize");
 const { Op } = require("sequelize");
 const board = require("../database/models/Board");
 
+/**
+ * @param  {Array} boards SELECT * FROM Boards 의 결과 Array
+ * @param  {number} idx Client가 클릭한 페이징 넘버
+ * @const  {number} minBoardIndex 각각 페이지 별 화면에 나타나는 배열의 최소 인덱스 값 ( 페이지 1이면 10 - 10 이므로 0 )
+ * @const  {number} maxBoardIndex 각각 페이지 별 화면에 나타나는 배열의 최대 인덱스 값 ( 페이지 1이면 1 * 10 이므로 10)
+ * @result idx값에 따라 slice 처리된 배열
+ 
+*/
+function boardPageSlice(boards,idx){
+    const maxBoardIndex = idx*10;
+    const minBoardIndex = maxBoardIndex-10;
+    const result = boards.slice(minBoardIndex,maxBoardIndex);
+    return result;
+}
+
 module.exports = {
     getBoardList: (params) => {
         return new Promise(async (resolve, reject) => {
-            let result = [];
-            let userName;
+            let result = {
+                pageLength : undefined,
+                boardsResult : []
+            };
             if (params.selected === undefined) {
-                const boards = await Board.findAll({
+                await Board.findAll({
                     /* ORDER BY b_id DESC */
                     order: [["b_id", "DESC"]],
                     attributes : {
@@ -34,12 +51,19 @@ module.exports = {
                             "views"
     
                         ]
+                    },
+                    raw: true
+                }).then((boards)=>{
+                    if(params.idx===undefined){
+                        result.boardsResult = boardPageSlice(boards,1);
+                    }else{
+                        result.boardsResult = boardPageSlice(boards,params.idx);
                     }
+                    result.pageLength = boards.length;
+                    resolve(result);
                 });
 
-                boards.forEach(async (board) => {
-                   result.push(pushQueryResult(board));
-                });
+               
             } else {
                 const sql =
                     "SELECT * FROM Boards WHERE " +
@@ -50,28 +74,12 @@ module.exports = {
                 db.query(sql, (err, results) => {
                     if (err) throw err;
                     else {
-                        results.forEach((board) => {
-                            result.push(pushQueryResult(board));
-                        });
                     }
                 });
             }
             setTimeout(() => {
                 resolve(result);
             }, 500);
-
-            function pushQueryResult(board) {
-                const scopeResult = {
-                    b_id: board.b_id,
-                    m_id: board.m_id,
-                    m_name: board.m_name,
-                    title: board.title,
-                    content: board.content,
-                    regDate: board.regDate,
-                    views: board.views,
-                }
-                return scopeResult;
-            }
         });
     },
     writeBoard: (params) => {
