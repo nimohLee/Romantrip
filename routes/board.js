@@ -4,8 +4,6 @@ const controller = require('../controllers/boardController');
 
 router.get("/main",controller.getMain);
 
-router.post("/main",controller.getMain);
-
 router.get("/write",controller.getWrite);
 
 router.post("/writeProc",controller.postWrite);

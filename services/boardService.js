@@ -26,6 +26,7 @@ module.exports = {
                 pageLength : undefined,
                 boardsResult : []
             };
+            
             if (params.selected === undefined) {
                 await Board.findAll({
                     /* ORDER BY b_id DESC */
@@ -65,21 +66,34 @@ module.exports = {
 
                
             } else {
-                const sql =
-                    "SELECT * FROM Boards WHERE " +
-                    params.selected +
-                    " like '%" +
-                    params.searchTf +
-                    "%' ORDER BY b_id DESC;";
-                db.query(sql, (err, results) => {
-                    if (err) throw err;
-                    else {
+                await Board.findAll({
+                    where : 
+                        {
+                            [Op.or]: [
+                                {
+                                  [params.selected] : {
+                                    [Op.substring]: params.searchTf
+                                  }
+                                }
+                              ]
+                            
+                        },
+                    
+                    order:[
+                        ['b_id', 'DESC'],
+                    ],
+                    raw : true
+                }).then((boards)=>{
+                    if(params.idx===undefined){
+                        result.boardsResult = boardPageSlice(boards,1);
+                    }else{
+                        result.boardsResult = boardPageSlice(boards,params.idx);
                     }
-                });
+                    result.pageLength = boards.length;
+                    resolve(result);
+                })
             }
-            setTimeout(() => {
-                resolve(result);
-            }, 500);
+            
         });
     },
     writeBoard: (params) => {

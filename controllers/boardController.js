@@ -4,13 +4,9 @@ import { axios } from 'axios';
 2. 서비스에서 작업을 마친 데이터를 받아 클라이언트에게 응답한다.
 3. res, req는 controller에서만 control */
 
-const db = require("../config/db");
 const service = require("../services/boardService");
-const { user, Board } = require("../database/models/index");
-const axios = require("axios");
-const request = require("request");
 
-/*  */
+/*  */  
 const sharedListData = async (params) => {
     let listData;
     return new Promise(async (resolve, reject) => {
@@ -19,7 +15,6 @@ const sharedListData = async (params) => {
                 result : result.boardsResult,
                 page: params.idx,
                 pageLength : result.pageLength,
-                // length: data.length,
                 page_num: 10,
                 pass: true,
                 session: params.session,
@@ -36,7 +31,7 @@ module.exports = {
     getMain: async (req, res) => {
         
         const clickedPage = req.query.clickedPageNum === undefined ? 1 : req.query.clickedPageNum;
-        
+        const count = Object.keys(req.query).length;
         const params = {
             idx: clickedPage,
             selected: req.query.select,

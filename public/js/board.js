@@ -9,14 +9,10 @@ function paging(clickedPageNum){
     ).then((data)=>{
         document.querySelector("#board-main").innerHTML = data;
     }).catch(()=>{
-        alert("잘못된 접근입니다.");
+        
     });
 
 }
-
-
-
-
 /* boardDetail js */
 function updateBoardPage(idx) {
     $.ajax({
@@ -67,9 +63,6 @@ function toWriteSubmit(){
         content : document.querySelector("#write-content").value
     }
     
-    /* set display flex hidden progress bar */
-    const progressBar = document.querySelector("#progress-bar");
-    progressBar.className = "display-flex";
 
     $.ajax({
         method : "post",
