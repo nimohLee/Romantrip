@@ -46,6 +46,9 @@ body{
     overflow-y: scroll;
 }
 
+#cart-list-wrap{
+ padding-bottom : 40px;   
+}
 #cart-section-title{
     width: 100%;
     height: 30vh;
@@ -53,6 +56,7 @@ body{
     text-align: center;
     padding: 10vh 0;
 }
+
 .cart-list{
     display: flex;
     position: relative;

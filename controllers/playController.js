@@ -31,14 +31,14 @@ module.exports = {
             }
             service.checkTourCart(params).then((isAlreadyShopped)=>{
             if(isAlreadyShopped){
-                res.status(409).send("exist");
+                res.sendStatus(409);
             }else{
                 service.insertTourCart(params);
-                res.status(201).send("success");
+                res.sendStatus(201);
             }
             });
         }else{
-            res.status(401).send("fail");
+            res.sendStatus(401);
         }
     }
 }

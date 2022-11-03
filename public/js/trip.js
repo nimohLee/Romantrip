@@ -39,26 +39,25 @@ shoppingBtns.forEach((shoppingBtn)=>{
         const tourIdx = e.target.value;
         $.ajax({
                     method : "post",
-                    url : `/play/shopping/${tourIdx}`,
-                    success : (result)=>{
-                        if(result === "fail"){
-                            alert("로그인이 필요합니다");
-                            window.location.href= "/users/login";
-                        }else if(result === "exist"){
-                            $(".pop-up #modal-text").text("이미 담긴 낭만입니다");
-                        }
-                        else{
-                            $(".pop-up #modal-text").text("낭만이 담겼습니다");
-                        }
-                          
-                    }
-                }).then(()=>{
+                    url : `/play/shopping/${tourIdx}`
+
+                }).then((result)=>{
+                    console.log(result);
+                    $(".pop-up #modal-text").text("낭만이 담겼습니다");
                     $(".pop-up").fadeIn();
                     $(".pop-up").addClass("black");
                     setTimeout(()=>{
                         $(".pop-up").removeClass("black");
                         $(".pop-up").fadeOut({duration:300});
                     },1500)
+                }).catch((result)=>{
+                    
+                    if(result.status === 401){
+                        alert("로그인이 필요합니다");
+                        window.location.href= "/users/login";
+                    }else if(result === 409){
+                        $(".pop-up #modal-text").text("이미 담긴 낭만입니다");
+                    }
                 })
     });
 })
