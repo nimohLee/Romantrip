@@ -4,8 +4,9 @@ module.exports = {
     getSightseeingPage : async (req,res) =>{
         await service.selectAllTourList("sightseeing").then((sightseeingResult)=>{
             res.render("../views/play/sightseeing",{session : req.session._id, result : sightseeingResult});
-        });
-        
+        }).catch(()=>{
+            res.status(500).send("<script>alert('데이터를 가져오는 중 에러가 발생했습니다.');history.back();</script>")
+        })
     },
     getAmusementPage : async (req,res) =>{
         await service.selectAllTourList("amusement").then((amusementResult)=>{

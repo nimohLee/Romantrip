@@ -6,17 +6,22 @@ module.exports = {
     selectAllTourList: (params) => {
         return new Promise(async (resolve, reject) => {
             let result = [];
-            const tourLists = await TourList.findAll({
+            await TourList.findAll({
                 where: {
                     category: params,
                 },
                 raw: true,
+            }).then((tourLists)=>{
+                tourLists.forEach((tourlist) => {
+                    result.push(tourlist);
+                });
+                resolve(result);
+            }).catch(()=>{
+                reject(500);
             });
 
-            tourLists.forEach((tourlist) => {
-                result.push(tourlist);
-            });
-            resolve(result);
+            
+            
         });
     },
     /* 세션 TourList에 선택한 idx값이 있을 경우 중복해서 담지 못하게 하기 위한 function */
