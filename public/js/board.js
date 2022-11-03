@@ -79,17 +79,13 @@ function toWriteSubmit(){
         title : document.querySelector("#write-title").value,
         content : document.querySelector("#write-content").value
     }
-    
-
     $.ajax({
         method : "post",
         contentType : "application/json",
         url : "./writeProc",
         data : JSON.stringify(writeData)
-    }).then((res)=>{
-        console.log(res);
-        progressBar.className = "display-none";
-        if(res === "success"){
+    }).then((result)=>{
+        if(result === "success"){
             location.href = "/board/main";
         }
     }).catch((res)=>{   

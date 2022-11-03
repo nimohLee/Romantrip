@@ -5,41 +5,40 @@ module.exports = {
         await service.selectAllTourList("sightseeing").then((sightseeingResult)=>{
             res.render("../views/play/sightseeing",{session : req.session._id, result : sightseeingResult});
         }).catch(()=>{
-            res.status(500).send("<script>alert('데이터를 가져오는 중 에러가 발생했습니다.');history.back();</script>")
+            res.status(500).send("<script>alert('데이터를 가져오는 중 에러가 발생했습니다.');history.back();</script>");
         })
     },
     getAmusementPage : async (req,res) =>{
         await service.selectAllTourList("amusement").then((amusementResult)=>{
             res.render("../views/play/amusement",{session : req.session._id, result : amusementResult});
+        }).catch(()=>{
+            res.status(500).send("<script>alert('데이터를 가져오는 중 에러가 발생했습니다.');history.back();</script>");
         }); 
         
     },
     getLeisurePage : async (req,res) =>{
         await service.selectAllTourList("leisure").then((leisureResult)=>{
             res.render("../views/play/leisure",{session : req.session._id, result : leisureResult});
-        });
+        }).catch(()=>{
+            res.status(500).send("<script>alert('데이터를 가져오는 중 에러가 발생했습니다.');history.back();</script>");
+        }); ;
     },
     postShopping : async (req,res)=>{
-        
-        const tourListSession = req.session._tourList;
-        
         if(req.session._id){
             const params = {
                 shoppedIdx : parseInt(req.params.idx),
                 sessionID : req.session._id
             }
             service.checkTourCart(params).then((isAlreadyShopped)=>{
-                console.log(isAlreadyShopped);
             if(isAlreadyShopped){
-                res.send("exist");
+                res.status(409).send("exist");
             }else{
                 service.insertTourCart(params);
-                res.send("success");
+                res.status(201).send("success");
             }
             });
         }else{
-            res.send("fail");
+            res.status(401).send("fail");
         }
-        console.log(req.session._tourList);
     }
 }

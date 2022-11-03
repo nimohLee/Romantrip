@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 module.exports = {
     selectAllTourList: (params) => {
         return new Promise(async (resolve, reject) => {
-            let result = [];
+            let result = [];                                                                                                                                          
             await TourList.findAll({
                 where: {
                     category: params,
@@ -19,9 +19,6 @@ module.exports = {
             }).catch(()=>{
                 reject(500);
             });
-
-            
-            
         });
     },
     /* 세션 TourList에 선택한 idx값이 있을 경우 중복해서 담지 못하게 하기 위한 function */

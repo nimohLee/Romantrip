@@ -1,19 +1,28 @@
 const service = require('../services/tourService');
 
 module.exports = {
-    getMainPage : (req,res) =>{
-        res.render("../views/eat/index",{session : req.session._id});
-    },
     getRestaurantPage : async (req,res) =>{
-        const restaurantResult = await service.selectAllTourList("restaurant");
-        res.render("../views/eat/restaurant",{session : req.session._id, result : restaurantResult});
+        await service.selectAllTourList("restaurant").then((restaurantResult)=>{
+            res.render("../views/eat/restaurant",{session : req.session._id, result : restaurantResult});
+        }).catch(()=>{
+            res.status(500).send("<script>alert('데이터를 가져오는 중 에러가 발생했습니다.');history.back();</script>");
+        });
+        
     },
     getCafePage : async (req,res) =>{
-        const cafeResult = await service.selectAllTourList("cafe");
-        res.render("../views/eat/cafe",{session : req.session._id,result: cafeResult});
+        await service.selectAllTourList("cafe").then((cafeResult)=>{
+            res.render("../views/eat/cafe",{session : req.session._id,result: cafeResult});
+        }).catch(()=>{
+            res.status(500).send("<script>alert('데이터를 가져오는 중 에러가 발생했습니다.');history.back();</script>");
+        });
+        
     },
     getMarketPage : async (req,res) =>{
-        const marketResult = await service.selectAllTourList("market");
-        res.render("../views/eat/market",{session : req.session._id, result:marketResult});
+        await service.selectAllTourList("market").then((marketResult)=>{
+            res.render("../views/eat/market",{session : req.session._id, result:marketResult});
+        }).catch(()=>{
+            res.status(500).send("<script>alert('데이터를 가져오는 중 에러가 발생했습니다.');history.back();</script>");
+        });
+        
     }
 }

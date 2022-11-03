@@ -157,17 +157,16 @@ module.exports = {
                         });
                     }, 10);
                 }).then(()=>{
-                    
-                });
-
-                setTimeout(()=>{
+                    setTimeout(()=>{
                    
-                    if(result===201)
-                        resolve(result);    
-                    
-                    else
-                        reject(result);
-            },500);
+                        if(result===201)
+                            resolve(result);    
+                        
+                        else
+                            reject(result);
+                },500);
+                });
+                
 
                 })
        

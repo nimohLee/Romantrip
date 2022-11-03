@@ -64,6 +64,25 @@ module.exports = {
             );
         }
     },
+    postWrite: async (req, res) => {
+        console.log(req.session._id);
+        const board = {
+            title: req.body.title,
+            content: req.body.content,
+            m_id: req.session._id,
+            m_name: req.session._name,
+        };
+
+        await service
+            .writeBoard(board)
+            .then((result) => {
+                res.status(result).send("success");
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(400).send("잘못작성되었습니다.");
+            });
+    },
     getDetail: async (req, res) => {
         const id = req.params.id;
         await service.showBoardDetail(id).then(function (data) {
@@ -77,25 +96,7 @@ module.exports = {
     },
 
 
-    postWrite: async (req, res) => {
-        console.log(req.session._id);
-        const board = {
-            title: req.body.title,
-            content: req.body.content,
-            m_id: req.session._id,
-            m_name: req.session._name,
-        };
-
-        await service
-            .writeBoard(board)
-            .then((result) => {
-                res.status(201).send("success");
-            })
-            .catch((err) => {
-                console.log(err);
-                res.status(400).send("잘못작성되었습니다.");
-            });
-    },
+    
 
     getUpdate: (req, res) => {
         
