@@ -29,7 +29,7 @@
                         <td>&nbsp;</td>
                         
                     </tr>
-                        <%} }else { console.log(pageLength);%>
+                        <%} }else { %>
                     <% for( let i = 0 ; i <result.length ; i++ ) { 
                         let data = result[i];
                         %>
@@ -54,9 +54,21 @@
                 <div class="board-search">
                     <form >
                         <select name="select" id="search-select">
-                            <option value="title">제목</option>
-                            <option value="m_name">작성자</option>
-                            <option value="content">내용</option>
+                             <option value="title"  
+                            <% if(selected === "title"){ %>
+                                selected="selected"
+                                <%}%>
+                                >제목</option>
+                            <option value="m_name" 
+                            <% if(selected === "m_name"){%>
+                                selected="selected"
+                                <%}%>
+                                >작성자</option>
+                            <option value="content"
+                             <% if(selected === "content"){%>
+                                selected="selected"
+                                <%}%>
+                                >내용</option>
                         </select>
                         <input type="text" placeholder="검색어를 입력하세요" name="text" id="search-text" />
                         <input type="submit" value="검색"></input>

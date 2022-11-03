@@ -27,7 +27,7 @@ module.exports = {
                 boardsResult : []
             };
             
-            if (params.selected === undefined) {
+            if (params.selected === undefined || params.selected === "") {
                 await Board.findAll({
                     /* ORDER BY b_id DESC */
                     order: [["b_id", "DESC"]],
@@ -82,11 +82,35 @@ module.exports = {
                     order:[
                         ['b_id', 'DESC'],
                     ],
+                    attributes : {
+                        include: [
+                            "b_id",
+                            "m_id",
+                            "m_name",
+                            "title",
+                            "content",
+                            [
+                                /* 작성일 Date FORMAT 지정  */
+                                sequelize.fn
+                                (
+                                  "DATE_FORMAT", 
+                                  sequelize.col("regDate"), 
+                                  "%Y-%m-%d %H:%i:%s"
+                                ),
+                                "regDate",
+                              ],
+                            
+                            "views"
+    
+                        ]
+                    },
                     raw : true
                 }).then((boards)=>{
                     if(params.idx===undefined){
+                       
                         result.boardsResult = boardPageSlice(boards,1);
                     }else{
+                        
                         result.boardsResult = boardPageSlice(boards,params.idx);
                     }
                     result.pageLength = boards.length;
@@ -137,7 +161,7 @@ module.exports = {
                 });
 
                 setTimeout(()=>{
-                    // console.log(result);
+                   
                     if(result===201)
                         resolve(result);    
                     

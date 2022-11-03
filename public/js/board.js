@@ -1,17 +1,34 @@
+/* DOM */       
+
+/* 현재 주소값에서 쿼리스트링을 가져와 select는 value로 설정해주고, select와 text의 값을 서버에 data로 넘김 */
+const urlStr = window.location.href;
+const url = new URL(urlStr);
+const urlparams = url.searchParams;
+const selectQueryString = urlparams.get('select');
+
+const textQueryString = urlparams.get('text');
+
+function searchFormSubmit(){
+    const searchForm = document.forms.searchForm;
+    searchForm.action = "/board/main";
+    searchForm.method = "get";
+    searchForm.elements.select.value = selectQueryString;
+    searchForm.submit();
+}
+
 /* list.ejs */
 function paging(clickedPageNum){
-
     $.ajax({
         method : "get",
         url : "/board/main",
-        data : {clickedPageNum}
+        data : {clickedPageNum, select : selectQueryString, text :textQueryString }
     }
     ).then((data)=>{
         document.querySelector("#board-main").innerHTML = data;
     }).catch(()=>{
         
     });
-
+    
 }
 /* boardDetail js */
 function updateBoardPage(idx) {

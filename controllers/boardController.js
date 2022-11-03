@@ -11,6 +11,7 @@ const sharedListData = async (params) => {
     let listData;
     return new Promise(async (resolve, reject) => {
         await service.getBoardList(params).then(function (result) {
+
             listData = {
                 result : result.boardsResult,
                 page: params.idx,
@@ -18,6 +19,7 @@ const sharedListData = async (params) => {
                 page_num: 10,
                 pass: true,
                 session: params.session,
+                selected : params.selected
             };
 
             setTimeout(() => {
@@ -29,15 +31,16 @@ const sharedListData = async (params) => {
 
 module.exports = {
     getMain: async (req, res) => {
-        
         const clickedPage = req.query.clickedPageNum === undefined ? 1 : req.query.clickedPageNum;
-        const count = Object.keys(req.query).length;
+        console.log(req.query.select);
+        /* 페이지 전환 시 select값이 undefined이 되므로 req.query를 직접 사용하지 않고 변수에 저장해서 사용하기 */
         const params = {
             idx: clickedPage,
-            selected: req.query.select,
+            selected: req.query.select, 
             searchTf: req.query.text,
             session: req.session._id,
         };
+        
         await sharedListData(params).then((data) => {
             if(data.page===1)
                 res.status(200).render("../views/board/list.ejs", data);
