@@ -20,7 +20,9 @@ module.exports = {
                 result = "success";
             }
 
-            res.send({ result });
+            res.status(200).send({ result });
+        }).catch(()=>{
+            res.status(400);
         });
     },
     kakaoLogin: (req, res) => {
@@ -41,7 +43,7 @@ module.exports = {
                     req.session._kakao = "yes";
                     service.createSnsUser("kakao", userObj);
                 } else {
-                    console.log("이미 세션이 존재합니다");
+                    res.status(409);
                 }
             });
             res.render('index',{session : req.session._id});    
@@ -64,7 +66,7 @@ module.exports = {
                     req.session._token = data;
                     service.createSnsUser("naver", userObj);
                 } else {
-                    console.log("이미 세션이 존재합니다");
+                    res.status(409);
                 }
             });
             res.render('index',{session : req.session._id});

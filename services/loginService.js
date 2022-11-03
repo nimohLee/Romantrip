@@ -98,7 +98,7 @@ module.exports = {
             });
             if(selectUser.length>0){
                 resolve(selectUser);
-            }else{resolve("fail");}
+            }else{reject("fail");}
             
         })
     },

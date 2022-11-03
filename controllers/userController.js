@@ -1,8 +1,7 @@
 const request = require('request');
 const db = require('../config/db');
 const service = require('../services/userService');
-// const service = require('../services/loginService');
-const session = require('express-session');
+
 module.exports = {
     getMain: (req, res) => {
         res.render("../views/users/main.ejs",{session : req.session._id});
@@ -11,7 +10,7 @@ module.exports = {
         if(req.session._id==undefined)
             res.render("../views/users/login.ejs",{session : req.session._id})      
         else{
-            res.send("<script>alert('이미 로그인 중입니다');history.go(-1);</script>")
+            res.status(409).send("<script>alert('이미 로그인 중입니다');history.go(-1);</script>")
         }
     },
     postLogout:(req,res)=>{
@@ -52,6 +51,7 @@ module.exports = {
             email: req.body.email,
         };
         service.register(userDto);
+        res.status(201);
         res.redirect("/users/login");
     },
     getRegister: (req, res) => {
@@ -66,6 +66,8 @@ module.exports = {
         };
         service.validator(userDto).then(function (data){
             res.send(data);
+        }).catch(()=>{
+            res.status(409);
         });
     },
     getUpdate: (req, res) => {

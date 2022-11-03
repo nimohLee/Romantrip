@@ -26,7 +26,6 @@ function paging(clickedPageNum){
     ).then((data)=>{
         document.querySelector("#board-main").innerHTML = data;
     }).catch(()=>{
-        
     });
     
 }
@@ -51,6 +50,7 @@ function deleteBoard(idx) {
         }).catch((res)=>{
             if(res.status === 401){
                 alert("로그인이 필요합니다");
+                location.href = "/users/login"
             }else if(res.status === 403){
                 alert("글쓴이만 삭제할 수 있습니다")
             }

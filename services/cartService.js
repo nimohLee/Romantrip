@@ -34,15 +34,16 @@ module.exports = {
     },
     deleteList : (params) => {
         return new Promise(async (resolve, reject)=>{
-            destroyList = await TourCart.destroy({
+             await TourCart.destroy({
                 where:{
                     tl_id : params.tlID,
                     m_id : params.sessionID
                 }
+            }).then(()=>{
+                resolve("success");
+            }).catch(()=>{
+                reject("fail");
             });
-            
-            resolve("success");
-            reject("fail");
         })
     }
 }
