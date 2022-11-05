@@ -30,24 +30,18 @@ window.onload = function() {
              if(menuName === "즐길거리"){
                  eatMenu.classList.remove("selected-sub-menu");
                  playMenu.classList.add("selected-sub-menu");
-                //  mains.forEach((main)=>{
                  main.classList.add("menu-opened");
-            //  })
 
                 
              }
              else if(menuName === "먹거리"){
                  playMenu.classList.remove("selected-sub-menu");
                  eatMenu.classList.add("selected-sub-menu");
-                //  mains.forEach((main)=>{
                  main.classList.add("menu-opened");
-            //  })
 
              }else if(menuName === "게시판"){
                  subMenu.classList.remove("menu-block");
-                //  mains.forEach((main)=>{
                  main.classList.remove("menu-opened");
-            //  })
              }
          });
         

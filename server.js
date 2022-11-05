@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+require("dotenv").config();
 
 /* import Routes */
 const boardRoute = require('./routes/board');
@@ -12,10 +13,11 @@ const cartRoute = require('./routes/cart');
 const cors = require("cors");
 const { sequelize } = require('./database/models/index')
 const session = require('express-session');
+
 const FileStore = require('session-file-store')(session);
 
 const app = express();
-const PORT  = 5001;
+const PORT  = process.env.SERVER_PORT;
 
 sequelize
   .sync()
@@ -39,7 +41,7 @@ app.use(express.urlencoded({extended : true}));
 
 app.use(session({
   store: new FileStore({logFn: function(){}}),
-  secret: 'keyboard dogcatdog',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 3600000,secure: false, httpOnly: true }
@@ -70,4 +72,4 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.listen(PORT,()=>{console.log(`localhost:${PORT} is connected`)});
+app.listen(PORT,()=>{console.log(`Running...`)});

@@ -49,13 +49,14 @@
                         <li>
                             <% if(session=== undefined){ %>
                             <a href="/users/login">로그인</a>
+                            <li><a href="/users/register">회원가입</a></li>
                             <%}else{%>
                             <a onclick="logout()" style="cursor: pointer" id="logoutBtn">
                                 로그아웃
                             </a>
                             <%}%>
                         </li>
-                        <li><a href="/users/register">회원가입</a></li>
+                        
                     </ul>
                 </div>
             </div>
@@ -66,7 +67,6 @@
                     <div class="play-sub-menu">
                         <div class="sub-menu-title-wrap">
                             <h4 class="hans">즐길거리</h4>
-                
                             <h5 class="brush">부산에서 신나게 놀아보자 !</h5>
                         </div>
                         <div class="sub-menu-button-wrap dohyeon">

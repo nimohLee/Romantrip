@@ -10,7 +10,6 @@ const board = require("../database/models/Board");
  * @const  {number} minBoardIndex 각각 페이지 별 화면에 나타나는 배열의 최소 인덱스 값 ( 페이지 1이면 10 - 10 이므로 0 )
  * @const  {number} maxBoardIndex 각각 페이지 별 화면에 나타나는 배열의 최대 인덱스 값 ( 페이지 1이면 1 * 10 이므로 10)
  * @result idx값에 따라 slice 처리된 배열
- 
 */
 function boardPageSlice(boards,idx){
     const maxBoardIndex = idx*10;

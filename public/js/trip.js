@@ -61,18 +61,3 @@ shoppingBtns.forEach((shoppingBtn)=>{
                 })
     });
 })
-
-
-// shoppingBtn.addEventListener("click",(e)=>{
-    
-//     const data = {
-
-//     }
-//     $.ajax({
-//         method : "post",
-//         url : "play/shopping/1",
-//         success : ()=>{
-
-//         }
-//     })
-// })
