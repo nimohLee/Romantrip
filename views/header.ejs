@@ -37,10 +37,24 @@
                 </div>
                 <div class="header-center">
                     <ul class="main-menu gmarket">
-                        <li><a href="#">즐길거리</a></li>
-                        <li><a href="#">먹거리</a>
+                        <li><a href="#" class="main-category">즐길거리</a>
+                            <ul class="sub-category-wrap">
+                                <li><a href="/play/sightseeing" class="sub-category">관광명소</a></li>
+                                <li><a href="/play/amusement" class="sub-category">놀이시설</a></li>
+                                <li><a href="/play/leisure" class="sub-category">레저</a></li>
+                            </ul>
                         </li>
-                        <li><a href="/board/main">게시판</a></li>
+                        
+                        <li>
+                            <a href="#" class="main-category">먹거리</a>
+                            <ul class="sub-category-wrap">
+                                <li><a href="/eat/restaurant" class="sub-category">식당</a></li>
+                                <li><a href="/eat/cafe" class="sub-category">카페</a></li>
+                                <li><a href="/eat/market" class="sub-category">시장</a></li>
+                            </ul>
+                        </li>
+                       
+                        <li><a href="/board/main" class="main-category">게시판</a></li>
                     </ul>
                 </div>
                 <div class="header-right">
@@ -56,14 +70,14 @@
                             </a>
                             <%}%>
                         </li>
-                        
+                        <i class="fa-solid fa-bars" id="bars-btn"></i>
                     </ul>
                 </div>
             </div>
 
 
             <div id="sub-header">
-                <div class="sub-menu menu-hidden">
+                <div class="sub-menu display-none">
                     <div class="play-sub-menu">
                         <div class="sub-menu-title-wrap">
                             <h4 class="hans">즐길거리</h4>

@@ -21,41 +21,72 @@ window.onload = function() {
     const playMenu = document.querySelector(".play-sub-menu");
     const eatMenu = document.querySelector(".eat-sub-menu");
     const main = document.querySelector("main");
+    const subCategoryWraps = document.querySelectorAll(".sub-category-wrap");
+    const showMenuBtn = document.querySelector("#bars-btn");
+
+
+    /* 화면 너비가 900px 이상일 때 */
     menus.forEach((menu)=>{
          menu.addEventListener('mouseenter',(e)=>{
-             const menuName = e.target.innerText;
-             subMenu.classList.add("menu-block");
+          // if(window.innerWidth > 900)  {
+          const menuName = e.target.innerText;
+             
            
 
              if(menuName === "즐길거리"){
-                 eatMenu.classList.remove("selected-sub-menu");
-                 playMenu.classList.add("selected-sub-menu");
-                 main.classList.add("menu-opened");
-
-                
+                if(window.innerWidth > 900){
+                  subMenu.classList.add("menu-block");
+                  eatMenu.classList.remove("selected-sub-menu");
+                  playMenu.classList.add("selected-sub-menu");
+                  main.classList.add("menu-opened");
+                } 
              }
              else if(menuName === "먹거리"){
-                 playMenu.classList.remove("selected-sub-menu");
+              if(window.innerWidth > 900){
+              subMenu.classList.add("menu-block");   
+              playMenu.classList.remove("selected-sub-menu");
                  eatMenu.classList.add("selected-sub-menu");
                  main.classList.add("menu-opened");
-
+              }
              }else if(menuName === "게시판"){
-                 subMenu.classList.remove("menu-block");
+               
+            
+                subMenu.classList.remove("menu-block");
                  main.classList.remove("menu-opened");
              }
-         });
+            });
         
     })
 
     document.addEventListener('mousemove', (event) => {
       if(convertPXToVH(event.clientY) > 45){
         subMenu.classList.remove("menu-block");
-        // mains.forEach((main)=>{
+        
           main.classList.remove("menu-opened");
-        // })
+        
       }
       
-});
+    });
+   
+    let isSubMenuOpened = false;
+    showMenuBtn.addEventListener("click",(e)=>{
+      if(isSubMenuOpened){
+        document.querySelector(".header-center").classList.remove("show-sub-menu-right");
+        document.querySelector(".header-center").classList.add("hide-sub-menu-right");
+        isSubMenuOpened = false;
+      }
+        else{
+          document.querySelector(".header-center").classList.remove("hide-sub-menu-right");
+          document.querySelector(".header-center").classList.add("show-sub-menu-right");
+        isSubMenuOpened = true;
+      }
+    })
+   
+   
+    
+    
+    
+   
 
 /* pixel to vh function */
 function convertPXToVH(px) {
@@ -91,6 +122,12 @@ function convertPXToVH(px) {
     createStar();
   }
 });
+
+
+
+  
+    
+
  </script>
 
 <script src="/js/login.js"></script>

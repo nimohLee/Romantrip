@@ -61,11 +61,11 @@
     } 
 
     .display-none{
-        display: none;
+        display: none !important;
     }
     
     .display-flex{
-        display : flex;
+        display : flex !important;
     }
     /* 글리터 */
     
@@ -227,7 +227,7 @@
         background-color: #eee;
     }
     
-    .menu-hidden{
+    .display-none{
         display: none;
     }
 
@@ -443,4 +443,128 @@
 
     .black {
         background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .sub-category-wrap{
+        display: none;
+        flex-direction: column;
+        font-size:0.9em;
+     
+    }
+
+    #bars-btn{
+        display: none;
+    }
+
+
+@keyframes subCategoryMargin {
+    from{
+        margin : 0;
+        height: 0;
+    }
+    to{
+        margin: 15px 0;
+        height: 100px;
+    }
+}
+    
+    
+@keyframes showSubMenu {
+    from {
+        height: 0;
+        opacity: 0;
+    }
+    to {
+        height: 100px;
+        opacity: 1;
+    }
+}
+
+@keyframes showSubMenuRight {
+    from{
+        width: 0;
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+        width: 27vw;
+        
+    }   
+}
+@keyframes hideSubMenuRight {
+    from{
+        opacity: 1;
+        width: 27vw;
+    }
+    to{
+        width: 0;
+        opacity: 0;
+        right: -50px;
+        /* display를 none하면 보이진 않으나 남아있기때문에 position을 통해 숨겨버림 */
+    }
+}
+
+
+    @media screen and (max-width : 920px) {
+        
+        .show-sub-menu-right{
+            animation : showSubMenuRight .5s ease-in-out forwards;
+            display: flex !important;
+        }
+
+        .hide-sub-menu-right{
+            animation : hideSubMenuRight .5s  forwards;   
+            display: flex !important;
+        }
+
+        .header-center{
+            display: none;
+            position: absolute;
+            width: 0;
+            top: 88px;
+            right: 0;
+            height: 100vh;
+            background-color: white;
+        }
+
+        .header-center .main-menu{
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            width: 100%;
+
+        }
+        
+        .main-menu>li {
+            margin :30px 0;
+            transition: 1s;
+            width: 300px;
+            height: 150px;
+        }
+        .main-category{
+            font-size: 1.6em !important;
+        }
+
+        .main-menu li:hover > .sub-category-wrap{
+            display: flex;
+            animation: showSubMenu 1s ease-in-out forwards;
+            width: 100%;
+            
+        }
+
+        .main-menu li:hover >.sub-category-wrap li{
+            animation: subCategoryMargin 1s ease-in-out forwards;
+        }
+
+        .header-right li{
+            display: flex;
+            align-items: center;
+        }
+
+        #bars-btn{
+            display: block;
+            cursor: pointer;
+            margin-left: 30px;
+            font-size: 20px;
+        }
     }
