@@ -24,46 +24,39 @@ window.onload = function() {
     const subCategoryWraps = document.querySelectorAll(".sub-category-wrap");
     const showMenuBtn = document.querySelector("#bars-btn");
 
+    function openMenu(currentMenu,anotherMenu){
+      subMenu.classList.add("menu-block");
+      currentMenu.classList.add("selected-sub-menu");
+      anotherMenu.classList.remove("selected-sub-menu");
+      main.classList.add("menu-opened");
+    }
+
+    function closeMenu(){
+      subMenu.classList.remove("menu-block");
+      main.classList.remove("menu-opened");
+    }
 
     /* 화면 너비가 900px 이상일 때 */
     menus.forEach((menu)=>{
-         menu.addEventListener('mouseenter',(e)=>{
-          // if(window.innerWidth > 900)  {
+        menu.addEventListener('mouseenter',(e)=>{
           const menuName = e.target.innerText;
-             
-             if(menuName === "즐길거리"){
-                if(window.innerWidth > 900){
-                  subMenu.classList.add("menu-block");
-                  eatMenu.classList.remove("selected-sub-menu");
-                  playMenu.classList.add("selected-sub-menu");
-                  main.classList.add("menu-opened");
-                } 
-             }
-             else if(menuName === "먹거리"){
-              if(window.innerWidth > 900){
-              subMenu.classList.add("menu-block");   
-              playMenu.classList.remove("selected-sub-menu");
-                 eatMenu.classList.add("selected-sub-menu");
-                 main.classList.add("menu-opened");
-              }
-             }else if(menuName === "게시판"){
-               
-            
-                subMenu.classList.remove("menu-block");
-                 main.classList.remove("menu-opened");
-             }
+            if(window.innerWidth > 900){
+                if(menuName === "게시판"){
+                  closeMenu();
+                }else if(menuName === "즐길거리"){
+                  openMenu(playMenu,eatMenu);
+                }
+                else if(menuName === "먹거리"){
+                  openMenu(eatMenu,playMenu);
+                }
+            }
             });
-        
-    })
+          });
 
     document.addEventListener('mousemove', (event) => {
       if(convertPXToVH(event.clientY) > 45){
-        subMenu.classList.remove("menu-block");
-        
-          main.classList.remove("menu-opened");
-        
+          closeMenu();
       }
-      
     });
    
 
