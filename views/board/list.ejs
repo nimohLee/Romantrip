@@ -27,15 +27,15 @@
                         <td>&nbsp;</td>
                         <td >&nbsp;</td>
                         <td>&nbsp;</td>
-                        
                     </tr>
+                    <br class="table-br">   
                         <%} }else { %>
                     <% for( let i = 0 ; i <result.length ; i++ ) { 
                         let data = result[i];
                         %>
                         <tr class="data-tr">
                             <td><%=data.b_id%></td>
-                            <td><a href="/board/detail/<%= data.b_id%>" id="title-td"><%=data.title %></a></td>
+                            <td><a href="/board/detail/<%= data.b_id%>" class="title-td"><%=data.title %></a></td>
                             <td><%=data.m_name%></td>
                             <td><%=data.regDate%></td>
                             <td><%=data.views%></td>

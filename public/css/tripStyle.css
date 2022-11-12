@@ -16,11 +16,9 @@ body{
 }
 
 .subject-content{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    row-gap: 10px;
-    column-gap: 10px;
-    justify-items: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;    
     }
 .tour-card{
     display: flex;
@@ -167,5 +165,13 @@ body{
 
 .close-detail{
     animation: closeDetail .5s ease-in-out forwards;
+    
+}
+
+@media screen and (max-width : 1023px) {
+    
+}
+
+@media screen and (max-width : 767px) {
     
 }

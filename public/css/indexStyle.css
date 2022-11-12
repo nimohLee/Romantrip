@@ -496,6 +496,7 @@ body {
     .header-center {
         display: none;
         position: absolute;
+        border-left: 1px solid #eee;
         width: 0;
         top: 88px;
         right: 0;
