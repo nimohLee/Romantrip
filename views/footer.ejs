@@ -67,15 +67,20 @@ window.onload = function() {
     })
 
     let isSubMenuOpened = false;
+
     showMenuBtn.addEventListener("click",(e)=>{
       if(isSubMenuOpened){
         document.querySelector(".header-center").classList.remove("show-sub-menu-right");
         document.querySelector(".header-center").classList.add("hide-sub-menu-right");
+        document.querySelector(".header-right").classList.add("hide-sub-menu-right");
+        document.querySelector(".header-right").classList.remove("show-sub-menu-right");
         isSubMenuOpened = false;
       }
         else{
           document.querySelector(".header-center").classList.remove("hide-sub-menu-right");
           document.querySelector(".header-center").classList.add("show-sub-menu-right");
+          document.querySelector(".header-right").classList.add("show-sub-menu-right");
+          document.querySelector(".header-right").classList.remove("hide-sub-menu-right");
         isSubMenuOpened = true;
       }
     })

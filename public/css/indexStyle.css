@@ -181,7 +181,6 @@ ul {
 }
 .header-right ul li a {
     font-size: 0.9em;
-
     transition-duration: 0.5s;
 }
 .header-right ul li a:hover {
@@ -483,7 +482,7 @@ body {
     }
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 1023px) {
     .show-sub-menu-right {
         animation: showSubMenuRight 0.5s ease-in-out forwards;
         display: flex !important;
@@ -543,3 +542,24 @@ body {
         font-size: 20px;
     }
 }
+
+
+@media screen and (max-width:767px) {
+    .header-right{
+        position: absolute !important;
+        display: none;
+        top: 80vh;
+        right: 2vw;
+    }
+    .header-right ul{
+        flex-direction: column;
+    }
+    .header-right ul li{
+        margin-bottom: 20px;
+    }
+    
+    #main-header{
+        padding: 20px 50px;
+        justify-content: space-even;
+    }
+    }
