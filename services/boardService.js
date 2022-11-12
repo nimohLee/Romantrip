@@ -19,14 +19,19 @@ function boardPageSlice(boards,idx){
 }
 
 module.exports = {
-    getBoardList: (params) => {
+    /**
+     * 
+     * @param {Object} searchInfo 사용자가 입력한 검색 값(select option, 검색 text)
+     * @returns {Promise} 검색결과 or 모든 게시글
+     */
+    getBoardList: (searchInfo) => {
         return new Promise(async (resolve, reject) => {
             let result = {
                 pageLength : undefined,
                 boardsResult : []
             };
             
-            if (params.selected === undefined || params.selected === "") {
+            if (searchInfo.selected === undefined || searchInfo.selected === "") {
                 await Board.findAll({
                     /* ORDER BY b_id DESC */
                     order: [["b_id", "DESC"]],
@@ -54,10 +59,10 @@ module.exports = {
                     },
                     raw: true
                 }).then((boards)=>{
-                    if(params.idx===undefined){
+                    if(searchInfo.idx===undefined){
                         result.boardsResult = boardPageSlice(boards,1);
                     }else{
-                        result.boardsResult = boardPageSlice(boards,params.idx);
+                        result.boardsResult = boardPageSlice(boards,searchInfo.idx);
                     }
                     result.pageLength = boards.length;
                     resolve(result);
@@ -70,8 +75,8 @@ module.exports = {
                         {
                             [Op.or]: [
                                 {
-                                  [params.selected] : {
-                                    [Op.substring]: params.searchTf
+                                  [searchInfo.selected] : {
+                                    [Op.substring]: searchInfo.searchTf
                                   }
                                 }
                               ]
@@ -105,12 +110,12 @@ module.exports = {
                     },
                     raw : true
                 }).then((boards)=>{
-                    if(params.idx===undefined){
+                    if(searchInfo.idx===undefined){
                        
                         result.boardsResult = boardPageSlice(boards,1);
                     }else{
                         
-                        result.boardsResult = boardPageSlice(boards,params.idx);
+                        result.boardsResult = boardPageSlice(boards,searchInfo.idx);
                     }
                     result.pageLength = boards.length;
                     resolve(result);
@@ -211,38 +216,47 @@ module.exports = {
             
         });
     },
-    popupUpdate: (params) => {
+
+    /**
+     * 
+     * @param {Object} updateDto 게시글 idx값, 세션 사용자 정보 
+     * @returns 해당 게시글 데이터
+     */
+    popupUpdate: (updateDto) => {
         return new Promise(async (resolve, reject) => {
             const boards = await Board.findAll({
                 where: {
-                    b_id: params.boardIdx,
+                    b_id: updateDto.boardIdx,
                 },
                 raw: true
             });
             setTimeout(() => {
-                if(boards[0].m_id === params.loginedUser)
+                if(boards[0].m_id === updateDto.loginedUser)
                     resolve(boards);
                 else reject(403);
             }, 0);
         });
     },
-    deleteBoard: async (params) => {
+
+    /**
+     * 
+     * @param {Object} deleteBoardInfo 삭제하기 위한 게시글 idx값과 세션 유저 
+     * @returns HTTP 상태 코드 
+     */
+    deleteBoard: async (deleteBoardInfo) => {
         
-        // delete recode
-        let result;
-       
         const deleteDto = {
-            b_id : params.boardIdx,
-            m_id : params.loginedUser
+            b_id : deleteBoardInfo.boardIdx,
+            m_id : deleteBoardInfo.loginedUser
         }
 
-        const updateSql = "UPDATE Boards SET b_id = b_id-1 WHERE b_id > " + deleteDto.b_id;
+        const updateSql = "UPDATE Boards SET b_id = b_id-1 WHERE b_id > " +deleteBoardInfo.boardIdx;
 
         return new Promise(async (resolve,reject)=>{
             await Board.destroy({
                 where: {
-                    b_id : params.boardIdx,
-                    m_id : params.loginedUser
+                    b_id : deleteBoardInfo.boardIdx,
+                    m_id : deleteBoardInfo.loginedUser
                 }
             }).then((data)=>{
                 if(data === 0){
@@ -257,18 +271,21 @@ module.exports = {
                 }
             })
         })
-       
-
     },
-    updateBoard: async (params) => {
+
+    /**
+     * 
+     * @param {Object} updateDto 업데이트할 사용자 세션id와 게시글 idx
+     */
+    updateBoard: async (updateDto) => {
         await Board.update(
             {
-                title: params.title,
-                content: params.content,
+                title: updateDto.title,
+                content: updateDto.content,
             },
             {
                 where: {
-                    b_id: params.id,
+                    b_id: updateDto.id,
                 },
             }
         );

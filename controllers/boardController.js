@@ -1,25 +1,22 @@
-/* controller에서는  데이터 가공등 서비스 로직 X 
-import { axios } from 'axios';
-1. 컨트롤러는 들어오는 클라이언트 요청을 받고 서비스에 전달한다.
-2. 서비스에서 작업을 마친 데이터를 받아 클라이언트에게 응답한다.
-3. res, req는 controller에서만 control */
-
 const service = require("../services/boardService");
 
-/*  */  
-const sharedListData = async (params) => {
+/**
+ * 
+ * @param {Object} searchInfo 사용자가 입력한 검색 값(select option, 검색 text)
+ * @returns {Promise} DB 검색결과
+ */
+const sharedListData = async (searchInfo) => {
     let listData;
     return new Promise(async (resolve, reject) => {
-        await service.getBoardList(params).then(function (result) {
-
+        await service.getBoardList(searchInfo).then(function (result) {
             listData = {
                 result : result.boardsResult,
-                page: params.idx,
+                page: searchInfo.idx,
                 pageLength : result.pageLength,
                 page_num: 10,
                 pass: true,
-                session: params.session,
-                selected : params.selected
+                session: searchInfo.session,
+                selected : searchInfo.selected
             };
 
             setTimeout(() => {
@@ -30,18 +27,18 @@ const sharedListData = async (params) => {
 };
 
 module.exports = {
+    
     getMain: async (req, res) => {
         const clickedPage = req.query.clickedPageNum === undefined ? 1 : req.query.clickedPageNum;
-        console.log(req.query.select);
         /* 페이지 전환 시 select값이 undefined이 되므로 req.query를 직접 사용하지 않고 변수에 저장해서 사용하기 */
-        const params = {
+        const searchInfo = {
             idx: clickedPage,
             selected: req.query.select, 
             searchTf: req.query.text,
             session: req.session._id,
         };
         
-        await sharedListData(params).then((data) => {
+        await sharedListData(searchInfo).then((data) => {
             if(data.page===1)
                 res.status(200).render("../views/board/list.ejs", data);
              else
@@ -102,11 +99,11 @@ module.exports = {
         
         /* 현재 세션에 로그인된 아이디가 있으면 popupdate() 호출 */
         if(req.session._id){
-            const params = {
+            const updateDto = {
                 boardIdx : req.params.id,
                 loginedUser : req.session._id
             }
-            service.popupUpdate(params).then(function (data) {
+            service.popupUpdate(updateDto).then(function (data) {
                 res.render("../views/board/update", {
                     result: data,
                     session: req.session._id,
@@ -136,14 +133,11 @@ module.exports = {
 
     postDelete: async (req, res) => {
         if(req.session._id){
-            const params = {
+            const deleteBoardInfo = {
                 boardIdx : req.body.idx,
                 loginedUser : req.session._id
             };
-            /**
-             * @result deleteBoard() 후 리턴된 상태코드
-             **/
-            await service.deleteBoard(params).then((result)=>{
+            await service.deleteBoard(deleteBoardInfo).then((result)=>{
             res.sendStatus(result);
             });
         
