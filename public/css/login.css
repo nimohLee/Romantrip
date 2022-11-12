@@ -68,3 +68,19 @@
     cursor: pointer;
     background-size: contain;
 }
+
+@media screen and (max-width : 1023px) {
+    #kakao-login-btn{
+        background-image: url("../assets/kakao_login_small.png");
+        background-size:contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    #naver-login-btn{
+        background-image: url("../assets/naver_login_small.png");
+        background-size:contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+    
+}
