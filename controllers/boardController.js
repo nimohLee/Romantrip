@@ -91,10 +91,6 @@ module.exports = {
             res.status(result).send("<script>alert('잘못된 접근입니다'); history.back();</script>")
         });
     },
-
-
-    
-
     getUpdate: (req, res) => {
         
         /* 현재 세션에 로그인된 아이디가 있으면 popupdate() 호출 */

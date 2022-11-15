@@ -11,18 +11,15 @@ module.exports = {
             pw: req.body.pw,
         };
         service.validation(loginInfo).then((selectedUser) => {
-            let result;
             if (selectedUser === "fail") {
-                result = "fail";
+                res.sendStatus(400);
             } else {
                 req.session._id = selectedUser[0].id;
                 req.session._name = selectedUser[0].name;
-                result = "success";
-            }
-
-            res.status(200).send({ result });
+                res.sendStatus(200);    
+            }  
         }).catch(()=>{
-            res.status(400);
+            res.sendStatus(400);
         });
     },
     kakaoLogin: (req, res) => {

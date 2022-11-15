@@ -29,8 +29,8 @@ module.exports = {
                 shoppedIdx : parseInt(req.params.idx),
                 sessionID : req.session._id
             }
-            service.checkTourCart(params).then((isAlreadyShopped)=>{
-            if(isAlreadyShopped){
+            await service.checkTourCart(params).then((isAlreadyShopped)=>{
+                if(isAlreadyShopped){
                 res.sendStatus(409);
             }else{
                 service.insertTourCart(params);

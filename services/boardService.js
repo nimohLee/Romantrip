@@ -175,7 +175,12 @@ module.exports = {
                 })
        
     },
-    /* update params 수정해야함  */
+    
+    /**
+     * 
+     * @param {Number} id 게시글 자세히 보기 위한 해당 게시글 id값
+     * @returns id 값으로 조회된 해당 게시글 정보
+     */
     showBoardDetail: (id) => {
         return new Promise(async (resolve, reject) => {
             /**
