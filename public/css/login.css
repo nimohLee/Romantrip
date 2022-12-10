@@ -1,3 +1,6 @@
+body{
+    overflow-y: scroll;
+}
 #login-main {
     display: flex;
     height: 100%;

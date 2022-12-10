@@ -106,10 +106,10 @@ module.exports = {
             "UPDATE member SET m_id = m_id-1 WHERE m_id > " + req.body.idx;
 
         db.query(deleteSql, (err) => {
-            if (err) throw err;
+            if (err) console.error(err);
         });
         db.query(updateSql, (err) => {
-            if (err) throw err;
+            if (err) console.error(err);
         });
     },
 };

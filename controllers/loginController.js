@@ -5,7 +5,6 @@ const url = require("url");
 
 module.exports = {
     basicLogin: (req, res) => {
-        /* DB랑 연결해서 로그인 유효성검사하기 */
         const loginInfo = {
             id: req.body.id,
             pw: req.body.pw,
@@ -28,7 +27,6 @@ module.exports = {
         service.getKakaoToken(code).then(async (data) => {
             await service.getUserInfo(data).then((returnData) => {
                 const userInfo = JSON.parse(returnData);
-                /* 카카오와 네이버로그인 -> DB INSERT 함수인 createSnsUser()를 카카오와 네이버에서 재사용할 수있도록 새로운 객체 userObj 정의 */
                 const userObj = {
                     id: userInfo.id,
                     name: userInfo.properties.nickname,
@@ -49,7 +47,6 @@ module.exports = {
     },
     naverLogin: (req, res) => {
         const code = req.query.code;
-        /* 카카오와 네이버로그인 -> DB INSERT 함수인 createSnsUser()를 카카오와 네이버에서 재사용할 수있도록 새로운 객체 userObj 정의 */
         service.getNaverToken(code).then(async (data) => {
             await service.naverGetUserInfo(data).then((returnData) => {
                 const userInfo = JSON.parse(returnData);
@@ -67,8 +64,6 @@ module.exports = {
                 }
             });
             res.render('index',{session : req.session._id});
-        });
-        
-    },
-    logout: async (req, res, next) => {},
+        });   
+    }
 };

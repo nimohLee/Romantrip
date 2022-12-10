@@ -2,15 +2,16 @@ const { application } = require('express');
 const axios = require('axios');
 const request = require('request');
 const { User } = require("../database/models/index");
-
+require("dotenv").config();
+const env = process.env;
 const kakaoKey = {
-    client_id : "457bc0baab39156996248d5b7386f600",
+    client_id : env.KAKAO_CLIENT_ID,
     redirect_uri : "http://localhost:5001/login/kakao"
 }
 const naverKey = {
-    client_id : "_MITzC_aLNm1ne3NkL3o",
+    client_id : env.NAVER_CLIENT_ID,
     redirect_uri : "http://localhost:5001/login/naver",
-    secret : "sL8N635zhm"
+    secret : env.NAVER_SECRET
 }
 module.exports = {
     getKakaoToken : (code)=>{
