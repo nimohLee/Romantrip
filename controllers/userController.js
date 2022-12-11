@@ -3,9 +3,6 @@ const db = require('../config/db');
 const service = require('../services/userService');
 
 module.exports = {
-    getMain: (req, res) => {
-        res.render("../views/users/main.ejs",{session : req.session._id});
-    },
     getLogin: (req,res) =>{
         if(req.session._id==undefined)
             res.render("../views/users/login.ejs",{session : req.session._id})      

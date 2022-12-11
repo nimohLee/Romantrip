@@ -1,5 +1,3 @@
-
-
 /* DOM */
 const readMoreBtns = document.querySelectorAll(".read-more-btn");
 const readMoreCloseBtns = document.querySelectorAll(".close-detail-btn");

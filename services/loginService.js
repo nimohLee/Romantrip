@@ -1,4 +1,3 @@
-const { application } = require('express');
 const axios = require('axios');
 const request = require('request');
 const { User } = require("../database/models/index");
@@ -49,7 +48,7 @@ module.exports = {
     ,
     naverAuth: async ()=>{
         const reqParams = {
-            client_id : "_MITzC_aLNm1ne3NkL3o",
+            client_id : naverKey.client_id,
             redirect_uri : "http://localhost:5001/login/naver",
             state : "test"
         };

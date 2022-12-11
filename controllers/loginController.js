@@ -1,5 +1,3 @@
-const request = require("request");
-const session = require("express-session");
 const service = require("../services/loginService");
 const url = require("url");
 
@@ -14,8 +12,8 @@ module.exports = {
                 res.sendStatus(400);
             } else {
                 req.session._id = selectedUser[0].id;
-                req.session._name = selectedUser[0].name;
-                res.sendStatus(200);    
+                req.session._name = selectedUser[0].name;  
+                res.sendStatus(201);
             }  
         }).catch(()=>{
             res.sendStatus(400);
