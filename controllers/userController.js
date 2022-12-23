@@ -20,7 +20,7 @@ module.exports = {
                         req.session.destroy((err)=>{
                             if(err) throw(err);
                             else {
-                                res.send("success");
+                                res.status(201).send("success");
                             }
                         });
                     
@@ -30,7 +30,7 @@ module.exports = {
             req.session.destroy((err)=>{
                 if(err) {
                     res.sendStatus(500);
-                } 
+                }
                 else {
                     res.sendStatus(201);
                 }
@@ -47,8 +47,7 @@ module.exports = {
             };
             try{
                 await service.register(userDto);
-                res.sendStatus(201);
-                res.redirect("/users/login");
+                res.status(201).redirect("/users/login");
             }catch(err){
                 res.sendStatus(500);
             }
@@ -67,9 +66,9 @@ module.exports = {
             email: req.body.email,
         };
         service.validator(userDto).then(function (data){
-            res.send(data);
+            res.status(200).send(data);
         }).catch(()=>{
-            res.status(409);
+            res.sendStatus(409);
         });
     },
     getUpdate: (req, res) => {
