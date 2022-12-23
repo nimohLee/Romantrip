@@ -20,23 +20,7 @@ function naverAuthorization() {
     location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${reqParams.client_id}&redirect_uri=${reqParams.redirect_uri}&state=test`;
 }
 
-/* 로그아웃 */
-function logout() {
-    /* express 서버에서 처리하기 위해 post 요청 */
-  
-        $.ajax({
-            method: "post",
-            async: true,
-            url: "/users/logout",
-            data: "",
-            success: (result) => {
-                if (result === "success") {
-                    location.href = "/";
-                }
-            },
-        });
-    
-}
+
 
 function submitLoginForm() {
     const loginForm = document.forms.loginFrm;

@@ -6,8 +6,6 @@ const uID = document.getElementById("id");
 const uPW = document.getElementById("pw");
 const email = document.getElementById("email");
 
-console.log(uID);
-// declare isInput(boolean)
 let nameOK = false;
 let idOK = false;
 let pwOK = false;

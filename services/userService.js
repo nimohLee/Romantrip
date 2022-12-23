@@ -2,13 +2,18 @@ const { User } = require("../database/models/index");
 
 module.exports = {
     register : async (params)=>{
-        await User.create({
-            name : params.name,
-            id : params.id,
-            pw : params.pw,
-            email : params.email,
-            regDate : new Date()
-        });
+        try{
+            await User.create({
+                name : params.name,
+                id : params.id,
+                pw : params.pw,
+                email : params.email,
+                regDate : new Date()
+            });
+        }catch(err){
+            throw err;
+        }
+        
     },
     validator : (params) =>{
         return new Promise(async (resolve,reject)=>{

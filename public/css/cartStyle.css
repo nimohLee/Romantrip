@@ -42,14 +42,10 @@
     }
 }
 
-body{
-    overflow-y: scroll;
-}
-
 /* 메뉴에 mouseover 시 회색으로 변하는 화면 높이 */
-#cart-main{
+/* #cart-main{
     height: 200%;
-}
+} */
 
 #cart-list-wrap{
  padding-bottom : 40px;   
@@ -59,7 +55,7 @@ body{
     height: 30vh;
     font-size: 3em;
     text-align: center;
-    padding: 10vh 0;
+    padding: 130px 0 10vh 0;
 }
 
 .cart-list{
