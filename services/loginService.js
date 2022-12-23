@@ -1,6 +1,8 @@
 const axios = require('axios');
 const request = require('request');
 const { User } = require("../database/models/index");
+const bcryptService = require("../services/bcryptService");
+
 require("dotenv").config();
 const env = process.env;
 const kakaoKey = {
@@ -87,18 +89,26 @@ module.exports = {
         })
     },
     validation : (info) =>{
-
         return new Promise(async (resolve,reject)=>{
-            const selectUser = await User.findAll({
-                where : {
-                    id : info.id,
-                    pw : info.pw
-                },
-                raw: true
-            });
-            if(selectUser.length>0){
-                resolve(selectUser);
-            }else{reject("fail");}
+            
+            try{
+                const selectUser = await User.findOne({
+                    where : {
+                        id : info.id
+                    },
+                    raw: true
+                });
+                const pwCompareResult = bcryptService.comparePassword(selectUser.pw, info.pw);
+                if(selectUser && pwCompareResult){
+                    resolve(selectUser);
+                }else
+                    reject("fail")
+            }catch(err){
+                reject("fail");
+            }
+            
+            
+            
             
         })
     },

@@ -8,13 +8,9 @@ module.exports = {
             pw: req.body.pw,
         };
         service.validation(loginInfo).then((selectedUser) => {
-            if (selectedUser === "fail") {
-                res.sendStatus(400);
-            } else {
-                req.session._id = selectedUser[0].id;
-                req.session._name = selectedUser[0].name;  
+                req.session._id = selectedUser.id;
+                req.session._name = selectedUser.name;  
                 res.sendStatus(201);
-            }  
         }).catch(()=>{
             res.sendStatus(400);
         });
