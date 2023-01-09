@@ -6,7 +6,6 @@ const cookieParser = require("cookie-parser");
 /* import Routes */
 const boardRoute = require('./routes/board');
 const userRoute = require('./routes/users');
-const loginRoute = require('./routes/login');
 const playRoute = require('./routes/play');
 const eatRoute = require('./routes/eat');
 const cartRoute = require('./routes/cart');
@@ -56,7 +55,6 @@ app.get("/",(req,res)=>{
 
 app.use('/board',boardRoute);
 app.use('/users',userRoute); 
-app.use("/login",loginRoute);
 app.use("/play",playRoute);
 app.use("/eat",eatRoute);
 app.use("/cart",cartRoute);

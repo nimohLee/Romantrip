@@ -1,7 +1,6 @@
 const request = require('request');
 const db = require('../config/db');
 const service = require('../services/userService');
-const loginService = require('../services/loginService');
 
 module.exports = {
     getLogin: (req,res) =>{
@@ -16,7 +15,7 @@ module.exports = {
             id: req.body.id,
             pw: req.body.pw,
         };
-        loginService.validation(loginInfo).then((selectedUser) => {
+        service.validation(loginInfo).then((selectedUser) => {
                 req.session._id = selectedUser.id;
                 req.session._name = selectedUser.name;  
                 res.sendStatus(201);

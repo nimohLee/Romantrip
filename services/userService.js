@@ -28,5 +28,25 @@ module.exports = {
             }else
                 resolve("Yes");
         })
+    },
+    validation : (info) =>{
+        return new Promise(async (resolve,reject)=>{
+            
+            try{
+                const selectUser = await User.findOne({
+                    where : {
+                        id : info.id
+                    },
+                    raw: true
+                });
+                const pwCompareResult = bcryptService.comparePassword(selectUser.pw, info.pw);
+                if(selectUser && pwCompareResult){
+                    resolve(selectUser);
+                }else
+                    reject("fail")
+            }catch(err){
+                reject("fail");
+            }
+        })
     }
 }
