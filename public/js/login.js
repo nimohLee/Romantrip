@@ -1,26 +1,6 @@
 /* DOM */
+
 document.title = "RomanTrip>login";
-/* SNS 로그인 */
-/* 카카오 */
-function kakaoAuthorization() {
-    const REST_API_KEY = "457bc0baab39156996248d5b7386f600";
-    const REDIRECT_URI = "http://localhost:5001/login/kakao";
-    Kakao.init(REST_API_KEY);
-    Kakao.Auth.authorize({
-        redirectUri: REDIRECT_URI,
-    });
-}
-
-/* 네이버 */
-function naverAuthorization() {
-    const reqParams = {
-        client_id: "_MITzC_aLNm1ne3NkL3o",
-        redirect_uri: "http://localhost:5001/login/naver",
-    };
-    location.href = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${reqParams.client_id}&redirect_uri=${reqParams.redirect_uri}&state=test`;
-}
-
-
 
 function submitLoginForm() {
     const loginForm = document.forms.loginFrm;
@@ -30,7 +10,7 @@ function submitLoginForm() {
     };
     $.ajax({
         method: "post",
-        url: "/login/basic",
+        url: "/users/login",
         data: formData,
         success: () => {
                 /* 이전 주소가 회원가입 주소이면 홈화면으로, 아니면 이전 화면으로 */

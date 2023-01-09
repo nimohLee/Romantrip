@@ -1,6 +1,7 @@
 const request = require('request');
 const db = require('../config/db');
 const service = require('../services/userService');
+const loginService = require('../services/loginService');
 
 module.exports = {
     getLogin: (req,res) =>{
@@ -10,23 +11,20 @@ module.exports = {
             res.status(409).send("<script>alert('이미 로그인 중입니다');history.go(-1);</script>")
         }
     },
+    postLogin: (req, res) => {
+        const loginInfo = {
+            id: req.body.id,
+            pw: req.body.pw,
+        };
+        loginService.validation(loginInfo).then((selectedUser) => {
+                req.session._id = selectedUser.id;
+                req.session._name = selectedUser.name;  
+                res.sendStatus(201);
+        }).catch(()=>{
+            res.sendStatus(400);
+        });
+    },
     postLogout:(req,res)=>{
-        /* 카카오 세션 존재 시 카카오 서버~ 없을 시 세션만 삭제 */
-        if(req.session._kakao){
-            const logoutURL = `https://kauth.kakao.com/oauth/logout?client_id=457bc0baab39156996248d5b7386f600&logout_redirect_uri=http://localhost:5001`;
-            request.get({
-                url : logoutURL},
-                    function (err,result,body){
-                        req.session.destroy((err)=>{
-                            if(err) throw(err);
-                            else {
-                                res.status(201).send("success");
-                            }
-                        });
-                    
-                    }
-                );
-        }else{
             req.session.destroy((err)=>{
                 if(err) {
                     res.sendStatus(500);
@@ -35,7 +33,6 @@ module.exports = {
                     res.sendStatus(201);
                 }
             })
-        }
     },
     postRegister: async (req, res) => {
         if(req.body.id!==undefined && req.body.pw!==undefined && req.body.name !== undefined && req.body.email !==undefined){

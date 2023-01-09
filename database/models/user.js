@@ -31,10 +31,6 @@ module.exports = (sequelize, DataTypes) => {
                 type : DataTypes.DATE,
                 
                 comment: "가입일"
-            },
-            loginBy :{
-                type : DataTypes.STRING,
-                comment : "가입 수단"
             }
         },
         {
