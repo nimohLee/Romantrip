@@ -53,6 +53,16 @@ body{
     cursor: pointer;
 }
 
+#auth-btn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#auth-btn>a{
+    margin-bottom: 10px;
+}
+
 #kakao-login-btn{
     background-image: url('../assets/kakao_login.png');
     background-size: contain;

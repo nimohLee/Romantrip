@@ -1,5 +1,6 @@
 const { User } = require("../database/models/index");
 const bcryptService = require("../services/bcryptService");
+
 module.exports = {
     register: async (params) => {
         const encodedPw = bcryptService.hashingPassword(params.pw);
@@ -48,5 +49,5 @@ module.exports = {
                 reject("fail");
             }
         });
-    },
+    }
 };

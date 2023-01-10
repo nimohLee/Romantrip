@@ -1,4 +1,3 @@
-const request = require("request");
 const db = require("../config/db");
 const service = require("../services/userService");
 
@@ -125,5 +124,5 @@ module.exports = {
         db.query(updateSql, (err) => {
             if (err) console.error(err);
         });
-    },
+    }
 };
