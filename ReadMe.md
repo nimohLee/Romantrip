@@ -68,7 +68,7 @@ PW : test
 |TourCarts|tc_id|int|여행바구니 테이블 기본키|
 ||m_id|int|바구니 유저 id|
 ||tl_id|int|담은 여행 id|
-|Tourarts|price|varchar|여행목록 테이블 기본키|
+||price|varchar|여행목록 테이블 기본키|
 
 
 
