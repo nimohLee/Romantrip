@@ -8,7 +8,7 @@
             <span><%=result[0].regDate%> 조회 <%=result[0].views%></span>
         </article>
         <article id="read-content">
-            <%=result[0].content%>
+            <pre id="board-detail-text"><%=result[0].content%></pre>
         </article>
         <article id="write-footer">
             <a href=<%="/board/update/" +result[0].b_id%>>

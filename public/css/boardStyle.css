@@ -28,6 +28,7 @@ body {
     background-color: #ffd6ec;
 }
 #board-main {
+    margin-top: 90px;
     width: 100%;
 }
 #board-wrap {
@@ -135,8 +136,8 @@ body {
     align-items: center;
 }
 #read-section {
-    margin-top:100px;
-    margin-bottom:50px;
+    margin-top: 100px;
+    margin-bottom: 50px;
     width: 70vw;
     height: 70vh;
     background-color: white;
@@ -166,6 +167,10 @@ body {
 }
 #read-content {
     padding: 30px;
+}
+#board-detail-text {
+    font-size: 18px;
+    background-color: white;
 }
 #board-table {
     height: 90%;

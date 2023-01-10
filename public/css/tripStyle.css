@@ -5,6 +5,10 @@ body{
     overflow: scroll;
 }
 
+.trip-main{
+    margin-top:90px;
+}
+
 .subject-title h3{ 
     padding : 1.5em 0 1.5em 1.5em;
     border-bottom: 1px dotted #ccc;

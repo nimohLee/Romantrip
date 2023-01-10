@@ -7,7 +7,7 @@
     <section id="write-section">
         <input type="text" name="title" id="update-title" class = "write-title nanum" value=<%=result[0].title%>></input>
         
-        <textarea name="content" id="update-content" class = "write-content nanum" ><%=result[0].content%></textarea>
+        <textarea name="content" id="update-content" class = "write-content nanum" cols="20" wrap="hard"><%=result[0].content%></textarea>
         <div class="write-page-btns">
                 <input type="button" value="수정" onclick="toUpdateSubmit('<%=result[0].b_id%>')" />
                 <input type="button" value="삭제" onclick="deleteBoard('<%=result[0].b_id%>')">
