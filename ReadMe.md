@@ -9,7 +9,7 @@
 - Node.js
 
 ## 접속 도메인
-[Romantrip](www.nimoh.shop)
+www.nimoh.shop
 
 ID : test
 
