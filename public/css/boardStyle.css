@@ -11,138 +11,116 @@
     --summer-black2-color: #393e46;
     --summer-gray-color: #eeeeee;
 }
-
-body{
+body {
     overflow-y: scroll;
 }
-
-.subject-title h3{ 
-    padding : 1.5em 0 1.5em 1.5em;
+.subject-title h3 {
+    padding: 1.5em 0 1.5em 1.5em;
     border-bottom: 1px dotted #ccc;
     margin-bottom: 1em;
     font-size: 2em;
 }
-
 .paging-btn {
     cursor: pointer;
     width: 40px;
     height: 30px;
     border-radius: 5px;
-    background-color: #FFD6EC;
+    background-color: #ffd6ec;
 }
-
-#board-main{
+#board-main {
     width: 100%;
 }
-
-#board-wrap{
+#board-wrap {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-
 /* 테이블 */
 #board-table-section {
     width: 80vw;
     height: 70vh;
     background-color: white;
-    
 }
 #board-table-article {
     width: 100%;
     height: 90%;
 }
-
 #board-table {
     width: 100%;
     height: 90px;
     text-align: center;
     color: var(--summer-black2-color);
 }
-
-#board-table thead{
+#board-table thead {
     height: 20px;
 }
-
 #board-table th {
-    background-color: #FFD6EC;
+    background-color: #ffd6ec;
     color: white;
     text-align: center;
     padding: 10px 0;
     height: 30px;
 }
-
-.nbsp-tr{
+.nbsp-tr {
     height: 6vh;
-    
 }
-#title-td:hover{
+#title-td:hover {
     text-decoration: underline;
 }
-
-.data-tr{
+.data-tr {
     height: 10%;
 }
 
-#board-footer{
+#board-footer {
     display: flex;
     justify-content: space-between;
 }
-
-#paging-btn-wrap{
-    margin-left: 10px
+#paging-btn-wrap {
+    margin-left: 10px;
 }
-
-.icon{
-    cursor:pointer;
+.icon {
+    cursor: pointer;
 }
-
 /* 글쓰기 write.ejs*/
-
-
-
-#write-section{
+#write-section {
     margin-left: 20px;
     width: 90vw;
     height: 60vh;
     margin: 0 auto;
 }
-
-.write-title{
+.write-title {
     height: 40px;
     width: 90%;
-    padding : 11px 12px 10px;    
+    padding: 11px 12px 10px;
     border: 1px solid #ebecef;
     resize: none;
     overflow: hidden;
     font-size: 18px;
-    letter-spacing: -.23px;
+    letter-spacing: -0.23px;
     line-height: 17px;
     word-break: break-all;
-    font-weight: 700;   
+    font-weight: 700;
 }
-
-
-.write-content{
+.write-content {
     width: 90%;
-    padding : 11px 12px 10px;    
-    margin : 30px 0;
+    padding: 11px 12px 10px;
+    margin: 30px 0;
     height: 40vh;
     font-size: 15px;
     outline: 0;
-    border: 1px solid #ebecef;   
+    border: 1px solid #ebecef;
     resize: none;
     line-height: 25px;
 }
-.write-page-btns{
+.write-page-btns {
     float: right;
     margin-right: 20px;
 }
-.write-page-btns input{
+.write-page-btns input {
     margin-left: 15px;
-    background-color: #FFD6EC;
-    border: 1px solid #FFD6EC;
+    background-color: #ffd6ec;
+    border: 1px solid #ffd6ec;
     padding: 8px 20px;
     border-radius: 5px;
     font-size: 17px;
@@ -150,13 +128,15 @@ body{
 }
 
 /* 글 읽기 ( detail.ejs ) */
-#board-detail-main{
+#board-detail-main {
     height: 100%;
     display: flex;
-    justify-content: center;  
-    align-items: center;  
+    justify-content: center;
+    align-items: center;
 }
-#read-section{
+#read-section {
+    margin-top:100px;
+    margin-bottom:50px;
     width: 70vw;
     height: 70vh;
     background-color: white;
@@ -166,85 +146,77 @@ body{
     grid-template-rows: 30% 70%;
 }
 
-#read-header{
+#read-header {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0 20px;
     border-bottom: 1px solid #ccc;
-    margin-bottom : 10px;
+    margin-bottom: 10px;
 }
 
-#read-header h4{
-   font-size: 2em;
-   font-weight: 700;
-   margin-bottom: 30px;
+#read-header h4 {
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 30px;
 }
-
-#read-header strong{
+#read-header strong {
     font-weight: 600;
     margin-bottom: 8px;
 }
-
-#read-content{
+#read-content {
     padding: 30px;
 }
-
-
-#board-table{
+#board-table {
     height: 90%;
 }
-#write-footer{
-   display: flex;
-   justify-content: end;
-   align-items: center;
+#write-footer {
+    display: flex;
+    justify-content: end;
+    align-items: center;
 }
-.write-btn{
+.write-btn {
     cursor: pointer;
     width: 50px;
     height: 30px;
     margin: 10px 10px 0 0;
-    background-color: #FFD6EC;
+    background-color: #ffd6ec;
     border-radius: 5px;
 }
-
 /* 글 수정하기 팝업 ( update.ejs ) */
-#updateFrom{
+#updateFrom {
     display: flex;
     flex-direction: column;
     justify-content: end;
 }
-
-#update-title{
+#update-title {
     width: 80%;
     margin: 0 auto;
     height: 40px;
-    border : 1px solid #ebecef;
-    
+    border: 1px solid #ebecef;
 }
-.table-br{
+.table-br {
     display: none;
 }
 
 @media screen and (max-width: 767px) {
-    #board-table{
+    #board-table {
         margin-bottom: 15px;
     }
-    #board-table thead{
+    #board-table thead {
         display: none;
     }
-    #board-table tr td:first-child{
+    #board-table tr td:first-child {
         display: none;
     }
-    td{
+    td {
         text-align: left;
         /* height: 30px; */
     }
-    .title-td{
+    .title-td {
         font-size: 1.3em;
     }
-    tr{
+    tr {
         border-bottom: 1px solid #eee;
     }
-    
 }

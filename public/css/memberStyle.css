@@ -13,10 +13,10 @@
 }
 
 /* 회원가입 */
-body{
+body {
     overflow-y: scroll;
 }
-#register-main{
+#register-main {
     height: 90vh;
     width: 100%;
     /* margin: 0 auto; */
@@ -26,18 +26,15 @@ body{
 }
 
 #register-wrap {
-    /* position: absolute; */
-    /* top: 80px; */
+    margin-top: 90px;
     display: flex;
-    
     flex-direction: column;
     align-items: center;
     width: 70vw;
-    height: 600px;
+    height: 550px;
     background-color: rgba(255, 255, 255, 0.85);
     border: 1px solid #ccc;
     border-radius: 30px;
-    
 }
 
 #register-title {
@@ -78,11 +75,10 @@ body{
 .wrap-input input {
     padding: 10px;
     width: 20vw;
-    border:1px solid #ccc
+    border: 1px solid #ccc;
 }
 .wrap-input input[type="text" i] {
     padding: 10px;
-    
 }
 
 .wrap-input input[type="password" i] {
@@ -115,15 +111,14 @@ small {
     cursor: pointer;
 }
 
-@media screen and (max-width:767px) {
-    .wrap-input{
+@media screen and (max-width: 767px) {
+    .wrap-input {
         width: 100%;
     }
-    #input-wrap-forFlex{
+    #input-wrap-forFlex {
         padding-left: 20px;
     }
 }
 
-@media screen and (max-height:670px){
-    
+@media screen and (max-height: 670px) {
 }

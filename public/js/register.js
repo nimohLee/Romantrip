@@ -173,27 +173,28 @@ function successCheck(input) {
     return true;
 }
 
-function submitForm(){
+function submitForm() {
     let isSuccessed = false;
     const jsObj = {
-        id : uID.value,
-        pw : uPW.value,
-        name : uName.value,
-        email : email.value
-    }
+        id: uID.value,
+        pw: uPW.value,
+        name: uName.value,
+        email: email.value,
+    };
     $.ajax({
         url: "./idVaild",
-        method:"post",
+        method: "post",
         contentType: "application/json",
         async: false,
         data: JSON.stringify(jsObj),
-        success: function(result){
-            if( result === "No"){
+        success: function (result) {
+            if (result === "No") {
                 alert("사용할 수 없는 아이디입니다");
                 isSuccessed = false;
-            }else{
-                isSuccessed = true;}
-        }
+            } else {
+                isSuccessed = true;
+            }
+        },
     });
     return isSuccessed;
 }
@@ -201,16 +202,16 @@ function submitForm(){
 document.getElementById("frm").addEventListener("submit", (e) => {
     validateCheck();
     if (nameOK && idOK && pwOK && emailOK) {
-        if(submitForm()){
+        if (submitForm()) {
             $(".pop-up #modal-text").text("회원가입이 완료되었습니다");
             $(".pop-up").fadeIn();
-                    $(".pop-up").addClass("black");
-                    setTimeout(()=>{
-                        $(".pop-up").removeClass("black");
-                        $(".pop-up").fadeOut({duration:300});
-                         },1500);
+            $(".pop-up").addClass("black");
+            setTimeout(() => {
+                $(".pop-up").removeClass("black");
+                $(".pop-up").fadeOut({ duration: 300 });
+            }, 1500);
             return true;
-        }else{
+        } else {
             e.preventDefault();
             return false;
         }
@@ -226,5 +227,3 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.remove("fade");
     });
 });
-
-

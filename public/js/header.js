@@ -92,21 +92,20 @@ function convertPXToVH(px) {
     return px * (100 / document.documentElement.clientHeight);
 }
 
-
 /* 로그아웃 */
 function logout() {
     /* express 서버에서 처리하기 위해 post 요청 */
-        $.ajax({
-            method: "post",
-            async: true,
-            url: "/users/logout",
-            data: "",
-            success: (result) => {
-                    location.href = "/";
-            },
-            fail: (result)=>{
-                console.log(result);
-                alert("로그아웃에 실패했습니다. 잠시 후 다시 시도해주세요")
-            }
-        });
+    $.ajax({
+        method: "post",
+        async: true,
+        url: "/users/logout",
+        data: "",
+        success: (result) => {
+            location.href = "/";
+        },
+        fail: (result) => {
+            console.log(result);
+            alert("로그아웃에 실패했습니다. 잠시 후 다시 시도해주세요");
+        },
+    });
 }
