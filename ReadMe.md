@@ -8,6 +8,70 @@
 - HTML ( EJS 템플릿엔진 ), CSS, JavaScript
 - Node.js
 
-## 데이터 베이스 ERD
+## 접속 도메인
+[Romantrip](www.nimoh.shop)
+
+ID : test
+
+PW : test
+
+## 데이터 베이스
+
+### ERD
+<img width="406" alt="image" src="https://user-images.githubusercontent.com/106662308/211467180-16e68b8b-b67c-443d-a50a-0233ba65c7ff.png">
+
+연관관계를 코드로 구현하여 MySQL 상 연관관계는 지정해주지 않았습니다.
+
+### 테이블 명세서
+
+***Users 테이블***
+
+|테이블명|필드명|데이터타입|필드설명|
+|---|---|---|---|
+|Users|m_id|int|유저 테이블 기본키|
+|Users|name|varchar|유저 이름|
+|Users|id|varchar|유저 로그인 ID|
+|Users|pw|varchar|유저 패스워드|
+|Users|email|varchar|유저 이메일|
+|Users|regDate|datetime|유저 가입 날짜 및 시간|
+
+
+***Boards 테이블***
+
+|테이블명|필드명|데이터타입|필드설명|
+|---|---|---|---|
+|Boards|b_id|int|게시판 테이블 기본키|
+|Boards|m_id|int|게시글 작성자 (유저 id)|
+|Boards|m_name|varchar|작성자 이름|
+|Boards|title|varchar|게시글 제목|
+|Boards|content|varchar|게시글 내용|
+|Boards|regDate|datetime|게시글 작성 날짜 및 시간|
+|Boards|views|int|게시글 조회 수|
+|Boards|createdAt|datetime|게시글 레코드 생성 시간|
+|Boards|updatedAt|datetime|게시글 레코드 수정 시간|
+
+***TourLists 테이블***
+
+|테이블명|필드명|데이터타입|필드설명|
+|---|---|---|---|
+|TourLists|tl_id|int|여행목록 테이블 기본키|
+|TourLists|category|varchar|여행 분류|
+|TourLists|name|varchar|여행 이름|
+|TourLists|description|varchar|여행 설명|
+|TourLists|location|varchar|여행 주소|
+|TourLists|image|varchar|여행 이미지|
+
+***ToursCarts 테이블***
+
+|테이블명|필드명|데이터타입|필드설명|
+|---|---|---|---|
+|TourCarts|tc_id|int|여행바구니 테이블 기본키|
+|TourCarts|m_id|int|바구니 유저 id|
+|TourCarts|tl_id|int|담은 여행 id|
+|TourCarts|price|varchar|여행목록 테이블 기본키|
+
+
 
 ## 실행 화면
+### 홈 화면
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/106662308/211467348-9cdcd6fe-286b-43d3-8347-14f98e0f1d80.png">
