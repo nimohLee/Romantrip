@@ -49,7 +49,6 @@ body {
 }
 #board-table {
     width: 100%;
-    height: 90px;
     text-align: center;
     color: var(--summer-black2-color);
 }
@@ -70,7 +69,7 @@ body {
     text-decoration: underline;
 }
 .data-tr {
-    height: 10%;
+    height: 40px;
 }
 
 #board-footer {
@@ -84,11 +83,19 @@ body {
     cursor: pointer;
 }
 /* 글쓰기 write.ejs*/
+#write-main{
+    margin-top:90px;
+}
+
 #write-section {
     margin-left: 20px;
     width: 90vw;
     height: 60vh;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 .write-title {
     height: 40px;
@@ -104,10 +111,10 @@ body {
     font-weight: 700;
 }
 .write-content {
-    width: 90%;
+    width: 80%;
     padding: 11px 12px 10px;
     margin: 30px 0;
-    height: 40vh;
+    height: 35vh;
     font-size: 15px;
     outline: 0;
     border: 1px solid #ebecef;
@@ -115,7 +122,7 @@ body {
     line-height: 25px;
 }
 .write-page-btns {
-    float: right;
+    align-self: flex-end;
     margin-right: 20px;
 }
 .write-page-btns input {
@@ -146,7 +153,6 @@ body {
     display: grid;
     grid-template-rows: 30% 70%;
 }
-
 #read-header {
     display: flex;
     flex-direction: column;
@@ -155,7 +161,6 @@ body {
     border-bottom: 1px solid #ccc;
     margin-bottom: 10px;
 }
-
 #read-header h4 {
     font-size: 2em;
     font-weight: 700;
@@ -171,9 +176,6 @@ body {
 #board-detail-text {
     font-size: 18px;
     background-color: white;
-}
-#board-table {
-    height: 90%;
 }
 #write-footer {
     display: flex;
