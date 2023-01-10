@@ -8,6 +8,10 @@ router.post('/login',controller.postLogin);
 
 router.post("/logout",controller.postLogout);
 
+router.get("/kakao/start",controller.startKakaoLogin);
+
+router.get("/kakao/callback",controller.callbackKakaoLogin);
+
 router.get("/register", controller.getRegister);
 
 router.post("/register", controller.postRegister);

@@ -30,6 +30,10 @@ module.exports = {
             });
     },
     postLogout: (req, res) => {
+        if(req.session.provider === "kakao"){
+            const token = req.session.token;
+            service.kakaoLogout(token);
+        }
         req.session.destroy((err) => {
             if (err) {
                 res.sendStatus(500);
@@ -124,5 +128,39 @@ module.exports = {
         db.query(updateSql, (err) => {
             if (err) console.error(err);
         });
+    },
+    startKakaoLogin: (req, res) =>{
+        const baseUrl = "https://kauth.kakao.com/oauth/authorize";
+        const config = {
+            client_id: process.env.KAKAO_API,
+            redirect_uri: "http://localhost:5001/users/kakao/callback",
+            response_type: "code",
+        };
+        const params = new URLSearchParams(config).toString();
+
+        const finalUrl = `${baseUrl}?${params}`;
+        return res.redirect(finalUrl);
+    },
+    callbackKakaoLogin: async (req,res)=>{
+        const code = req.query.code;
+        try{
+            const result = await service.kakaoLogin(code);
+            req.session._id = result.snsUser;
+            req.session.provider = 'kakao';
+            req.session.token = result.token;
+            res.redirect("/");
+        }catch(e){
+            console.error(e);
+        }
+    },
+
+    kakaoLogout: async (req, res)=>{
+        try{
+            await service.kakaoLogout();
+            res.status(204);
+        }catch(e){
+            console.error("로그아웃 중 에러가 발생하였습니다.");
+            res.status(500);
+        }
     }
 };
