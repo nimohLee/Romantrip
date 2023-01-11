@@ -129,11 +129,10 @@ module.exports = {
         const baseUrl = "https://kauth.kakao.com/oauth/authorize";
         const config = {
             client_id: process.env.KAKAO_API,
-            redirect_uri: "http://localhost:5001/users/kakao/callback",
+            redirect_uri: `${process.env.REDIRECT_URI}/users/kakao/callback`,
             response_type: "code",
         };
         const params = new URLSearchParams(config).toString();
-
         const finalUrl = `${baseUrl}?${params}`;
         return res.redirect(finalUrl);
     },
@@ -141,11 +140,12 @@ module.exports = {
         const code = req.query.code;
         try {
             const result = await service.kakaoLogin(code);
-            req.session._id = result.snsUser;
+            req.session._id = result?.snsUser;
             req.session.provider = "kakao";
             res.redirect("/");
         } catch (e) {
             console.error(e);
+            res.sendStatus(500);
         }
     },
     kakaoLogout: async (req, res) => {

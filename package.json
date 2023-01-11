@@ -24,7 +24,7 @@
     "loading-spinner": "^1.2.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
-    "node-fetch": "^3.3.0",
+    "node-fetch": "^2.6.7",
     "nodemailer": "^6.8.0",
     "promise-loading-spinner": "^3.0.2",
     "readmore-js": "^2.2.1",

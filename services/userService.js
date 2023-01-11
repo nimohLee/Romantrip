@@ -1,3 +1,4 @@
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const { User } = require("../database/models/index");
 const bcryptService = require("../services/bcryptService");
 require("dotenv").config;
@@ -57,7 +58,7 @@ module.exports = {
         const config = {
             client_id: process.env.KAKAO_API,
             grant_type: "authorization_code",
-            redirect_uri: "http://localhost:5001/users/kakao/callback",
+            redirect_uri: `${process.env.REDIRECT_URI}/users/kakao/callback`,
             code,
         };
         const params = new URLSearchParams(config).toString();
@@ -88,6 +89,7 @@ module.exports = {
                     sns_id: userRequest.id,
                 },
             });
+
             if (!snsUser) {
                 try {
                     snsUser = await User.create({
@@ -101,12 +103,14 @@ module.exports = {
                     throw err;
                 }
             }
+
             const result = {
                 snsUser: snsUser.m_id,
                 token: access_token,
             };
-
             return result;
+        }else{
+            throw new Error("카카오 API 연동에 실패하였습니다.");
         }
     },
     kakaoLogout: async (token) => {
@@ -123,7 +127,7 @@ module.exports = {
             response_type: "code",
             client_id: process.env.NAVER_API,
             redirect_uri: encodeURI(
-                "http://localhost:5001/users/naver/callback"
+                `${process.env.REDIRECT_URI}/users/naver/callback`
             ),
             state: "test",
         };
