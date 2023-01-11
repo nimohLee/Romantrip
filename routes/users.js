@@ -12,6 +12,10 @@ router.get("/kakao/start",controller.startKakaoLogin);
 
 router.get("/kakao/callback",controller.callbackKakaoLogin);
 
+router.get("/naver/start",controller.startNaverLogin);
+
+router.get("/naver/callback",controller.callbackNaverLogin);
+
 router.get("/register", controller.getRegister);
 
 router.post("/register", controller.postRegister);
