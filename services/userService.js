@@ -4,26 +4,34 @@ const bcryptService = require("../services/bcryptService");
 require("dotenv").config;
 
 module.exports = {
-    getId: async () => {},
-    register: async (params) => {
-        const encodedPw = bcryptService.hashingPassword(params.pw);
+    /**
+     * 
+     * @param {Object} registerDto 회원가입 정보
+     */
+    register: async (registerDto) => {
+        const encodedPw = bcryptService.hashingPassword(registerDto.pw);
         try {
             await User.create({
-                name: params.name,
-                id: params.id,
+                name: registerDto.name,
+                id: registerDto.id,
                 pw: encodedPw,
-                email: params.email,
+                email: registerDto.email,
                 regDate: new Date(),
             });
         } catch (err) {
             throw err;
         }
     },
-    validator: (params) => {
+    /**
+     * 
+     * @param {Object} userDto 
+     * @returns 
+     */
+    validator: (userDto) => {
         return new Promise(async (resolve, reject) => {
             const result = await User.findAll({
                 where: {
-                    id: params.id,
+                    id: userDto.id,
                 },
                 raw: true,
             });
@@ -32,18 +40,23 @@ module.exports = {
             } else resolve("Yes");
         });
     },
-    validation: (info) => {
+    /**
+     * 
+     * @param {Object} loginDto 로그인 정보 DTO
+     * @returns 
+     */
+    validation: (loginDto) => {
         return new Promise(async (resolve, reject) => {
             try {
                 const selectUser = await User.findOne({
                     where: {
-                        id: info.id,
+                        id: loginDto.id,
                     },
                     raw: true,
                 });
                 const pwCompareResult = bcryptService.comparePassword(
                     selectUser.pw,
-                    info.pw
+                    loginDto.pw
                 );
                 if (selectUser && pwCompareResult) {
                     resolve(selectUser);
@@ -53,6 +66,11 @@ module.exports = {
             }
         });
     },
+    /**
+     * 
+     * @param {String} code 카카오 로그인 시 콜백받은 code
+     * @returns 
+     */
     kakaoLogin: async (code) => {
         const baseUrl = "https://kauth.kakao.com/oauth/token";
         const config = {
@@ -113,6 +131,12 @@ module.exports = {
             throw new Error("카카오 API 연동에 실패하였습니다.");
         }
     },
+
+    /**
+     * 
+     * @param {String} token 카카오 로그인 토큰
+     * @returns 
+     */
     kakaoLogout: async (token) => {
         await fetch(`https://kapi.kakao.com/v1/user/logout`, {
             headers: {
@@ -136,6 +160,12 @@ module.exports = {
 
         return finalUrl;
     },
+    /**
+     * 
+     * @param {String} code 네이버 API 로그인 콜백 시 받은 코드
+     * @param {String} state 네이버 API에 사용자 식별을 위한 임의의 문자열
+     * @returns 
+     */
     fetchNaverLogin: async (code,state)=>{
         const baseUrl = `https://nid.naver.com/oauth2.0/token`;
         const config = {

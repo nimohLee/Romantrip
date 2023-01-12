@@ -16,6 +16,13 @@ function searchFormSubmit() {
     searchForm.submit();
 }
 
+// 뒤로가기 시 페이지 새로고침 처리 -> 조회 수 새로고침
+window.onpageshow = function (event){
+    if ( event.persisted || (window.performance && window.performance.navigation.type == 2)){
+        window.location.reload();
+    }
+}
+
 /* list.ejs */
 function paging(clickedPageNum) {
     $.ajax({
