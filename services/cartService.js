@@ -1,14 +1,17 @@
 const { TourList, TourCart } = require("../database/models/index");
-const sequelize = require("sequelize");
-const { Op } = require("sequelize");
 
 module.exports = {
-    getCartList: (params) => {
+    /**
+     * 
+     * @param {Number} sessionId 현재 사용자 세션 ID
+     * @returns resolve of reject
+     */
+    getCartList: (sessionId) => {
         return new Promise(async (resolve, reject) => {
             const result = [];
             const cartLists = await TourCart.findAll({
                 where: {
-                    m_id: params,
+                    m_id: sessionId,
                 },
                 order: [["tl_id", "ASC"]],
                 raw: true,
@@ -29,12 +32,17 @@ module.exports = {
             }, 500);
         });
     },
-    deleteList: (params) => {
+    /**
+     * 
+     * @param {Object} deleteDto 현재 세션 ID와, 삭제하려는 Cart List의 idx값이 담긴 DTO
+     * @returns Resolve or Reject
+     */
+    deleteList: (deleteDto) => {
         return new Promise(async (resolve, reject) => {
             await TourCart.destroy({
                 where: {
-                    tl_id: params.tlID,
-                    m_id: params.sessionID,
+                    tl_id: deleteDto.tlID,
+                    m_id: deleteDto.sessionID,
                 },
             })
                 .then(() => {

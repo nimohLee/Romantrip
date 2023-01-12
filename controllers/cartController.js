@@ -17,12 +17,12 @@ module.exports = {
         }
     },
     deleteCartList: async (req, res) => {
-        const params = {
+        const deleteDto = {
             sessionID: req.session._id,
             tlID: req.body.idx,
         };
         await service
-            .deleteList(params)
+            .deleteList(deleteDto)
             .then((result) => {
                 res.status(200).send(result);
             })
