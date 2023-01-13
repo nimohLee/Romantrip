@@ -48,15 +48,15 @@ module.exports = {
     },
     postShopping: async (req, res) => {
         if (req.session._id) {
-            const params = {
+            const shopDto = {
                 shoppedIdx: parseInt(req.params.idx),
                 sessionID: req.session._id,
             };
-            await service.checkTourCart(params).then((isAlreadyShopped) => {
+            await service.checkTourCart(shopDto).then((isAlreadyShopped) => {
                 if (isAlreadyShopped) {
                     res.sendStatus(409);
                 } else {
-                    service.insertTourCart(params);
+                    service.insertTourCart(shopDto);
                     res.sendStatus(201);
                 }
             });
