@@ -8,13 +8,6 @@
 - HTML ( EJS 템플릿엔진 ), CSS, JavaScript
 - Node.js
 
-## 접속 도메인
-www.nimoh.shop
-
-ID : test
-
-PW : test
-
 ## 데이터 베이스
 
 ### ERD
